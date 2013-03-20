@@ -2,8 +2,8 @@ package mediator;
 
 import java.util.List;
 
-import model.Service;
 import model.User;
+import model.service.Service;
 import model.state.OfferState;
 import model.state.ServiceState;
 import model.state.TransferState;

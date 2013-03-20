@@ -1,14 +1,33 @@
 package model;
 
+import java.util.List;
+
+import model.service.Service;
+
 public abstract class AbstractUser implements User {
 
-	public AbstractUser(String name) {
-		// TODO Auto-generated constructor stub
+	private final String username;
+	private final User.Type type;
+	private final List<Service> services;
+
+	public AbstractUser(String username, List<Service> services, User.Type type) {
+		this.username = username;
+		this.type = type;
+		this.services = services;
 	}
 
 	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUsername() {
+		return username;
+	}
+
+	@Override
+	public User.Type getType() {
+		return type;
+	}
+
+	@Override
+	public List<Service> getServices() {
+		return services;
 	}
 }

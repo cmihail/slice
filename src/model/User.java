@@ -1,5 +1,9 @@
 package model;
 
+import java.util.List;
+
+import model.service.Service;
+
 public interface User {
 
 	enum Type {
@@ -7,7 +11,9 @@ public interface User {
 		MANUFACTURER,
 	}
 
-	String getName();
+	String getUsername();
 
 	User.Type getType();
+
+	List<Service> getServices();
 }

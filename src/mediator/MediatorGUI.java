@@ -2,13 +2,12 @@ package mediator;
 
 import model.Buyer;
 import model.Manufacturer;
-import model.Offer;
-import model.Service;
+import model.service.Offer;
+import model.service.Service;
 
 public interface MediatorGUI {
 
 	// TODO read type and services from config file
-	void login(String username, String password);
 	void logout();
 
 	// for manufacturers only

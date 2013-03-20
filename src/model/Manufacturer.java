@@ -1,16 +1,12 @@
 package model;
 
+import java.util.List;
+
+import model.service.Service;
+
 public class Manufacturer extends AbstractUser {
 
-	public Manufacturer(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	public Manufacturer(String username, List<Service> services) {
+		super(username, services, Type.MANUFACTURER);
 	}
-
-	@Override
-	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

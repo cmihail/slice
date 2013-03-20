@@ -1,15 +1,15 @@
 package webserviceclient;
 
 import java.util.List;
+import java.util.Map;
 
-import model.Service;
 import model.User;
+import model.service.Service;
 
 public interface WebServiceClient {
 
 	// TODO return null if login fails and password is optional
-	User login(String username, String password, User.Type type,
-			List<Service> userServices);
+	Map<Service, List<User>> login(User user, String password);
 
 	void logout(User user);
 }

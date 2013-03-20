@@ -4,9 +4,9 @@ import java.util.List;
 
 import model.Buyer;
 import model.Manufacturer;
-import model.Offer;
-import model.Service;
 import model.User;
+import model.service.Offer;
+import model.service.Service;
 
 public interface Network {
 
