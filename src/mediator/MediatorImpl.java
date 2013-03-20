@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.Buyer;
 import model.Manufacturer;
@@ -19,11 +20,18 @@ import model.service.Price;
 import model.service.Service;
 import model.service.ServiceImpl;
 import model.service.Timer;
+import model.service.info.ServiceInfo;
+import model.service.info.UserInfo;
+import model.service.info.UserServicesInfo;
+import model.state.OfferState;
+import model.state.TransferState;
 import network.Network;
 import network.NetworkImpl;
 import webserviceclient.WebServiceClient;
 import webserviceclient.WebServiceClientImpl;
 
+// TODO in README add the fact that User / Services are equal if
+// username / name are equal
 public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 
@@ -32,115 +40,159 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	private final Network network;
 	private final WebServiceClient webServiceClient;
 	private User mainUser;
+	private UserServicesInfo userServicesInfo;
 
 	public MediatorImpl() {
-		this.gui = new GUIImpl(this);
-		this.network = new NetworkImpl(this);
-		this.webServiceClient = new WebServiceClientImpl(this);
+		gui = new GUIImpl(this);
+		network = new NetworkImpl(this);
+		webServiceClient = new WebServiceClientImpl(this);
 
 		readConfigFileAndLogin();
+
+		gui.generateEvents(); // TODO delete
+	}
+
+	@Override
+	public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
+		this.userServicesInfo = userServicesInfo;
 	}
 
 	@Override
 	public void logout() {
-		// TODO Auto-generated method stub
+		for (Service service : userServicesInfo.getServices()) {
+			ServiceInfo si = userServicesInfo.getServiceInfo(service);
 
+			for (User user : si.getUsers()) {
+				UserInfo ui = si.getUserInfo(user);
+
+				// Refuse offer.
+				if (mainUser instanceof Buyer && user instanceof Manufacturer &&
+						ui.getOfferState() == OfferState.OFFER_MADE)
+					network.refuseServiceOffer((Buyer) mainUser, (Manufacturer) user,
+							service);
+
+				// Cancel transfer.
+				if (ui.getTransferState() != TransferState.TRANSFER_COMPLETED)
+					network.cancelTransfer(mainUser, user, service);
+			}
+		}
+
+		webServiceClient.logout(mainUser);
 	}
 
 	@Override
 	public void registerUserForService(User userToRegister, Service service) {
-		// TODO Auto-generated method stub
-
+		gui.addUserForService(userToRegister, service);
 	}
 
 	@Override
-	public void unregisterUserForService(User userToRegister, Service service) {
-		// TODO Auto-generated method stub
-
+	public void unregisterUserForService(User userToUnregister, Service service) {
+		gui.removeUserForService(userToUnregister, service);
 	}
 
 	@Override
 	public void receiveServiceOffer(Manufacturer manufacturer, Service service,
 			Offer offer) {
-		// TODO Auto-generated method stub
-
+		gui.setManufacturerServiceOffer(manufacturer, service, offer);
+		if (mainUser instanceof Buyer)
+			network.announceUsersOfServiceOffer((Buyer) mainUser, manufacturer,
+					service, offer, userServicesInfo.getServiceInfo(service).getUsers());
+		else
+			logError("Invalid user type at receiveServiceOffer.");
 	}
 
 	@Override
 	public void dropAuctionForManufacturer(Manufacturer manufacturer,
 			Service service) {
-		// TODO Auto-generated method stub
-
+		unregisterUserForService(manufacturer, service);
 	}
 
 	@Override
-	public void receiveLaunchServiceOfferRequest(Buyer buyer, Service service) {
-		// TODO Auto-generated method stub
-
+	public void receiveLaunchedServiceOfferRequest(Buyer buyer, Service service) {
+		gui.activateBuyerForService(buyer, service);
 	}
 
 	@Override
-	public void receiveDropServiceOfferRequest(Buyer buyer, Service service) {
-		// TODO Auto-generated method stub
-
+	public void receiveDroppedServiceOfferRequest(Buyer buyer, Service service) {
+		gui.deactivateBuyerForService(buyer, service);
 	}
 
 	@Override
-	public void receiveRefusedServiceOffer(Buyer buyer, Service service,
-			Offer offer) {
-		// TODO Auto-generated method stub
-
+	public void receiveRefusedServiceOffer(Buyer buyer, Service service) {
+		gui.changeBuyerOfferState(buyer, service, OfferState.OFFER_REFUSED);
 	}
 
 	@Override
-	public void receiveAcceptedServiceOffer(Buyer buyer, Service service,
-			Offer offer) {
-		// TODO Auto-generated method stub
-
+	public void receiveAcceptedServiceOffer(Buyer buyer, Service service) {
+		gui.changeBuyerOfferState(buyer, service, OfferState.OFFER_ACCEPTED);
 	}
 
 	@Override
 	public void receiveServiceOfferAnnouncement(Buyer buyer, Service service,
 			Offer offer) {
-		// TODO Auto-generated method stub
-
+		gui.compareServiceOffer(buyer, service, offer);
 	}
 
+	@Override
+	public void setServiceTransferState(User fromUser, Service service,
+			TransferState transferState) {
+		gui.setTransferState(fromUser, service, transferState);
+	}
 
 	@Override
 	public void makeOffer(Service service, Buyer buyer, Offer offer) {
-		// TODO Auto-generated method stub
-
+		if (mainUser instanceof Buyer)
+			network.makeServiceOffer((Manufacturer) mainUser, buyer, service, offer);
+		else
+			logError("Invalid user type at dropAuction.");
 	}
 
 	@Override
 	public void dropAuction(Service service, Buyer buyer) {
-		// TODO Auto-generated method stub
-
+		if (mainUser instanceof Buyer)
+			network.dropUserAuction((Manufacturer) mainUser, buyer, service);
+		else
+			logError("Invalid user type at dropAuction.");
 	}
 
 	@Override
 	public void launchOfferRequest(Service service) {
-		// TODO Auto-generated method stub
-
+		if (mainUser instanceof Buyer)
+			network.launchServiceOfferRequest((Buyer) mainUser, service,
+					userServicesInfo.getServiceInfo(service).getUsers());
+		else
+			logError("Invalid user type at launchOfferRequest.");
 	}
 
 	@Override
 	public void dropOfferRequest(Service service) {
-		// TODO Auto-generated method stub
-
+		if (mainUser instanceof Buyer)
+			network.dropServiceOfferRequest((Buyer) mainUser, service,
+					userServicesInfo.getServiceInfo(service).getUsers());
+		else
+			logError("Invalid user type at dropOfferRequest.");
 	}
 
 	@Override
 	public void acceptOffer(Service service, Manufacturer manufacturer) {
-		// TODO Auto-generated method stub
-
+		if (mainUser instanceof Buyer)
+			network.acceptServiceOffer((Buyer) mainUser, manufacturer, service,
+					userServicesInfo.getServiceInfo(service).getUsers());
+		else
+			logError("Invalid user type at acceptOffer.");
 	}
 
 	@Override
 	public void refuseOffer(Service service, Manufacturer manufacturer) {
-		// TODO Auto-generated method stub
+		if (mainUser instanceof Buyer)
+			network.refuseServiceOffer((Buyer) mainUser, manufacturer, service);
+		else
+			logError("Invalid user type at refuseOffer.");
+	}
 
+	@Override
+	public void transfer(Service service, User toUser) {
+		network.startTransfer(mainUser, toUser, service);
 	}
 
 	private User.Type readUserType(BufferedReader in) throws IOException {
@@ -201,13 +253,15 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	}
 
 	private void login(User user, String password) {
-		Map<Service, List<User>> mapServiceUsers =
+		Map<Service, Set<User>> mapServiceUsers =
 				webServiceClient.login(mainUser, password);
 
-		if (mapServiceUsers == null)
+		// Draw corresponded page in GUI.
+		if (mapServiceUsers == null) {
 			gui.drawErrorPage("Error at login credentials (see config file).");
-		else
-			gui.drawMainPage(mainUser, mapServiceUsers);
+			return;
+		}
+		gui.drawMainPage(mainUser, mapServiceUsers);
 	}
 
 	private void readConfigFileAndLogin() {
@@ -246,15 +300,20 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			gui.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
 		} catch (IOException e) {
 			e.printStackTrace();
+			gui.drawErrorPage("Error at reading config file.");
 		} finally {
 			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+					gui.drawErrorPage("Error at reading config file.");
 				}
 			}
-//			gui.drawErrorPage("Error at reading config file.");
 		}
+	}
+
+	private void logError(String errorMessage) {
+		gui.drawErrorPage(errorMessage);
 	}
 }

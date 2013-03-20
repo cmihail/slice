@@ -2,10 +2,12 @@ package webserviceclient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import mediator.MediatorWebServiceClient;
 import model.Buyer;
@@ -23,27 +25,34 @@ public class WebServiceClientImpl implements WebServiceClient {
 	}
 
 	@Override
-	public Map<Service, List<User>> login(User user, String password) {
+	public Map<Service, Set<User>> login(User user, String password) {
+		// TODO login to WebService
+
 		try {
-			Thread.sleep(200); // TODO delete (only for testing)
+			Thread.sleep(500); // TODO delete (only for testing)
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 
 		// Create mockup data.
-		Map<Service, List<User>> mapServiceUsers = new HashMap<Service, List<User>>();
+		Map<Service, Set<User>> mapServiceUsers = new HashMap<Service, Set<User>>();
 		Random random = new Random();
 
 		// Randomize users.
-		List<User> users = new ArrayList<User>();
-		int numOfUsers = random.nextInt(4) + 2; // minimum 2 users
+		Set<User> users = new HashSet<User>();
+		int numOfUsers = random.nextInt(user.getServices().size()) + 2; // minimum 2 users
 		for (int i = 0; i < numOfUsers; i++) {
 			int numOfServices = random.nextInt(user.getServices().size() - 1);
 			numOfServices++; // minimum 1 service
+			int order = random.nextInt(2), limit = 0;
+			if (order == 0)
+				limit = user.getServices().size() - 1;
+
 			List<Service> services = new ArrayList<Service>();
 			for (int j = 0; j < numOfServices; j++) {
-				services.add(new ServiceImpl(user.getServices().get(j).getName()));
+				int index = Math.abs(j - limit);
+				services.add(new ServiceImpl(user.getServices().get(index).getName()));
 			}
 
 			switch (user.getType()) {
@@ -59,7 +68,7 @@ public class WebServiceClientImpl implements WebServiceClient {
 		Iterator<Service> it = user.getServices().iterator();
 		while (it.hasNext()) {
 			Service service = it.next();
-			List<User> serviceUsers = new ArrayList<User>();
+			Set<User> serviceUsers = new HashSet<User>();
 
 			Iterator<User> usersIt = users.iterator();
 			while (usersIt.hasNext()) {
@@ -83,7 +92,6 @@ public class WebServiceClientImpl implements WebServiceClient {
 
 	@Override
 	public void logout(User user) {
-		// TODO Auto-generated method stub
-
+		// TODO logout user from WebService
 	}
 }

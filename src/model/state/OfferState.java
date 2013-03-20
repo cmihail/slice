@@ -5,7 +5,7 @@ public enum OfferState implements State {
 	OFFER_MADE("Offer Made"),
 	OFFER_EXCEEDED("Offer Exceeded"),
 	OFFER_ACCEPTED("Offer Accepted"),
-	OFFER_REFUZED("Offer Refused");
+	OFFER_REFUSED("Offer Refused");
 
 	private String name;
 

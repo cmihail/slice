@@ -1,23 +1,36 @@
 package gui;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import model.Buyer;
+import model.Manufacturer;
 import model.User;
 import model.service.Offer;
 import model.service.Service;
 import model.state.OfferState;
-import model.state.ServiceState;
-
-import com.sun.jdi.connect.spi.TransportService;
+import model.state.TransferState;
 
 public interface GUI {
 
 	void drawErrorPage(String errorMessage);
-	void drawMainPage(User user, Map<Service, List<User>> mapServiceUsers);
+	void drawMainPage(User user, Map<Service, Set<User>> mapServiceUsers);
 
-	void changeServiceState(Service service, ServiceState serviceState);
-	void changeOfferState(Service service, OfferState state);
-	void changeTransferState(Service service, TransportService state);
-	void setServiceOffer(Service service, User user, Offer offer);
+	void addUserForService(User newUser, Service service);
+	void removeUserForService(User oldUser, Service service);
+
+	// for buyers only
+	void setManufacturerServiceOffer(Manufacturer manufacturer, Service service,
+			Offer offer);
+
+	// for manufactures only
+	void activateBuyerForService(Buyer buyer, Service service);
+	void deactivateBuyerForService(Buyer buyer, Service service);
+	void changeBuyerOfferState(Buyer buyer, Service service, OfferState offerState);
+	void compareServiceOffer(Buyer buyer, Service service, Offer offer);
+
+	// for transfers
+	void setTransferState(User user, Service service, TransferState transferState);
+
+	void generateEvents(); // TODO delete (only for testing)
 }

@@ -1,5 +1,6 @@
 package model.service;
 
+
 public class ServiceImpl implements Service {
 
 	private final String name;
@@ -31,4 +32,13 @@ public class ServiceImpl implements Service {
 		return timer;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Service))
+			return false;
+
+		// Two services with same name are equal.
+		Service service = (Service) o;
+		return name.equals(service.getName());
+	}
 }

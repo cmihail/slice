@@ -30,4 +30,14 @@ public abstract class AbstractUser implements User {
 	public List<Service> getServices() {
 		return services;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof User))
+			return false;
+
+		// Two users with same username are equal.
+		User user = (User) o;
+		return username.equals(user.getUsername());
+	}
 }

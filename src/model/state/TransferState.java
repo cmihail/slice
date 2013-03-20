@@ -1,6 +1,7 @@
 package model.state;
 
 public enum TransferState implements State {
+	NONE("No transfer"),
 	TRANSFER_STARTED("Transfer started"),
 	TRANSFER_IN_PROGRESS("Transfer in progress"),
 	TRANSFER_COMPLETED("Transfer completed"),

@@ -1,6 +1,6 @@
 package network;
 
-import java.util.List;
+import java.util.Set;
 
 import model.Buyer;
 import model.Manufacturer;
@@ -15,14 +15,14 @@ public interface Network {
 	 * same service.
 	 */
 	void registerUserServiceToUsers(User mainUser, Service service,
-			List<User> usersWithService);
+			Set<User> usersWithService);
 
 	/**
 	 * Unregisters a user with a given service from all users clients that have
 	 * the same service.
 	 */
 	void unregisterUserServiceFromUsers(User mainUser, Service service,
-			List<User> usersWithService);
+			Set<User> usersWithService);
 
 	// for manufacturers only
 	void makeServiceOffer(Manufacturer mainUser, Buyer buyer, Service service, Offer offer);
@@ -30,13 +30,16 @@ public interface Network {
 
 	// for buyers only
 	void launchServiceOfferRequest(Buyer mainUser, Service service,
-			List<User> usersWithService);
+			Set<User> usersWithService);
 	void dropServiceOfferRequest(Buyer mainUser, Service service,
-			List<User> usersWithService);
+			Set<User> usersWithService);
 	void acceptServiceOffer(Buyer mainUser, Manufacturer manufacturer, Service service,
-			Offer offer, List<User> usersWithService);
-	void refuseServiceOffer(Buyer mainUser, Manufacturer manufacturer, Service service,
-			Offer offer);
-	void announceUsersOfServiceOffer(Buyer mainUser, Service service, Offer offer,
-			List<User> usersWithService);
+			Set<User> usersWithService);
+	void refuseServiceOffer(Buyer mainUser, Manufacturer manufacturer, Service service);
+	void announceUsersOfServiceOffer(Buyer mainUser, Manufacturer originatorManufacturer,
+			Service service, Offer offer, Set<User> usersWithService);
+
+	// for transfers
+	void startTransfer(User mainUser, User toUser, Service service);
+	void cancelTransfer(User mainUser, User toUser, Service service);
 }

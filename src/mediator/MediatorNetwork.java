@@ -5,6 +5,7 @@ import model.Manufacturer;
 import model.User;
 import model.service.Offer;
 import model.service.Service;
+import model.state.TransferState;
 
 public interface MediatorNetwork {
 
@@ -16,16 +17,20 @@ public interface MediatorNetwork {
 	/**
 	 * Unregisters a user for a given service.
 	 */
-	void unregisterUserForService(User userToRegister, Service service);
+	void unregisterUserForService(User userToUnregister, Service service);
 
 	// for buyers only
 	void receiveServiceOffer(Manufacturer manufacturer, Service service, Offer offer);
 	void dropAuctionForManufacturer(Manufacturer manufacturer, Service service);
 
 	// for manufacturers only
-	void receiveLaunchServiceOfferRequest(Buyer buyer, Service service);
-	void receiveDropServiceOfferRequest(Buyer buyer, Service service);
-	void receiveRefusedServiceOffer(Buyer buyer, Service service, Offer offer);
-	void receiveAcceptedServiceOffer(Buyer buyer, Service service, Offer offer);
+	void receiveLaunchedServiceOfferRequest(Buyer buyer, Service service);
+	void receiveDroppedServiceOfferRequest(Buyer buyer, Service service);
+	void receiveRefusedServiceOffer(Buyer buyer, Service service);
+	void receiveAcceptedServiceOffer(Buyer buyer, Service service);
 	void receiveServiceOfferAnnouncement(Buyer buyer, Service service, Offer offer);
+
+	// for transfers
+	void setServiceTransferState(User fromUser, Service service,
+			TransferState transferState);
 }
