@@ -15,8 +15,18 @@ import model.user.User;
  */
 public interface WebServiceClient {
 
-	// TODO return null if login fails + password is optional
+	/**
+	 * Logins a user ant retrieves a list with users that have same services
+	 * as the user that logins.
+	 * @param user the user that logins
+	 * @param password the user password
+	 * @return a map with services and correspondent users,
+	 * or null if logins fails
+	 */
 	Map<Service, Set<User>> login(User user, String password);
 
+	/**
+	 * @param user the user that logouts
+	 */
 	void logout(User user);
 }
