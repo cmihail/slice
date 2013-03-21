@@ -1,5 +1,10 @@
 package model.state;
 
+/**
+ * Defines offer states.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public enum OfferState implements State {
 	NONE("No Offer"),
 	OFFER_MADE("Offer Made"),

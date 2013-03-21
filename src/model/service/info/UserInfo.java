@@ -5,6 +5,11 @@ import model.state.OfferState;
 import model.state.TransferState;
 import model.user.User;
 
+/**
+ * Contains all info about a user like offer state, transfer state, etc.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class UserInfo {
 
 	private final User user;

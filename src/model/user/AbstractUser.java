@@ -4,6 +4,12 @@ import java.util.List;
 
 import model.service.Service;
 
+/**
+ * Implements {@link User}.
+ * Overrides {@link #equals(Object)} so that users are equal if usernames are equal.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public abstract class AbstractUser implements User {
 
 	private final String username;

@@ -1,5 +1,10 @@
 package model.service;
 
+/**
+ * Defines timer class.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class Timer implements Comparable<Timer> {
 
 	private final int value; // in seconds

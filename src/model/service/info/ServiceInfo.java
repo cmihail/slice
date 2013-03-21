@@ -9,7 +9,10 @@ import model.state.ServiceState;
 import model.user.User;
 
 /**
- * Contains all the info about a service.
+ * Contains all the info about a service, like service state,
+ * correspondent users, etc.
+ *
+ * @author cmihail, radu-tutueanu
  */
 public class ServiceInfo {
 

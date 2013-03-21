@@ -1,6 +1,11 @@
 package model.service;
 
-
+/**
+ * Implements {@link Service}.
+ * Overrides {@link #equals(Object)} so that services are equal if names are equal.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class ServiceImpl implements Service {
 
 	private final String name;

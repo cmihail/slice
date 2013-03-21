@@ -9,6 +9,11 @@ import java.util.Set;
 import model.service.Service;
 import model.user.User;
 
+/**
+ * Implements {@link UserServicesInfo}.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class UserServicesInfoImpl implements UserServicesInfo {
 
 	private final HashMap<Service, ServiceInfo> mapServicesInfo;

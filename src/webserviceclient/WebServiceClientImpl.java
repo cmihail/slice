@@ -16,6 +16,11 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 
+/**
+ * Implements {@link WebServiceClient}.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class WebServiceClientImpl implements WebServiceClient {
 
 	private final MediatorWebServiceClient mediator;

@@ -1,5 +1,10 @@
 package model.service;
 
+/**
+ * Defines price class.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class Price implements Comparable<Price> {
 
 	private final int value;

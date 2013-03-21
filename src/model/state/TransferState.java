@@ -1,5 +1,10 @@
 package model.state;
 
+/**
+ * Defines transfer states.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public enum TransferState implements State {
 	NONE("No transfer"),
 	TRANSFER_STARTED("Transfer started"),

@@ -30,6 +30,12 @@ import network.NetworkImpl;
 import webserviceclient.WebServiceClient;
 import webserviceclient.WebServiceClientImpl;
 
+/**
+ * Implements {@link MediatorGUI}, {@link MediatorNetwork},
+ * {@link MediatorWebServiceClient} in order to respect the Mediator Design.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 
@@ -47,7 +53,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 		readConfigFileAndLogin();
 
-		gui.generateEvents(); // TODO delete
+		gui.generateEvents(); // TODO delete (only for testing)
 	}
 
 	@Override

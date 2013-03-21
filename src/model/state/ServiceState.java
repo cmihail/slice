@@ -1,5 +1,10 @@
 package model.state;
 
+/**
+ * Defines service states.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public enum ServiceState implements State {
 	INACTIVE("Inactiv"),
 	ACTIVE("Activ");

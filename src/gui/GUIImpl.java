@@ -17,6 +17,11 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 
+/**
+ * Implements {@link GUI}.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class GUIImpl implements GUI {
 
 	private final MediatorGUI mediator;
@@ -33,18 +38,18 @@ public class GUIImpl implements GUI {
 	}
 
 	@Override
-	public void drawMainPage(User user, Map<Service, Set<User>> mapServiceUsers) {
+	public void drawMainPage(User mainUser, Map<Service, Set<User>> mapServiceUsers) {
 		// Init services info.
 		userServicesInfo = new UserServicesInfoImpl(mapServiceUsers);
 		mediator.setUserServicesInfo(userServicesInfo);
 
 		// Print user.
 		System.out.println("User:");
-		System.out.println("\tUsername: " + user.getUsername());
-		System.out.println("\tType: " + user.getType());
+		System.out.println("\tUsername: " + mainUser.getUsername());
+		System.out.println("\tType: " + mainUser.getType());
 
 		System.out.print("\tServices: ");
-		for (Service s : user.getServices())
+		for (Service s : mainUser.getServices())
 			System.out.print(s.getName() + ", ");
 		System.out.println();
 

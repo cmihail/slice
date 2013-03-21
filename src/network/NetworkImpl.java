@@ -9,6 +9,11 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 
+/**
+ * Implements {@link Network}.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class NetworkImpl implements Network {
 
 	private final MediatorNetwork mediator;
