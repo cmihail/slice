@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import model.User;
 import model.service.Service;
+import model.user.User;
 
 public class UserServicesInfoImpl implements UserServicesInfo {
 

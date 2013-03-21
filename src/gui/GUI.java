@@ -3,13 +3,13 @@ package gui;
 import java.util.Map;
 import java.util.Set;
 
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
 import model.service.Offer;
 import model.service.Service;
 import model.state.OfferState;
 import model.state.TransferState;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 public interface GUI {
 

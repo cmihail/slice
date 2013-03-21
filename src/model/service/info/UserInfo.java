@@ -1,9 +1,9 @@
 package model.service.info;
 
-import model.User;
 import model.service.Offer;
 import model.state.OfferState;
 import model.state.TransferState;
+import model.user.User;
 
 public class UserInfo {
 

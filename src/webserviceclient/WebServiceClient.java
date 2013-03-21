@@ -3,8 +3,8 @@ package webserviceclient;
 import java.util.Map;
 import java.util.Set;
 
-import model.User;
 import model.service.Service;
+import model.user.User;
 
 public interface WebServiceClient {
 

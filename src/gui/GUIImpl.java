@@ -5,9 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import mediator.MediatorGUI;
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
 import model.service.Offer;
 import model.service.Service;
 import model.service.info.UserInfo;
@@ -16,6 +13,9 @@ import model.service.info.UserServicesInfoImpl;
 import model.state.OfferState;
 import model.state.ServiceState;
 import model.state.TransferState;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 public class GUIImpl implements GUI {
 

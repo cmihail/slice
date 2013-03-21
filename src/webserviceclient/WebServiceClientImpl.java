@@ -10,11 +10,11 @@ import java.util.Random;
 import java.util.Set;
 
 import mediator.MediatorWebServiceClient;
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
 import model.service.Service;
 import model.service.ServiceImpl;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 public class WebServiceClientImpl implements WebServiceClient {
 

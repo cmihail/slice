@@ -1,17 +1,16 @@
 package mediator;
 
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
 import model.service.Offer;
 import model.service.Service;
 import model.service.info.UserServicesInfo;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 public interface MediatorGUI {
 
 	void setUserServicesInfo(UserServicesInfo userServicesInfo);
 
-	// TODO read type and services from config file
 	void logout();
 
 	// for manufacturers only
@@ -24,6 +23,6 @@ public interface MediatorGUI {
 	void acceptOffer(Service service, Manufacturer manufacturer);
 	void refuseOffer(Service service, Manufacturer manufacturer);
 
-	// TODO add transfer methods
+	// for transfers
 	void transfer(Service service, User toUser);
 }

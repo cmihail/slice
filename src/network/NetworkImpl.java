@@ -3,11 +3,11 @@ package network;
 import java.util.Set;
 
 import mediator.MediatorNetwork;
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
 import model.service.Offer;
 import model.service.Service;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 public class NetworkImpl implements Network {
 

@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import model.Buyer;
-import model.Manufacturer;
-import model.User;
-import model.User.Type;
 import model.service.Offer;
 import model.service.Price;
 import model.service.Service;
@@ -25,13 +21,15 @@ import model.service.info.UserInfo;
 import model.service.info.UserServicesInfo;
 import model.state.OfferState;
 import model.state.TransferState;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
+import model.user.User.Type;
 import network.Network;
 import network.NetworkImpl;
 import webserviceclient.WebServiceClient;
 import webserviceclient.WebServiceClientImpl;
 
-// TODO in README add the fact that User / Services are equal if
-// username / name are equal
 public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 

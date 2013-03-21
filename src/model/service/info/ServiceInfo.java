@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import model.User;
 import model.service.Service;
 import model.state.ServiceState;
+import model.user.User;
 
 /**
  * Contains all the info about a service.
