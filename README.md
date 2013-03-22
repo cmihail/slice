@@ -19,3 +19,5 @@ slice
 
 2. Observations:
   - User / Service objects are equal if they have same username / name
+  
+ Radu-started working on the gui
