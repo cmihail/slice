@@ -8,6 +8,12 @@ import java.beans.PropertyChangeListener;
 import javax.swing.JOptionPane;
 
 import mediator.MediatorGUI;
+import model.service.Offer;
+import model.service.Service;
+import model.service.info.UserServicesInfo;
+import model.user.Buyer;
+import model.user.Manufacturer;
+import model.user.User;
 
 /**
  *
@@ -22,7 +28,62 @@ public class Main extends GUIImpl implements PropertyChangeListener{
 		super(mediator);
 		loginFrame = new LoginFrame();
 		loginFrame.addPropertyChangeListener(this);
-		mainFrame = new MainFrame();
+		mainFrame = new MainFrameBuyer(new MediatorGUI() {
+			
+			@Override
+			public void transfer(Service service, User toUser) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void refuseOffer(Service service, Manufacturer manufacturer) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void makeOffer(Service service, Buyer buyer, Offer offer) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void logout() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void launchOfferRequest(Service service) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void dropOfferRequest(Service service) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void dropAuction(Service service, Buyer buyer) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void acceptOffer(Service service, Manufacturer manufacturer) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	
