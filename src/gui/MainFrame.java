@@ -16,6 +16,7 @@ import mediator.MediatorGUI;
 import model.service.Offer;
 import model.service.Service;
 import model.service.info.UserServicesInfo;
+import model.service.info.UserServicesInfoImpl;
 import model.state.OfferState;
 import model.state.TransferState;
 import model.user.Buyer;
@@ -30,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI{
 
 	private final MediatorGUI mediator;
 	private UserServicesInfo userServicesInfo;
+	private User mainUser;
     /**
      * Creates new form Main
      */
@@ -259,6 +261,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI{
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {      
     	JOptionPane.showMessageDialog(this, "Logging out and exiting");
+    	mediator.logout();
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }                                            
 
@@ -294,8 +297,14 @@ public class MainFrame extends javax.swing.JFrame implements GUI{
 	@Override
 	public void drawMainPage(User mainUser,
 			Map<Service, Set<User>> mapServiceUsers) {
-		// TODO Auto-generated method stub
-		
+			userServicesInfo = new UserServicesInfoImpl(mapServiceUsers);
+			mediator.setUserServicesInfo(userServicesInfo);
+			usernameLabel.setText(mainUser.getUsername()+"-"+mainUser.getType());
+			int i=0;
+			for (Service s : mainUser.getServices()) {
+				servicesTable.getModel().setValueAt(s.getName(),i, 0);
+				i++;
+			}
 	}
 
 	@Override
