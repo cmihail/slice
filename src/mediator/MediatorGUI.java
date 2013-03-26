@@ -21,12 +21,19 @@ public interface MediatorGUI {
 	void setUserServicesInfo(UserServicesInfo userServicesInfo);
 
 	/**
+	 * Logins a user.
+	 * @param username the username
+	 * @param password the password
+	 */
+	void login(String username, String password);
+
+	/**
 	 * Logouts the mainUser.
 	 */
 	void logout();
 
 	/**
-	 *
+	 * Transfers a serbice to a user.
 	 * @param service the service where the action occurs
 	 * @param toUser the user where the service must be transfered
 	 */

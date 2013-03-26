@@ -51,14 +51,18 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		network = new NetworkImpl(this);
 		webServiceClient = new WebServiceClientImpl(this);
 
-		readConfigFileAndLogin();
-
+		login("User", "Password"); // TODO should be called from GUI
 		gui.generateEvents(); // TODO delete (only for testing)
 	}
 
 	@Override
 	public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
 		this.userServicesInfo = userServicesInfo;
+	}
+
+	@Override
+	public void login(String username, String password) {
+		readConfigFileAndLogin(username, password);
 	}
 
 	@Override
@@ -268,20 +272,10 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		gui.drawMainPage(mainUser, mapServiceUsers);
 	}
 
-	private void readConfigFileAndLogin() {
+	private void readConfigFileAndLogin(String username, String password) {
 		BufferedReader in = null;
 		try {
 			in = new BufferedReader(new FileReader(CONFIG_FILE));
-			String username = in.readLine();
-			if (username == null) {
-				gui.drawErrorPage("No username.");
-				return;
-			}
-			String password = in.readLine();
-			if (password == null) {
-				gui.drawErrorPage("No password.");
-				return;
-			}
 			User.Type userType = readUserType(in);
 			if (userType == null) {
 				gui.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
