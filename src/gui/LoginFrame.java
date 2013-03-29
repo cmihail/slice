@@ -1,17 +1,22 @@
 
 package gui;
 
+import javax.swing.JOptionPane;
+
+import mediator.MediatorGUI;
+
 /**
  * Defines the first frame, used for login
  * @author cmihail, radu-tutueanu
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+	private final MediatorGUI mediator;
     /**
      * Creates new form Login
      */
-    public LoginFrame() {
+    public LoginFrame(MediatorGUI med) {
         initComponents();
+        mediator = med;
     }
 
     /**
@@ -93,9 +98,16 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>                        
 
                                      
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        this.firePropertyChange("status", "notLoggedIn", "LoggedIn");
-    }    
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+    	mediator.login("User", "Password");
+    	//if(mediator.login("User", "Password"))
+        //this.firePropertyChange("status", "notLoggedIn", "LoggedIn");
+    }  
+  
+	public void drawErrorPage(String errorMessage) {
+		JOptionPane.showMessageDialog(this,"ERORR : "+ errorMessage);
+		
+	}
     /**
      * @param args the command line arguments
      */

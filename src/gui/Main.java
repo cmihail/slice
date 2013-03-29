@@ -19,13 +19,13 @@ public class Main extends GUIImpl implements PropertyChangeListener{
 
 	public Main(MediatorGUI mediator) {
 		super(mediator);
-		loginFrame = new LoginFrame();
+		loginFrame = new LoginFrame(mediator);
 		loginFrame.addPropertyChangeListener(this);
 		mainFrame = new MainFrameBuyer(mediator);
 	}
 
 
-	public static void main(String args[]) {
+	public  void main(String args[]) {
 		MediatorImpl mediator = new MediatorImpl();
 
 		/* Set the Nimbus look and feel */

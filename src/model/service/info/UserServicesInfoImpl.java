@@ -34,7 +34,16 @@ public class UserServicesInfoImpl implements UserServicesInfo {
 	public Set<Service> getServices() {
 		return mapServicesInfo.keySet();
 	}
-
+	@Override
+	public Service getServiceByName(String name) {
+		Iterator<Service> it = mapServicesInfo.keySet().iterator();
+		while (it.hasNext())
+		{
+			Service aux =it.next();
+			if (aux.getName().equals(name)) return aux;
+		}
+		return null;
+	}
 	@Override
 	public ServiceInfo getServiceInfo(Service service) {
 		return mapServicesInfo.get(service);
