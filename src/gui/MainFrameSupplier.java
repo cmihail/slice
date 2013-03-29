@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -14,7 +15,9 @@ import model.service.Service;
 import model.user.User;
 
 public class MainFrameSupplier extends MainFrame  implements MouseListener{
-
+	JMenuItem makeOffer;
+	JMenuItem dropAuction;
+	
 	public MainFrameSupplier(MediatorGUI med) {
 		super(med);
 		// TODO Auto-generated constructor stub
@@ -25,13 +28,19 @@ public class MainFrameSupplier extends MainFrame  implements MouseListener{
     protected void initComponents() {
 		super.initComponents();
 		  offersLabel.setText("Buyers");
-		  offersPopupMenu.add(new JMenuItem("Make offer"));
-		  offersPopupMenu.add(new JMenuItem("Drop auction"));
+		  makeOffer=new JMenuItem("Make offer");
+		  offersPopupMenu.add(makeOffer);
+		  dropAuction=new JMenuItem("Drop auction");
+		  offersPopupMenu.add(dropAuction);
 		  servicesTable.addMouseListener(this);
+		  
+		  makeOffer.addActionListener(this);
+		  dropAuction.addActionListener(this);
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		/*show users for selected service*/
 		if(SwingUtilities.isLeftMouseButton(e) && e.getSource() == servicesTable)
 		{
 			int index = servicesTable.getSelectedRow();
@@ -60,6 +69,18 @@ public class MainFrameSupplier extends MainFrame  implements MouseListener{
 			
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.getActionCommand());
+		if(e.getActionCommand().equals(makeOffer.getText()))
+		{
+			//TODO make an offer
+		}
+		if(e.getActionCommand().equals(dropAuction.getText()))
+		{
+			//TODO drop auction
+		}
+
+	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub

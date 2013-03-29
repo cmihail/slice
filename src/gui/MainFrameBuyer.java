@@ -111,6 +111,18 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 				drawErrorPage("Internal Error. Can't find requested Service");
 			else mediator.launchOfferRequest(aux);
 		}
+		if(e.getActionCommand().equals(drop.getText()))
+		{
+			//TODO drop request
+		}
+		if(e.getActionCommand().equals(accept.getText()))
+		{
+			//TODO accept offer from supplier
+		}
+		if(e.getActionCommand().equals(refuse.getText()))
+		{
+			//TODO refuse offer from supplier
+		}
 
 	}
 
