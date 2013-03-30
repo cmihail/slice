@@ -24,6 +24,7 @@ public interface MediatorGUI {
 	 * Logins a user.
 	 * @param username the username
 	 * @param password the password
+	 * @return logged in succesfully or not
 	 */
 	void login(String username, String password);
 

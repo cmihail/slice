@@ -49,4 +49,7 @@ public class UserServicesInfoImpl implements UserServicesInfo {
 	public ServiceInfo getServiceInfo(Service service) {
 		return mapServicesInfo.get(service);
 	}
+
+	
+	
 }

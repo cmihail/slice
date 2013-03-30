@@ -1,10 +1,12 @@
 package model.service.info;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import model.service.Service;
+import model.state.OfferState;
 import model.state.ServiceState;
 import model.user.User;
 
@@ -19,12 +21,13 @@ public class ServiceInfo {
 	private final Service service;
 	private final Map<User, UserInfo> usersInfo;
 	private ServiceState serviceState;
+	private OfferState offerState;
 
 	public ServiceInfo(Service service, Set<User> users) {
 		this.service = service;
 		this.usersInfo = new HashMap<User, UserInfo>();
 		setServiceState(ServiceState.INACTIVE);
-
+		setOfferState(OfferState.NONE);
 		for (User user : users) {
 			usersInfo.put(user, new UserInfo(user));
 		}
@@ -56,5 +59,25 @@ public class ServiceInfo {
 
 	public UserInfo getUserInfo(User user) {
 		return usersInfo.get(user);
+	}
+
+	public OfferState getOfferState() {
+		return offerState;
+	}
+
+	public void setOfferState(OfferState offerState) {
+		this.offerState = offerState;
+	}
+	public User getUserByName(String name){
+		Iterator<User> itUser =getUsers().iterator();
+		User aux;
+		while (itUser.hasNext())
+		{
+			aux=itUser.next();
+			if(aux.getUsername().equals(name)) return aux;
+		}
+		
+		return null;
+		
 	}
 }

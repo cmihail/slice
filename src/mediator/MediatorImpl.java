@@ -2,6 +2,9 @@ package mediator;
 
 import gui.GUI;
 import gui.GUIImpl;
+import gui.LoginFrame;
+import gui.MainFrameBuyer;
+import gui.MainFrameManufacturer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,19 +43,19 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 
 	private final String CONFIG_FILE = "config";
-	private final GUI gui;
+	private GUI gui;
+	private final LoginFrame login;
 	private final Network network;
 	private final WebServiceClient webServiceClient;
 	private User mainUser;
 	private UserServicesInfo userServicesInfo;
 
 	public MediatorImpl() {
-		gui = new GUIImpl(this);
+		login = new LoginFrame(this);
 		network = new NetworkImpl(this);
 		webServiceClient = new WebServiceClientImpl(this);
-
-		login("User", "Password"); // TODO should be called from GUI
-		gui.generateEvents(); // TODO delete (only for testing)
+		login.setVisible(true);
+		//gui.generateEvents(); // TODO delete (only for testing)
 	}
 
 	@Override
@@ -64,6 +67,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	@Override
 	public void login(String username, String password) {
 		readConfigFileAndLogin(username, password);
+		
 	}
 
 	@Override
@@ -150,15 +154,15 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 	@Override
 	public void makeOffer(Service service, Buyer buyer, Offer offer) {
-		if (mainUser instanceof Buyer)
+		if (mainUser instanceof Manufacturer)
 			network.makeServiceOffer((Manufacturer) mainUser, buyer, service, offer);
 		else
-			logError("Invalid user type at dropAuction.");
+			logError("Invalid user type at makeOffer.");
 	}
 
 	@Override
 	public void dropAuction(Service service, Buyer buyer) {
-		if (mainUser instanceof Buyer)
+		if (mainUser instanceof Manufacturer)
 			network.dropUserAuction((Manufacturer) mainUser, buyer, service);
 		else
 			logError("Invalid user type at dropAuction.");
@@ -261,16 +265,25 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		return user;
 	}
 
-	private void login(User user, String password) {
+	private boolean login(User user, String password) {
 		Map<Service, Set<User>> mapServiceUsers =
 				webServiceClient.login(mainUser, password);
 
 		// Draw corresponded page in GUI.
 		if (mapServiceUsers == null) {
 			gui.drawErrorPage("Error at login credentials (see config file).");
-			return;
+			return false;
 		}
-		gui.drawMainPage(mainUser, mapServiceUsers);
+		else{
+				login.setVisible(false);
+				if(mainUser.getType()== User.Type.BUYER)
+					gui = new MainFrameBuyer(this);
+				else 
+					gui = new MainFrameManufacturer(this);
+				gui.drawMainPage(mainUser, mapServiceUsers);
+				
+				return true;
+		}
 	}
 
 	private void readConfigFileAndLogin(String username, String password) {
@@ -279,37 +292,38 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			in = new BufferedReader(new FileReader(CONFIG_FILE));
 			User.Type userType = readUserType(in);
 			if (userType == null) {
-				gui.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
-				return;
+				login.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
+				
 			}
 			List<Service> userServices = readServices(in, userType);
 			if (userServices == null) {
-				gui.drawErrorPage("Invalid services.");
-				return;
+				login.drawErrorPage("Invalid services.");
+				
 			}
 
 			mainUser = createUser(username, userType, userServices);
 			if (mainUser == null) {
-				gui.drawErrorPage("Invalid user creation.");
-				return;
+				login.drawErrorPage("Invalid user creation.");
+			
 			}
 
 			login(mainUser, password);
 		} catch(NumberFormatException e) {
-			gui.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
+			login.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
 		} catch (IOException e) {
 			e.printStackTrace();
-			gui.drawErrorPage("Error at reading config file.");
+			login.drawErrorPage("Error at reading config file.");
 		} finally {
 			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-					gui.drawErrorPage("Error at reading config file.");
+					login.drawErrorPage("Error at reading config file.");
 				}
 			}
 		}
+		
 	}
 
 	private void logError(String errorMessage) {

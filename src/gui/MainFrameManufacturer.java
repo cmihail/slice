@@ -10,15 +10,20 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
 import mediator.MediatorGUI;
+import model.service.Offer;
+import model.service.OfferImpl;
 import model.service.Price;
 import model.service.Service;
+import model.state.OfferState;
+import model.state.ServiceState;
+import model.user.Buyer;
 import model.user.User;
 
-public class MainFrameSupplier extends MainFrame  implements MouseListener{
+public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 	JMenuItem makeOffer;
 	JMenuItem dropAuction;
 	
-	public MainFrameSupplier(MediatorGUI med) {
+	public MainFrameManufacturer(MediatorGUI med) {
 		super(med);
 		// TODO Auto-generated constructor stub
 	}
@@ -47,7 +52,7 @@ public class MainFrameSupplier extends MainFrame  implements MouseListener{
 			if(index == -1 ) drawErrorPage("No Service selected");
 			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
 			Service aux = userServicesInfo.getServiceByName(sname);
-			if (aux.equals(null)) 
+			if (aux==null) 
 				{
 				drawErrorPage("Internal Error. Can't find requested Service");
 				return;
@@ -58,10 +63,8 @@ public class MainFrameSupplier extends MainFrame  implements MouseListener{
 			if (usersIt.hasNext()){
 				User user = usersIt.next();
 				if(user.getType().equals(User.Type.BUYER)){
-					
+					model.setValueAt(user.getUsername(), i, 0);
 					i++;
-						model.setValueAt(user.getUsername(), i, 0);
-					
 				}
 				
 			}
@@ -70,15 +73,32 @@ public class MainFrameSupplier extends MainFrame  implements MouseListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
+		
+		Service selectedService = getSelectedService();
+		if (selectedService == null)
+			{
+			drawErrorPage("Internal Error. Can't find requested Service");
+			return;
+			}
+		User aUser = getSelectedOfferUser(selectedService);
+		if(aUser == null)
+		{
+			drawErrorPage("Internal Error. Can't find requested user");
+			return;
+			}
 		if(e.getActionCommand().equals(makeOffer.getText()))
 		{
-			//TODO make an offer
+			mediator.makeOffer(selectedService, (Buyer) aUser, new OfferImpl(new Price(10)) );
+			userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_MADE);
+			userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.ACTIVE);
 		}
 		if(e.getActionCommand().equals(dropAuction.getText()))
 		{
-			//TODO drop auction
+			mediator.dropAuction(getSelectedService(), (Buyer) aUser);
+			userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.INACTIVE);
+			
 		}
+		updateServicesTable();
 
 	}
 	@Override

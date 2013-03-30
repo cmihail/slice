@@ -3,6 +3,7 @@ package model.service.info;
 import java.util.Set;
 
 import model.service.Service;
+import model.user.User;
 
 /**
  * Defines a interface that contains all services and correspondent
@@ -17,4 +18,6 @@ public interface UserServicesInfo {
 	ServiceInfo getServiceInfo(Service service);
 
 	Service getServiceByName(String name);
+	
+	
 }
