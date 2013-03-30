@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.util.Iterator;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
@@ -49,24 +50,47 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 		if(SwingUtilities.isLeftMouseButton(e) && e.getSource() == servicesTable)
 		{
 			int index = servicesTable.getSelectedRow();
-			if(index == -1 ) drawErrorPage("No Service selected");
-			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
-			Service aux = userServicesInfo.getServiceByName(sname);
-			if (aux==null) 
+			if(index == -1 ) 
 				{
-				drawErrorPage("Internal Error. Can't find requested Service");
+				drawErrorPage("No Service selected");
 				return;
 				}
-			Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
-			int i =0;
-			TableModel model = offersTable.getModel();
-			if (usersIt.hasNext()){
-				User user = usersIt.next();
-				if(user.getType().equals(User.Type.BUYER)){
-					model.setValueAt(user.getUsername(), i, 0);
-					i++;
+			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
+			Service aux = userServicesInfo.getServiceByName(sname);
+
+			if (aux ==null)
+			{
+				drawErrorPage("Internal Error. Can't find requested Service");
+				return;
+			}
+			offersTableInit();
+			if(userServicesInfo.getServiceInfo(aux).getServiceState().equals(ServiceState.ACTIVE))
+			{
+				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
+				int i =0;
+				TableModel model = offersTable.getModel();
+				while (usersIt.hasNext()){
+					User user = usersIt.next();
+
+					if(user.getType().equals(User.Type.BUYER)){
+
+						if(userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOfferState().equals(OfferState.NONE)) 
+							continue;
+						Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
+						model.setValueAt(user.getUsername(), i, 0);
+						if(o!=null)
+						{
+							Price p =o.getPrice();
+							
+							if(p!=null) {
+								model.setValueAt(p, i, 1);
+								
+							}
+
+						}
+						i++;
+					}
 				}
-				
 			}
 		}
 			
@@ -88,10 +112,28 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 			}
 		if(e.getActionCommand().equals(makeOffer.getText()))
 		{
-			mediator.makeOffer(selectedService, (Buyer) aUser, new OfferImpl(new Price(10)) );
-			userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_MADE);
-			userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.ACTIVE);
+			String str = JOptionPane.showInputDialog(null, "Enter price quoted : ", 
+					"Make an offer", 1);
+			int i;
+			if(str==null )
+				{
+				drawErrorPage("Illegal price. Price should be an integer");
+				return;
+				}
+			try{
+				i=Integer.parseInt(str);
+				Offer o =  new OfferImpl(new Price(i));
+				mediator.makeOffer(selectedService, (Buyer) aUser,o );
+				userServicesInfo.getServiceInfo(selectedService).getUserInfo(aUser).setOffer(o);
+				userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_MADE);
+			}
+			catch (NumberFormatException ex)
+			{
+				drawErrorPage("Illegal price. Price should be an integer");
+			}
+			
 		}
+		
 		if(e.getActionCommand().equals(dropAuction.getText()))
 		{
 			mediator.dropAuction(getSelectedService(), (Buyer) aUser);

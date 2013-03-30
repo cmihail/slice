@@ -212,7 +212,12 @@ public class NetworkImpl implements Network {
 									si.getService(), new OfferImpl(new Price(price)));
 						}
 					}
-
+					if (mainUser instanceof Manufacturer) {
+						if (user != null && user instanceof Buyer) {
+							mediator.receiveLaunchedServiceOfferRequest((Buyer) user, si.getService());
+							
+						}
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

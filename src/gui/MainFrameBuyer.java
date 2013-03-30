@@ -179,7 +179,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
 				int i =0;
 				TableModel model = offersTable.getModel();
-				if (usersIt.hasNext()){
+				while (usersIt.hasNext()){
 					User user = usersIt.next();
 
 					if(user.getType().equals(User.Type.MANUFACTURER)){

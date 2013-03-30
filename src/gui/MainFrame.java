@@ -385,14 +385,15 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 	@Override
 	public void activateBuyerForService(Buyer buyer, Service service) {
-		//	userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.NONE);
-
+			userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.OFFER_REQUESTED);
+			userServicesInfo.getServiceInfo(service).setServiceState(ServiceState.ACTIVE);
+			updateServicesTable();
 	}
 
 	@Override
 	public void deactivateBuyerForService(Buyer buyer, Service service) {
-		//userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(offerState)
-
+		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.NONE);
+		updateServicesTable();
 	}
 
 	@Override

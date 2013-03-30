@@ -99,9 +99,8 @@ public class LoginFrame extends javax.swing.JFrame {
 
                                      
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {  
-    	mediator.login("User", "Password");
-    	//if(mediator.login("User", "Password"))
-        //this.firePropertyChange("status", "notLoggedIn", "LoggedIn");
+    	mediator.login(usernameTextField.getText(), myPasswordField.getPassword().toString());
+    	
     }  
   
 	public void drawErrorPage(String errorMessage) {
