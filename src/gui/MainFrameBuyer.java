@@ -12,13 +12,12 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 
-import sun.launcher.resources.launcher;
-
 import mediator.MediatorGUI;
 import model.service.Price;
 import model.service.Service;
 import model.state.ServiceState;
 import model.user.User;
+//import sun.launcher.resources.launcher;
 
 public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
@@ -28,10 +27,11 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	protected void initComponents() {
 		super.initComponents();
 		offersLabel.setText("Suppliers");
-		launch = new JMenuItem("Launch Offer request"); 
+		launch = new JMenuItem("Launch Offer request");
 		servicesPopupMenu.add(launch);
 		drop = new JMenuItem("Drop Offer request");
 		servicesPopupMenu.add(drop);
@@ -41,7 +41,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		offersPopupMenu.add(refuse);
 		servicesTable = new javax.swing.JTable() {
 
-	            /** 
+	            /**
 	             * @inherited <p>
 	             */
 	           @Override
@@ -67,7 +67,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 	        };
 	        offersTable = new JTable(){
 
-		            /** 
+		            /**
 		             * @inherited <p>
 		             */
 		           @Override
@@ -78,7 +78,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		                    // condition for showing popup triggered by mouse
 		                	int row = rowAtPoint(p);
 		                    if (isRowSelected(rowAtPoint(p))) {
-		                    	
+
 		                        return super.getComponentPopupMenu();
 		                    } else {
 		                        return null;
@@ -88,7 +88,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		            }
 
 		        };
-	        
+
 	    servicesTableInit();
 	    offersTableInit();
 	    servicesTable.addMouseListener(this);
@@ -98,6 +98,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		refuse.addActionListener(this);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 		if(e.getActionCommand().equals(launch.getText()))
@@ -107,7 +108,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			if(index == -1 ) drawErrorPage("No Service selected");
 			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
 			Service aux = userServicesInfo.getServiceByName(sname);
-			if (aux.equals(null)) 
+			if (aux.equals(null))
 				drawErrorPage("Internal Error. Can't find requested Service");
 			else mediator.launchOfferRequest(aux);
 		}
@@ -134,7 +135,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			if(index == -1 ) drawErrorPage("No Service selected");
 			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
 			Service aux = userServicesInfo.getServiceByName(sname);
-			if (aux.equals(null)) 
+			if (aux.equals(null))
 				{
 				drawErrorPage("Internal Error. Can't find requested Service");
 				return;
@@ -144,9 +145,9 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			TableModel model = offersTable.getModel();
 			if (usersIt.hasNext()){
 				User user = usersIt.next();
-				
+
 				if(user.getType().equals(User.Type.MANUFACTURER)){
-					
+
 					i++;
 					Price p =userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer().getPrice();
 					if(p!=null) {
@@ -154,33 +155,33 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 						model.setValueAt(user.getUsername(), i, 0);
 					}
 				}
-				
+
 			}
 		}
-			
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

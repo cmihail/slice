@@ -1,10 +1,16 @@
 package network;
 
+import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import mediator.MediatorNetwork;
 import model.service.Offer;
+import model.service.OfferImpl;
+import model.service.Price;
 import model.service.Service;
+import model.service.info.ServiceInfo;
+import model.service.info.UserServicesInfo;
 import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
@@ -20,12 +26,6 @@ public class NetworkImpl implements Network {
 
 	public NetworkImpl(MediatorNetwork mediator) {
 		this.mediator = mediator;
-
-		receiveIncomingMessage();
-	}
-
-	private void receiveIncomingMessage() {
-		// TODO receive incoming message from other clients
 	}
 
 	@Override
@@ -133,5 +133,90 @@ public class NetworkImpl implements Network {
 		// TODO cancel service transfer to toUser
 		System.out.println("Cancel transfer service (" + service.getName() +
 				") to user (" + toUser.getUsername() + ")");
+	}
+
+	@Override
+	public void startReceiveIncomingConnections(User mainUser, UserServicesInfo userServicesInfo) {
+		// TODO this should be in main constructor and without the passed params
+		Thread thread = new Thread(new ReceiveIncomingMessagesThread(mediator,
+									mainUser, userServicesInfo));
+		thread.start();
+	}
+
+	/**
+	 * Receives incoming messages in a different thread.
+	 *
+	 * @author cmihail, radu-tutueanu
+	 */
+	private class ReceiveIncomingMessagesThread implements Runnable {
+
+		private final MediatorNetwork mediator;
+		private final User mainUser;
+		private final UserServicesInfo userServicesInfo;
+
+		public ReceiveIncomingMessagesThread(MediatorNetwork mediator,
+				User mainUser, UserServicesInfo userServicesInfo) {
+			this.mediator = mediator;
+			this.mainUser = mainUser;
+			this.userServicesInfo = userServicesInfo;
+		}
+
+		@Override
+		public void run() {
+			// TODO receive incoming message from other clients
+
+			// for testing only: we assume we received offers
+			Random random = new Random();
+
+			if (userServicesInfo.getServices().isEmpty())
+				return;
+
+			while (true) {
+				int seconds = random.nextInt(2) + 1;
+				try {
+					Thread.sleep(seconds * 1000);
+
+					// generate random service
+					Set<Service> usi = userServicesInfo.getServices();
+					int index = random.nextInt(usi.size()), i;
+					ServiceInfo si = null;
+					Iterator<Service> it = usi.iterator();
+					i = 0;
+					while (it.hasNext()) {
+						si = userServicesInfo.getServiceInfo(it.next());
+						if (i == index)
+							break;
+						i++;
+					}
+
+					// generate random user
+					Set<User> users = si.getUsers();
+					if (users.isEmpty())
+						continue;
+
+					index = random.nextInt(users.size());
+					User user = null;
+					Iterator<User> itUsers = users.iterator();
+					i = 0;
+					while (itUsers.hasNext()) {
+						user = itUsers.next();
+						if (i == index)
+							break;
+						i++;
+					}
+
+					if (mainUser instanceof Buyer) {
+						if (user != null && user instanceof Manufacturer) {
+							int price = random.nextInt(10000) + 1;
+							mediator.receiveServiceOffer((Manufacturer) user,
+									si.getService(), new OfferImpl(new Price(price)));
+						}
+					}
+
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
