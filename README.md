@@ -19,5 +19,18 @@ slice
 
 2. Observations:
   - User / Service objects are equal if they have same username / name
+
+3. Testing:
+  - different events (like making an offer, the user that makes the
+    offer, etc) are generated randomly
+  - initial users are generated random too so we could have more case
+    scenario
+  - there are services with no correspondent users too sometime and
+    sometime they have a lot of users (depending on random generator)
+
+4. Source Code Management:
+  - git
+  - https://github.com/cmihail/slice
+
   
  Radu-started working on the gui
