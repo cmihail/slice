@@ -154,15 +154,15 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 	@Override
 	public void makeOffer(Service service, Buyer buyer, Offer offer) {
-		if (mainUser instanceof Buyer)
+		if (mainUser instanceof Manufacturer)
 			network.makeServiceOffer((Manufacturer) mainUser, buyer, service, offer);
 		else
-			logError("Invalid user type at dropAuction.");
+			logError("Invalid user type at makeOffer.");
 	}
 
 	@Override
 	public void dropAuction(Service service, Buyer buyer) {
-		if (mainUser instanceof Buyer)
+		if (mainUser instanceof Manufacturer)
 			network.dropUserAuction((Manufacturer) mainUser, buyer, service);
 		else
 			logError("Invalid user type at dropAuction.");

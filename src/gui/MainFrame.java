@@ -16,6 +16,7 @@ import javax.swing.JPopupMenu;
 import mediator.MediatorGUI;
 import model.service.Offer;
 import model.service.Service;
+import model.service.info.UserInfo;
 import model.service.info.UserServicesInfo;
 import model.service.info.UserServicesInfoImpl;
 import model.state.OfferState;
@@ -378,6 +379,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	public void setManufacturerServiceOffer(Manufacturer manufacturer,
 			Service service, Offer offer) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(manufacturer).setOffer(offer);
+		userServicesInfo.getServiceInfo(service).setOfferState(OfferState.OFFER_MADE);
 		updateServicesTable();
 	}
 
@@ -398,14 +400,16 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 			OfferState offerState) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(offerState);
 		userServicesInfo.getServiceInfo(service).setOfferState(offerState);
-		System.out.println(offerState);
 		updateServicesTable();
 	}
 
 	@Override
 	public void compareServiceOffer(Buyer buyer, Service service, Offer offer) {
-		// TODO Auto-generated method stub
-
+		UserInfo userInfo = userServicesInfo.getServiceInfo(service).getUserInfo(buyer);
+		if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) >= 0) {
+			userInfo.setOfferState(OfferState.OFFER_EXCEEDED);
+			updateServicesTable();
+		}
 	}
 
 	@Override
@@ -431,7 +435,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 			drawErrorPage("No Service selected");
 			return null;
 		}
-		String uname = (String)servicesTable.getModel().getValueAt(index, 0);
+		String uname = (String)offersTable.getModel().getValueAt(index, 0);
 		User aux = userServicesInfo.getServiceInfo(service).getUserByName(uname);
 		return aux;
 	}

@@ -104,7 +104,6 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
 		Service selectedService = getSelectedService();
 		if (selectedService == null)
 			{
@@ -134,7 +133,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			User aUser = getSelectedOfferUser(selectedService);
 			if(aUser == null)
 			{
-				drawErrorPage("Internal Error. Can't find requested Service");
+				drawErrorPage("Internal Error. Can't find requested user");
 				return;
 				}
 			mediator.acceptOffer(selectedService, (Manufacturer) aUser);
@@ -145,7 +144,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			User aUser = getSelectedOfferUser(selectedService);
 			if(aUser == null)
 			{
-				drawErrorPage("Internal Error. Can't find requested Service");
+				drawErrorPage("Internal Error. Can't find requested user");
 				return;
 				}
 			mediator.refuseOffer(selectedService, (Manufacturer) aUser);
