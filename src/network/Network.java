@@ -5,6 +5,7 @@ import java.util.Set;
 import mediator.MediatorNetwork;
 import model.service.Offer;
 import model.service.Service;
+import model.service.info.UserServicesInfo;
 import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
@@ -15,6 +16,9 @@ import model.user.User;
  * @author cmihail, radu-tutueanu
  */
 public interface Network {
+
+	// TODO only for testing
+	void startReceiveIncomingConnections(User mainUser, UserServicesInfo userServicesInfo);
 
 	/**
 	 * Registers a user with a given service in all users clients that have

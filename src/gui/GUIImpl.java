@@ -90,6 +90,9 @@ public class GUIImpl implements GUI {
 			Offer offer) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(manufacturer).setOffer(offer);
 		// TODO gui change
+		System.out.println("Recevied offer <" + offer.getPrice() + "> from <" +
+				manufacturer.getUsername() + "> for service <" +
+				service.getName() + ">"); // TODO only for testing
 	}
 
 	@Override

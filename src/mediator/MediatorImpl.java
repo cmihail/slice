@@ -58,6 +58,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	@Override
 	public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
 		this.userServicesInfo = userServicesInfo;
+		network.startReceiveIncomingConnections(mainUser, userServicesInfo); // TODO delete (only for testing)
 	}
 
 	@Override
