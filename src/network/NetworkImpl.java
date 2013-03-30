@@ -138,7 +138,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void startReceiveIncomingConnections(User mainUser, UserServicesInfo userServicesInfo) {
 		// TODO this should be in main constructor and without the passed params
-		Thread thread = new Thread(new ReceiveIncomingMessages(mediator,
+		Thread thread = new Thread(new ReceiveIncomingMessagesThread(mediator,
 									mainUser, userServicesInfo));
 		thread.start();
 	}
@@ -148,13 +148,13 @@ public class NetworkImpl implements Network {
 	 *
 	 * @author cmihail, radu-tutueanu
 	 */
-	private class ReceiveIncomingMessages implements Runnable {
+	private class ReceiveIncomingMessagesThread implements Runnable {
 
 		private final MediatorNetwork mediator;
 		private final User mainUser;
 		private final UserServicesInfo userServicesInfo;
 
-		public ReceiveIncomingMessages(MediatorNetwork mediator,
+		public ReceiveIncomingMessagesThread(MediatorNetwork mediator,
 				User mainUser, UserServicesInfo userServicesInfo) {
 			this.mediator = mediator;
 			this.mainUser = mainUser;
