@@ -234,7 +234,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(logoutButton))
 										.addGroup(layout.createSequentialGroup()
@@ -352,7 +352,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		userServicesInfo = new UserServicesInfoImpl(mapServiceUsers);
 		this.mainUser= mainUser;
 		mediator.setUserServicesInfo(userServicesInfo);
-		usernameLabel.setText(mainUser.getUsername()+"-"+mainUser.getType());
+		usernameLabel.setText(mainUser.getUsername()+" - "+mainUser.getType());
 		updateServicesTable();
 		this.setVisible(true);
 	}

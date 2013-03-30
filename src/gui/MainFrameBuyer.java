@@ -170,7 +170,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
 			if (aux ==null)
 			{
-				drawErrorPage("Internal Error. Can't find requested Service");
+				
 				return;
 			}
 			offersTableInit();

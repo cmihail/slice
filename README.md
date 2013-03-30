@@ -32,5 +32,7 @@ slice
   - git
   - https://github.com/cmihail/slice
 
-  
- Radu-started working on the gui
+5. GUI
+	Has a Login frame
+	Uses two tables, one for services, one for Buyers/ Manufacturers. When a service is selected, the Buyers/Manufacturers belonging to that service.
+	Most of the funtionalities in MainFrame.java, extended by two classes for Buyer and Manufacturer, implementing the parts that are different.
