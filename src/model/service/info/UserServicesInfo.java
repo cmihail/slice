@@ -15,4 +15,6 @@ public interface UserServicesInfo {
 	Set<Service> getServices();
 
 	ServiceInfo getServiceInfo(Service service);
+
+	Service getServiceByName(String name);
 }
