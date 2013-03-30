@@ -62,10 +62,10 @@ public class WebServiceClientImpl implements WebServiceClient {
 
 			switch (user.getType()) {
 			case BUYER:
-				users.add(new Buyer("Username " + i, services));
+				users.add(new Manufacturer("Username " + i, services));
 				break;
 			case MANUFACTURER:
-				users.add(new Manufacturer("Username " + i, services));
+				users.add(new Buyer("Username " + i, services));
 				break;
 			}
 		}
