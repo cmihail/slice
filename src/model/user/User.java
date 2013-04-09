@@ -1,5 +1,6 @@
 package model.user;
 
+import java.io.Serializable;
 import java.util.List;
 
 import model.service.Service;
@@ -9,7 +10,7 @@ import model.service.Service;
  *
  * @author cmihail, radu-tutueanu
  */
-public interface User {
+public interface User extends Serializable {
 
 	enum Type {
 		BUYER,

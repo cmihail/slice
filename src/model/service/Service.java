@@ -1,11 +1,13 @@
 package model.service;
 
+import java.io.Serializable;
+
 /**
  * Defines service interface.
  *
  * @author cmihail, radu-tutueanu
  */
-public interface Service {
+public interface Service extends Serializable {
 
 	String getName();
 

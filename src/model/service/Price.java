@@ -1,11 +1,13 @@
 package model.service;
 
+import java.io.Serializable;
+
 /**
  * Defines price class.
  *
  * @author cmihail, radu-tutueanu
  */
-public class Price implements Comparable<Price> {
+public class Price implements Comparable<Price>, Serializable {
 
 	private final int value;
 

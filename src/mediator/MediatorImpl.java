@@ -45,14 +45,13 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	private final String CONFIG_FILE = "config";
 	private GUI gui;
 	private final LoginFrame login;
-	private final Network network;
 	private final WebServiceClient webServiceClient;
+	private Network network;
 	private User mainUser;
 	private UserServicesInfo userServicesInfo;
 
 	public MediatorImpl() {
 		login = new LoginFrame(this);
-		network = new NetworkImpl(this);
 		webServiceClient = new WebServiceClientImpl(this);
 		login.setVisible(true);
 		//gui.generateEvents(); // TODO delete (only for testing)
@@ -61,13 +60,13 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	@Override
 	public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
 		this.userServicesInfo = userServicesInfo;
-		network.startReceiveIncomingConnections(mainUser, userServicesInfo); // TODO delete (only for testing)
+//		network.startReceiveIncomingConnections(mainUser, userServicesInfo); // TODO delete (only for testing)
 	}
 
 	@Override
 	public void login(String username, String password) {
 		readConfigFileAndLogin(username, password);
-		
+		network = new NetworkImpl(this, mainUser);
 	}
 
 	@Override

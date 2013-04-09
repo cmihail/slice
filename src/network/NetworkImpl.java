@@ -1,8 +1,16 @@
 package network;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+
+import network.common.Communication;
+import network.model.NetworkUser;
+
+import constants.Constants;
 
 import mediator.MediatorNetwork;
 import model.service.Offer;
@@ -23,11 +31,17 @@ import model.user.User;
 public class NetworkImpl implements Network {
 
 	private final MediatorNetwork mediator;
+	private SocketChannel socketChannel = null;
 
-	public NetworkImpl(MediatorNetwork mediator) {
+	public NetworkImpl(MediatorNetwork mediator, User mainUser) {
 		this.mediator = mediator;
+		this.socketChannel = connectToServer();
+		
+		if (mainUser == null)
+			System.out.println("ERRR");
+		Communication.send(socketChannel, new NetworkUser(mainUser));
 	}
-
+	
 	@Override
 	public void registerUserServiceToUsers(User mainUser, Service service,
 			Set<User> usersWithService) {
@@ -223,5 +237,19 @@ public class NetworkImpl implements Network {
 				}
 			}
 		}
+	}
+	
+	private SocketChannel connectToServer() {
+		SocketChannel socketChannel = null;
+	    try {
+	    	socketChannel = SocketChannel.open();
+	        socketChannel.socket().connect(
+	        		new InetSocketAddress(Constants.SERVER_IP, Constants.SERVER_PORT));
+	        socketChannel.configureBlocking(false);
+	    } catch (IOException e) {
+	    	System.out.println("Couldn't connect to server"); // TODO maybe something else
+	    	System.exit(1);
+	    }
+	    return socketChannel;
 	}
 }
