@@ -19,7 +19,7 @@ import model.user.User;
  */
 public interface GUI {
 
-	void generateEvents(); // TODO delete (only for testing)
+	public void generateEvents();
 
 	/**
 	 * Draws a page with a error message.

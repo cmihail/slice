@@ -12,6 +12,7 @@ import model.service.Service;
  */
 public abstract class AbstractUser implements User {
 
+	private static final long serialVersionUID = -6365482003158983284L;
 	private final String username;
 	private final User.Type type;
 	private final List<Service> services;

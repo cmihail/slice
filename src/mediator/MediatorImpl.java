@@ -1,7 +1,6 @@
 package mediator;
 
 import gui.GUI;
-import gui.GUIImpl;
 import gui.LoginFrame;
 import gui.MainFrameBuyer;
 import gui.MainFrameManufacturer;
@@ -42,7 +41,7 @@ import webserviceclient.WebServiceClientImpl;
 public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 
-	private final String CONFIG_FILE = "config";
+	private final String CONFIG_FILE_EXTENSION = ".cfg";
 	private GUI gui;
 	private final LoginFrame login;
 	private final WebServiceClient webServiceClient;
@@ -55,17 +54,18 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		webServiceClient = new WebServiceClientImpl(this);
 		login.setVisible(true);
 		//gui.generateEvents(); // TODO delete (only for testing)
+
+		// TODO synchronize in GUI
 	}
 
 	@Override
 	public void setUserServicesInfo(UserServicesInfo userServicesInfo) {
 		this.userServicesInfo = userServicesInfo;
-//		network.startReceiveIncomingConnections(mainUser, userServicesInfo); // TODO delete (only for testing)
 	}
 
 	@Override
 	public void login(String username, String password) {
-		readConfigFileAndLogin(username, password);
+		readConfigFileAndLogin(username + CONFIG_FILE_EXTENSION, username, password);
 		network = new NetworkImpl(this, mainUser);
 	}
 
@@ -272,39 +272,33 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		if (mapServiceUsers == null) {
 			gui.drawErrorPage("Error at login credentials (see config file).");
 			return false;
-		}
-		else{
+		} else {
 				login.setVisible(false);
 				if(mainUser.getType()== User.Type.BUYER)
 					gui = new MainFrameBuyer(this);
-				else 
+				else
 					gui = new MainFrameManufacturer(this);
 				gui.drawMainPage(mainUser, mapServiceUsers);
-				
+
 				return true;
 		}
 	}
 
-	private void readConfigFileAndLogin(String username, String password) {
+	private void readConfigFileAndLogin(String configFile, String username, String password) {
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader(CONFIG_FILE));
+			in = new BufferedReader(new FileReader(configFile));
 			User.Type userType = readUserType(in);
-			if (userType == null) {
+			if (userType == null)
 				login.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
-				
-			}
+
 			List<Service> userServices = readServices(in, userType);
-			if (userServices == null) {
+			if (userServices == null)
 				login.drawErrorPage("Invalid services.");
-				
-			}
 
 			mainUser = createUser(username, userType, userServices);
-			if (mainUser == null) {
+			if (mainUser == null)
 				login.drawErrorPage("Invalid user creation.");
-			
-			}
 
 			login(mainUser, password);
 		} catch(NumberFormatException e) {
@@ -322,7 +316,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 				}
 			}
 		}
-		
+
 	}
 
 	private void logError(String errorMessage) {

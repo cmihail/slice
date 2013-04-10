@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class Price implements Comparable<Price>, Serializable {
 
+	private static final long serialVersionUID = -582980750646957405L;
 	private final int value;
 
 	public Price(int value) {

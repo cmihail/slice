@@ -2,11 +2,9 @@ package network.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutput;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
@@ -15,7 +13,8 @@ import network.model.NetworkObject;
 public class Communication {
 	
 	public static class EndConnectionException extends Exception {
-		
+
+		private static final long serialVersionUID = 3407535627371086058L;
 	}
 
 	public static void send(SocketChannel socketChannel, NetworkObject obj) {

@@ -4,7 +4,7 @@
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. -->
-<project basedir="." default="build" name="slice">
+<project basedir="." default="run" name="slice">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../../../Applications/eclipse"/>
     <property name="debuglevel" value="source,lines,vars"/>
@@ -48,9 +48,29 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="run" depends="build">
-        <java classname="mediator.Main" failonerror="true" fork="yes">
+
+    <!-- Start server and 3 clients -->
+    <target name="server" depends="build">
+        <java classname="network.server.Server" fork="yes">
             <classpath refid="slice.classpath"/>
         </java>
+    </target>
+    <target name="client1" depends="build">
+        <java classname="mediator.Main" fork="yes" spawn="yes">
+            <classpath refid="slice.classpath"/>
+        </java>
+    </target>
+    <target name="client2" depends="build">
+        <java classname="mediator.Main" fork="yes" spawn="yes">
+            <classpath refid="slice.classpath"/>
+        </java>
+    </target>
+    <target name="client3" depends="build">
+        <java classname="mediator.Main" fork="yes" spawn="yes">
+            <classpath refid="slice.classpath"/>
+        </java>
+    </target>
+
+    <target name="run" depends="client1,client2,client3,server">
     </target>
 </project>

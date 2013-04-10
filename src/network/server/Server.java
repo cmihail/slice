@@ -1,10 +1,7 @@
 package network.server;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -17,38 +14,42 @@ import java.util.Map.Entry;
 import network.common.Communication;
 import network.model.NetworkObject;
 import network.model.NetworkUser;
-
-import model.user.User;
-
 import constants.Constants;
 
 public class Server {
-	
-	private static final Map<User, SocketChannel> userSocketsMap =
-			new HashMap<User, SocketChannel>();
-	
+
+	private static final Map<String, SocketChannel> userSocketsMap =
+			new HashMap<String, SocketChannel>();
+
 	public static void accept(SelectionKey key) throws IOException {
-		ServerSocketChannel serverSocketChannel = (ServerSocketChannel)key.channel();
+		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
 		SocketChannel socketChannel = serverSocketChannel.accept();
 		socketChannel.configureBlocking(false);
-		ByteBuffer buf = ByteBuffer.allocateDirect(0); // Not used.
-		socketChannel.register(key.selector(), SelectionKey.OP_READ, buf);
+		socketChannel.register(key.selector(), SelectionKey.OP_READ);
 
-		System.out.println("Connection from: " + socketChannel.socket().getRemoteSocketAddress()); // TODO
+		System.out.println("Connection from: " +
+				socketChannel.socket().getRemoteSocketAddress()); // TODO
 	}
-	
-	public static void read(SelectionKey key) throws IOException, ClassNotFoundException {
+
+	public static void read(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
-		
+
 		try {
-			NetworkObject obj = Communication.recv(socketChannel);
-			if (obj instanceof NetworkUser) {
-				NetworkUser networkUser = (NetworkUser) obj;
-				userSocketsMap.put(networkUser.getUser(), socketChannel);
-				System.out.println(networkUser.getUser().getUsername()); // TODO del
+			NetworkObject networkObj = Communication.recv(socketChannel);
+			System.out.println(networkObj.getDestinationUser().getUsername()); // TODO
+
+			if (networkObj instanceof NetworkUser) { // New user.
+				NetworkUser networkUser = (NetworkUser) networkObj;
+				userSocketsMap.put(networkUser.getDestinationUser().getUsername(), socketChannel);
+			} else { // Packet that needs to be redirect.
+				SocketChannel userChannel =
+						userSocketsMap.get(networkObj.getDestinationUser().getUsername());
+				if (userChannel == null)
+					throw new Exception("Invalid receiver");
+				Communication.send(userChannel, networkObj);
 			}
 		} catch (Communication.EndConnectionException e) {
-			Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
+			Iterator<Entry<String, SocketChannel>> it = userSocketsMap.entrySet().iterator();
 			while (it.hasNext()) {
 				if (it.next().getValue().equals(socketChannel)) {
 					it.remove();
@@ -60,38 +61,33 @@ public class Server {
 		}
 	}
 
-	public static void write(SelectionKey key) throws IOException {
-		// TODO
-	}
-	
 	public static void main(String[] args) {
 		System.out.println("Start"); // TODO logger
-		
+
 		ServerSocketChannel serverSocketChannel = null;
 		Selector selector = null;
-		
+
 		try {
 			selector = Selector.open();
 			serverSocketChannel = ServerSocketChannel.open();
 			serverSocketChannel.configureBlocking(false);
 			serverSocketChannel.socket().bind(
-					new InetSocketAddress(Constants.SERVER_IP, Constants.SERVER_PORT));
+					new InetSocketAddress(Constants.SERVER_IP,
+							Constants.SERVER_PORT));
 			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-			
+
 			while (true) {
 				selector.select();
-				
+
 				for (Iterator<SelectionKey> it = selector.selectedKeys().iterator();
-						it.hasNext(); ) {
+						it.hasNext();) {
 					SelectionKey key = it.next();
 					it.remove();
-					
+
 					if (key.isAcceptable())
 						accept(key);
 					else if (key.isReadable())
 						read(key);
-					else if (key.isWritable())
-						write(key);
 				}
 			}
 		} catch (Exception e) {
@@ -100,13 +96,13 @@ public class Server {
 			if (selector != null) {
 				try {
 					selector.close();
-				} catch (IOException e) {}
+				} catch (IOException e) { }
 			}
-			
+
 			if (serverSocketChannel != null) {
 				try {
 					serverSocketChannel.close();
-				} catch (IOException e) {}
+				} catch (IOException e) { }
 			}
 		}
 	}

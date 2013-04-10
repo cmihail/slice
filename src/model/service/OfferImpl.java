@@ -7,6 +7,7 @@ package model.service;
  */
 public class OfferImpl implements Offer {
 
+	private static final long serialVersionUID = 3620710594973567260L;
 	private final Price price;
 
 	public OfferImpl(Price price) {

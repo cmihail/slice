@@ -11,6 +11,8 @@ import model.service.Service;
  */
 public class Manufacturer extends AbstractUser {
 
+	private static final long serialVersionUID = 630915680630025674L;
+
 	public Manufacturer(String username, List<Service> services) {
 		super(username, services, Type.MANUFACTURER);
 	}

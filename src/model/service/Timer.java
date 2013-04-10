@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class Timer implements Comparable<Timer>, Serializable {
 
+	private static final long serialVersionUID = 6171141701046670570L;
 	private final int value; // in seconds
 
 	public Timer(int value) {

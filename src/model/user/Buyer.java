@@ -11,6 +11,8 @@ import model.service.Service;
  */
 public class Buyer extends AbstractUser {
 
+	private static final long serialVersionUID = 4429039817543673862L;
+
 	public Buyer(String username, List<Service> services) {
 		super(username, services, Type.BUYER);
 	}

@@ -8,6 +8,7 @@ package model.service;
  */
 public class ServiceImpl implements Service {
 
+	private static final long serialVersionUID = -8282420573977941799L;
 	private final String name;
 	private final Price priceLimit;
 	private final Timer timer;
