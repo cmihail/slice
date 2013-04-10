@@ -17,6 +17,8 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 
+import org.apache.log4j.Logger;
+
 /**
  * Implements {@link GUI}.
  *
@@ -24,6 +26,7 @@ import model.user.User;
  */
 public class GUIImpl implements GUI {
 
+	private static final Logger logger = Logger.getLogger(GUIImpl.class);
 	private final MediatorGUI mediator;
 	private UserServicesInfo userServicesInfo;
 
@@ -33,7 +36,7 @@ public class GUIImpl implements GUI {
 
 	@Override
 	public void drawErrorPage(String errorMessage) {
-		System.err.println(errorMessage);
+		logger.warn(errorMessage);
 		System.exit(1);
 	}
 
@@ -44,33 +47,33 @@ public class GUIImpl implements GUI {
 		mediator.setUserServicesInfo(userServicesInfo);
 
 		// Print user.
-		System.out.println("User:");
-		System.out.println("\tUsername: " + mainUser.getUsername());
-		System.out.println("\tType: " + mainUser.getType());
+		logger.info("User:");
+		logger.info("\tUsername: " + mainUser.getUsername());
+		logger.info("\tType: " + mainUser.getType());
 
-		System.out.print("\tServices: ");
+		logger.info("\tServices: ");
 		for (Service s : mainUser.getServices())
-			System.out.print(s.getName() + ", ");
-		System.out.println();
+			logger.info(s.getName() + ", ");
+		logger.info("\n");
 
 		// Print map service users.
-		System.out.println("Services users:");
+		logger.info("Services users:");
 		Set<Service> services = mapServiceUsers.keySet();
 		for (Service s : services) {
-			System.out.println("\tService: " + s.getName());
+			logger.info("\tService: " + s.getName());
 
 			Iterator<User> usersIt = mapServiceUsers.get(s).iterator();
 			if (usersIt.hasNext())
-				System.out.print("\t\tUsers: ");
+				logger.info("\t\tUsers: ");
 			else
-				System.out.print("\t\tNo users");
+				logger.info("\t\tNo users");
 			while (usersIt.hasNext()) {
 				User u = usersIt.next();
-				System.out.print(u.getUsername() + ", ");
+				logger.info(u.getUsername() + ", ");
 			}
-			System.out.println();
+			logger.info("\n");
 		}
-		System.out.println();
+		logger.info("\n");
 	}
 
 	@Override
@@ -90,7 +93,7 @@ public class GUIImpl implements GUI {
 			Offer offer) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(manufacturer).setOffer(offer);
 		// TODO gui change
-		System.out.println("Recevied offer <" + offer.getPrice() + "> from <" +
+		logger.info("Recevied offer <" + offer.getPrice() + "> from <" +
 				manufacturer.getUsername() + "> for service <" +
 				service.getName() + ">"); // TODO only for testing
 	}
@@ -151,7 +154,7 @@ public class GUIImpl implements GUI {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.error(e.toString());
 				System.exit(1);
 			}
 

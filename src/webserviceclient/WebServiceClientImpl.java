@@ -20,6 +20,9 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 import model.user.User.Type;
+
+import org.apache.log4j.Logger;
+
 import constants.Constants;
 
 /**
@@ -29,6 +32,7 @@ import constants.Constants;
  */
 public class WebServiceClientImpl implements WebServiceClient {
 
+	private static final Logger logger = Logger.getLogger(WebServiceClientImpl.class);
 	private final MediatorWebServiceClient mediator;
 
 	public WebServiceClientImpl(MediatorWebServiceClient mediator) {
@@ -38,7 +42,6 @@ public class WebServiceClientImpl implements WebServiceClient {
 	@Override
 	public Map<Service, Set<User>> login(User user, String password) {
 		// TODO login to WebService
-
 		return readConfigFiles(user, password);
 	}
 
@@ -79,14 +82,14 @@ public class WebServiceClientImpl implements WebServiceClient {
 					break;
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
 				System.exit(1);
 			} finally {
 				if (in != null) {
 					try {
 						in.close();
 					} catch (IOException e) {
-						e.printStackTrace();
+						logger.error(e.getMessage());
 					}
 				}
 			}
@@ -161,7 +164,7 @@ public class WebServiceClientImpl implements WebServiceClient {
 //		try {
 //			Thread.sleep(500); // TODO delete (only for testing)
 //		} catch (InterruptedException e) {
-//			e.printStackTrace();
+//			logger.error(e.getMessage());
 //			System.exit(1);
 //		}
 //

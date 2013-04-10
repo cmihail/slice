@@ -84,7 +84,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			Logger.getRootLogger().addAppender(appender);
 		} catch (IOException e) {
 			logError("Couln't append logger file");
-			e.printStackTrace(); // TODO delete
+			logger.error(e.toString());
 		}
 	}
 
@@ -323,14 +323,14 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		} catch(NumberFormatException e) {
 			login.drawErrorPage("Invalid user type (0 = Buyer or 1 = Manufacturer).");
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.toString());
 			login.drawErrorPage("Error at reading config file.");
 		} finally {
 			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(e.toString());
 					login.drawErrorPage("Error at reading config file.");
 				}
 			}
