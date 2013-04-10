@@ -15,10 +15,17 @@ import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
 import network.model.NetworkUser;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
+
 import constants.Constants;
 
 public class Server {
 
+	private static final Logger logger = Logger.getLogger(Server.class);
 	private static final Map<User, SocketChannel> userSocketsMap =
 			new HashMap<User, SocketChannel>();
 
@@ -28,43 +35,58 @@ public class Server {
 		socketChannel.configureBlocking(false);
 		socketChannel.register(key.selector(), SelectionKey.OP_READ);
 
-		System.out.println("Connection from: " +
-				socketChannel.socket().getRemoteSocketAddress()); // TODO
+		logger.info("Connection from: " + socketChannel.socket().getRemoteSocketAddress());
 	}
 
 	public static void read(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
 
+
 		try {
 			NetworkObject networkObj = Communication.recv(socketChannel);
-			System.out.println(networkObj.getDestinationUser().getUsername()); // TODO
 
 			if (networkObj instanceof NetworkUser) { // New user.
 				NetworkUser networkUser = (NetworkUser) networkObj;
 				userSocketsMap.put(networkUser.getDestinationUser(), socketChannel);
+				logger.info("Added connection from: " +
+						networkUser.getDestinationUser().getUsername());
 			} else { // Packet that needs to be redirect.
 				SocketChannel userChannel =
 						userSocketsMap.get(networkObj.getDestinationUser());
 				if (userChannel == null)
 					throw new Exception("Invalid receiver");
+
+				logger.info("Packet for: " + networkObj.getDestinationUser().getUsername());
 				Communication.send(userChannel, networkObj);
 			}
 		} catch (Communication.EndConnectionException e) {
 			Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
 			while (it.hasNext()) {
-				if (it.next().getValue().equals(socketChannel)) {
+				Entry<User, SocketChannel> entry = it.next();
+				if (entry.getValue().equals(socketChannel)) {
+					logger.info("Connection ended for: " + entry.getKey().getUsername());
 					it.remove();
 					break;
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn(e.getMessage());
 		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Start"); // TODO logger
+		// Configure logger.
+		PropertyConfigurator.configure("log4j.properties");
+		try {
+			PatternLayout layout = new PatternLayout(Constants.LOGGER_PATTERN);
+			FileAppender appender = new FileAppender(layout, Constants.SERVER_LOGGER_FILE, true);
+			Logger.getRootLogger().addAppender(appender);
+		} catch (IOException e) {
+			logger.error("Couln't append logger file");
+			System.exit(1);
+		}
 
+		// Start server.
 		ServerSocketChannel serverSocketChannel = null;
 		Selector selector = null;
 
@@ -92,7 +114,7 @@ public class Server {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.warn(e.getMessage());
 		} finally {
 			if (selector != null) {
 				try {

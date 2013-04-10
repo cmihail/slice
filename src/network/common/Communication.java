@@ -10,10 +10,13 @@ import java.nio.channels.SocketChannel;
 
 import network.model.NetworkObject;
 
-public class Communication {
-	
-	public static class EndConnectionException extends Exception {
+import org.apache.log4j.Logger;
 
+public class Communication {
+
+	private static final Logger logger = Logger.getLogger(Communication.class);
+
+	public static class EndConnectionException extends Exception {
 		private static final long serialVersionUID = 3407535627371086058L;
 	}
 
@@ -24,29 +27,29 @@ public class Communication {
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(obj);
 			oos.close();
-			
+
 			int size = baos.size();
 			final ByteBuffer byteBuffer = ByteBuffer.allocate(size + 4); // 4 needed for size.
 			byteBuffer.putInt(size);
 			byteBuffer.put(baos.toByteArray());
 			byteBuffer.flip();
-			
+
 			while (byteBuffer.hasRemaining()) {
 				socketChannel.write(byteBuffer);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn(e.getMessage());
 		} finally {
 			if (oos != null) {
 				try {
 					oos.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.warn(e.getMessage());
 				}
 			}
 		}
 	}
-	
+
 	public static NetworkObject recv(SocketChannel socketChannel) throws Exception {
 		NetworkObject result = null;
 		ObjectInputStream ois = null;
@@ -61,7 +64,7 @@ public class Communication {
 			}
 			sizeByteBuffer.flip();
 			int size = sizeByteBuffer.getInt();
-			
+
 			ByteBuffer data = ByteBuffer.allocate(size);
 			while (data.hasRemaining()) {
 				int bytes = socketChannel.read(data);
@@ -71,7 +74,7 @@ public class Communication {
 					throw new IOException("No data");
 			}
 			data.flip();
-			
+
 			ois = new ObjectInputStream(new ByteArrayInputStream(data.array()));
 			Object obj = ois.readObject();
 			if (!(obj instanceof NetworkObject))
@@ -82,11 +85,11 @@ public class Communication {
 				try {
 					ois.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.warn(e.getMessage());
 				}
 			}
 		}
-		
+
 		return result;
 	}
 }
