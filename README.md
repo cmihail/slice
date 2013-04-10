@@ -1,6 +1,8 @@
 slice
 =====
 
+// TODO update README for Tema2
+
 1. Structure:
   - gui folder: contains interfaces/classes related to GUI
   - mediator folder: contains interfaces/calsses related to Mediator
@@ -33,6 +35,8 @@ slice
   - https://github.com/cmihail/slice
 
 5. GUI
-	Has a Login frame
-	Uses two tables, one for services, one for Buyers/ Manufacturers. When a service is selected, the Buyers/Manufacturers belonging to that service.
-	Most of the funtionalities in MainFrame.java, extended by two classes for Buyer and Manufacturer, implementing the parts that are different.
+  - Has a Login frame
+  - Uses two tables, one for services, one for Buyers/ Manufacturers.
+    When a service is selected, the Buyers/Manufacturers belonging to that service.
+  - Most of the funtionalities in MainFrame.java, extended by two classes for Buyer
+    and Manufacturer, implementing the parts that are different.
