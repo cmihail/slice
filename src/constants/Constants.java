@@ -7,5 +7,6 @@ public class Constants {
 
 	public static final String CONFIG_FILE_EXTENSION = ".cfg";
 	public static final String LOGGER_FILE_EXTENSION = ".log";
+	public static final String LOGGER_FOLDER = "log/";
 	public static final String LOGGER_PATTERN = "%-4r %-4L [%t] %-5p %c %x - %m%n";
 }

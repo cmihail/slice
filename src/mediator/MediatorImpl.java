@@ -78,8 +78,9 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		// Add logger file.
 		try {
 			PatternLayout layout = new PatternLayout(Constants.LOGGER_PATTERN);
-			FileAppender appender = new FileAppender(layout,
-					username + Constants.LOGGER_FILE_EXTENSION, true);
+			String file = Constants.LOGGER_FOLDER + username +
+					Constants.LOGGER_FILE_EXTENSION;
+			FileAppender appender = new FileAppender(layout, file, true);
 			Logger.getRootLogger().addAppender(appender);
 		} catch (IOException e) {
 			logError("Couln't append logger file");
