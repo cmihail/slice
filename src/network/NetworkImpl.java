@@ -28,6 +28,9 @@ import network.model.RefuseServiceOffer;
 import network.model.RegisterUserForService;
 import network.model.StartTransfer;
 import network.model.UnregisterUserForService;
+
+import org.apache.log4j.Logger;
+
 import constants.Constants;
 
 /**
@@ -37,6 +40,7 @@ import constants.Constants;
  */
 public class NetworkImpl implements Network {
 
+	private final static Logger logger = Logger.getLogger(NetworkImpl.class);
 	private final MediatorNetwork mediator;
 	private SocketChannel socketChannel = null;
 
@@ -52,7 +56,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void registerUserServiceToUsers(User mainUser, Service service,
 			Set<User> usersWithService) {
-		System.out.println("Register users for service < " + service.getName() + " >");
+		logger.info("Register users for service < " + service.getName() + " >");
 		for (User user : usersWithService) {
 			synchronized (socketChannel) {
 				Communication.send(socketChannel,
@@ -64,7 +68,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void unregisterUserServiceFromUsers(User mainUser, Service service,
 			Set<User> usersWithService) {
-		System.out.println("Unregister users for service < " + service.getName() + " >");
+		logger.info("Unregister users for service < " + service.getName() + " >");
 		for (User user : usersWithService) {
 			synchronized (socketChannel) {
 				Communication.send(socketChannel,
@@ -76,9 +80,8 @@ public class NetworkImpl implements Network {
 	@Override
 	public void makeServiceOffer(Manufacturer mainUser, Buyer buyer,
 			Service service, Offer offer) {
-		System.out.println("Service (" + service.getName() +
-				") offer for buyer < " + buyer.getUsername() + " >:" +
-				offer.getPrice());
+		logger.info("Service (" + service.getName() + ") offer for buyer < " +
+				buyer.getUsername() + " >:" + offer.getPrice());
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
 					new MakeServiceOffer(mainUser, buyer, service, offer));
@@ -88,8 +91,8 @@ public class NetworkImpl implements Network {
 	@Override
 	public void dropUserAuction(Manufacturer mainUser, Buyer buyer,
 			Service service) {
-		System.out.println("Droped auction (" + service.getName() +
-				") for buyer < " + buyer.getUsername() + " >");
+		logger.info("Droped auction (" + service.getName() + ") for buyer < " +
+				buyer.getUsername() + " >");
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
 					new DropUserAuction(mainUser, buyer, service));
@@ -99,7 +102,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void launchServiceOfferRequest(Buyer mainUser, Service service,
 			Set<User> usersWithService) {
-		System.out.println("Launch offer request for service < " + service.getName() + " >");
+		logger.info("Launch offer request for service < " + service.getName() + " >");
 		for (User user : usersWithService) {
 			synchronized (socketChannel) {
 				Communication.send(socketChannel,
@@ -111,7 +114,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void dropServiceOfferRequest(Buyer mainUser, Service service,
 			Set<User> usersWithService) {
-		System.out.println("Dropped offer request for service < " + service.getName() + " >");
+		logger.info("Dropped offer request for service < " + service.getName() + " >");
 		for (User user : usersWithService) {
 			synchronized (socketChannel) {
 				Communication.send(socketChannel,
@@ -123,8 +126,8 @@ public class NetworkImpl implements Network {
 	@Override
 	public void acceptServiceOffer(Buyer mainUser, Manufacturer manufacturer,
 			Service service, Set<User> usersWithService) {
-		System.out.println("Accept service (" + service.getName() +
-				") offer for manufacturer < " + manufacturer.getUsername() + " >");
+		logger.info("Accept service (" + service.getName() + ") offer for manufacturer < " +
+				manufacturer.getUsername() + " >");
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
 					new AcceptServiceOffer(mainUser, manufacturer, service));
@@ -144,7 +147,7 @@ public class NetworkImpl implements Network {
 	@Override
 	public void refuseServiceOffer(Buyer mainUser, Manufacturer manufacturer,
 			Service service) {
-		System.out.println("Refuse service (" + service.getName() +
+		logger.info("Refuse service (" + service.getName() +
 				") offer for manufacturer < " + manufacturer.getUsername() + " >");
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
@@ -156,8 +159,8 @@ public class NetworkImpl implements Network {
 	public void announceUsersOfServiceOffer(Buyer mainUser,
 			Manufacturer originatorManufacturer, Service service,
 			Offer offer, Set<User> usersWithService) {
-		System.out.println("Annonuce users of service (" + service.getName() +
-				") offer (" + offer.getPrice() + ")");
+		logger.info("Annonuce users of service (" + service.getName() + ") offer (" +
+				offer.getPrice() + ")");
 		for (User user : usersWithService) {
 			if (!originatorManufacturer.equals(mainUser)) {
 				synchronized (socketChannel) {
@@ -170,8 +173,8 @@ public class NetworkImpl implements Network {
 
 	@Override
 	public void startTransfer(User mainUser, User toUser, Service service) {
-		System.out.println("Transfer service (" + service.getName() +
-				") to user (" + toUser.getUsername() + ")");
+		logger.info("Transfer service (" + service.getName() + ") to user (" +
+				toUser.getUsername() + ")");
 		// TODO send the file itself
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
@@ -181,8 +184,8 @@ public class NetworkImpl implements Network {
 
 	@Override
 	public void cancelTransfer(User mainUser, User toUser, Service service) {
-		System.out.println("Cancel transfer service (" + service.getName() +
-				") to user (" + toUser.getUsername() + ")");
+		logger.info("Cancel transfer service (" + service.getName() + ") to user (" +
+				toUser.getUsername() + ")");
 		// TODO stop file sending
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
@@ -199,7 +202,7 @@ public class NetworkImpl implements Network {
 	        		new InetSocketAddress(Constants.SERVER_IP, Constants.SERVER_PORT));
 	        socketChannel.configureBlocking(false);
 		} catch (IOException e) {
-			System.out.println("Couldn't connect to server"); // TODO maybe something else
+			logger.error("Couldn't connect to server");
 			System.exit(1);
 		}
 
@@ -220,7 +223,8 @@ public class NetworkImpl implements Network {
 					NetworkObject networkObj = Communication.recv(socketChannel);
 					networkObj.handler(mediator);
 				} catch (Communication.EndConnectionException e) {
-					System.exit(1);
+					logger.error("Connection with server lost");
+					System.exit(1); // TODO maybe another action
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -254,6 +258,7 @@ public class NetworkImpl implements Network {
 		}
 	}
 
+	// TODO delete (only for testing)
 //	private class ReceiveIncomingMessagesThread implements Runnable {
 //
 //		private final MediatorNetwork mediator;

@@ -20,6 +20,7 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 import model.user.User.Type;
+import constants.Constants;
 
 /**
  * Implements {@link WebServiceClient}.
@@ -59,7 +60,8 @@ public class WebServiceClientImpl implements WebServiceClient {
 
 			BufferedReader in = null;
 			try {
-				in = new BufferedReader(new FileReader(("user" + i + ".cfg")));
+				in = new BufferedReader(
+						new FileReader(("user" + i + Constants.CONFIG_FILE_EXTENSION)));
 				User.Type userType = readUserType(in);
 				if (userType == null)
 					throw new Exception("Invalid user type");

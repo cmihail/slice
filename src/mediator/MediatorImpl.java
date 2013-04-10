@@ -29,8 +29,14 @@ import model.user.User;
 import model.user.User.Type;
 import network.Network;
 import network.NetworkImpl;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+
 import webserviceclient.WebServiceClient;
 import webserviceclient.WebServiceClientImpl;
+import constants.Constants;
 
 /**
  * Implements {@link MediatorGUI}, {@link MediatorNetwork},
@@ -41,10 +47,10 @@ import webserviceclient.WebServiceClientImpl;
 public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		MediatorWebServiceClient {
 
-	private final String CONFIG_FILE_EXTENSION = ".cfg";
-	private GUI gui;
+	private final static Logger logger = Logger.getLogger(MediatorImpl.class);
 	private final LoginFrame login;
 	private final WebServiceClient webServiceClient;
+	private GUI gui;
 	private Network network;
 	private User mainUser;
 	private UserServicesInfo userServicesInfo;
@@ -65,8 +71,20 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 	@Override
 	public void login(String username, String password) {
-		readConfigFileAndLogin(username + CONFIG_FILE_EXTENSION, username, password);
+		readConfigFileAndLogin(username + Constants.CONFIG_FILE_EXTENSION,
+				username, password);
 		network = new NetworkImpl(this, mainUser);
+
+		// Add logger file.
+		try {
+			PatternLayout layout = new PatternLayout(Constants.LOGGER_PATTERN);
+			FileAppender appender = new FileAppender(layout,
+					username + Constants.LOGGER_FILE_EXTENSION, true);
+			Logger.getRootLogger().addAppender(appender);
+		} catch (IOException e) {
+			logError("Couln't append logger file");
+			e.printStackTrace(); // TODO delete
+		}
 	}
 
 	@Override

@@ -1,5 +1,10 @@
 package mediator;
 
+import org.apache.log4j.PropertyConfigurator;
+
+
+
+
 /**
  * Class used only for starting the mediator.
  * Might be changed/deleted in future iterations.
@@ -9,6 +14,7 @@ package mediator;
 public class Main {
 
 	public static void main(String[] args) {
+		PropertyConfigurator.configure("log4j.properties"); // Needed for logging.
 
 		MediatorImpl mediator = new MediatorImpl();
 		try {
