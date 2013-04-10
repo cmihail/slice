@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
 import network.model.NetworkUser;
@@ -18,8 +19,8 @@ import constants.Constants;
 
 public class Server {
 
-	private static final Map<String, SocketChannel> userSocketsMap =
-			new HashMap<String, SocketChannel>();
+	private static final Map<User, SocketChannel> userSocketsMap =
+			new HashMap<User, SocketChannel>();
 
 	public static void accept(SelectionKey key) throws IOException {
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
@@ -40,16 +41,16 @@ public class Server {
 
 			if (networkObj instanceof NetworkUser) { // New user.
 				NetworkUser networkUser = (NetworkUser) networkObj;
-				userSocketsMap.put(networkUser.getDestinationUser().getUsername(), socketChannel);
+				userSocketsMap.put(networkUser.getDestinationUser(), socketChannel);
 			} else { // Packet that needs to be redirect.
 				SocketChannel userChannel =
-						userSocketsMap.get(networkObj.getDestinationUser().getUsername());
+						userSocketsMap.get(networkObj.getDestinationUser());
 				if (userChannel == null)
 					throw new Exception("Invalid receiver");
 				Communication.send(userChannel, networkObj);
 			}
 		} catch (Communication.EndConnectionException e) {
-			Iterator<Entry<String, SocketChannel>> it = userSocketsMap.entrySet().iterator();
+			Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
 			while (it.hasNext()) {
 				if (it.next().getValue().equals(socketChannel)) {
 					it.remove();

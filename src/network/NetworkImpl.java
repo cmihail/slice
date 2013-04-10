@@ -212,24 +212,14 @@ public class NetworkImpl implements Network {
 	 * @author cmihail, radu-tutueanu
 	 */
 	private class ReceiveIncomingMessagesThread implements Runnable {
-
-		private void connect(SelectionKey key) throws IOException {
-			synchronized (socketChannel) {
-				SocketChannel socketChannel = (SocketChannel) key.channel();
-				if (!socketChannel.finishConnect())
-					throw new IOException("Error at connecting to server");
-				key.interestOps(SelectionKey.OP_READ);
-			}
-		}
-
 		private void read(SelectionKey key) {
 			synchronized (socketChannel) {
 				SocketChannel socketChannel = (SocketChannel) key.channel();
 
 				try {
 					NetworkObject networkObj = Communication.recv(socketChannel);
+					networkObj.handler(mediator);
 				} catch (Communication.EndConnectionException e) {
-					System.out.println("TODO"); // TODO
 					System.exit(1);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -243,7 +233,7 @@ public class NetworkImpl implements Network {
 			try {
 				selector = Selector.open();
 				synchronized (socketChannel) {
-					socketChannel.register(selector, SelectionKey.OP_CONNECT);
+					socketChannel.register(selector, SelectionKey.OP_READ);
 				}
 
 				while (true) {
@@ -254,9 +244,7 @@ public class NetworkImpl implements Network {
 						SelectionKey key = it.next();
 						it.remove();
 
-						if (key.isConnectable())
-							connect(key);
-						else if (key.isReadable())
+						if (key.isReadable())
 							read(key);
 					}
 				}

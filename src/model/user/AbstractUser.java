@@ -47,4 +47,9 @@ public abstract class AbstractUser implements User {
 		User user = (User) o;
 		return username.equals(user.getUsername());
 	}
+
+	@Override
+	public int hashCode() {
+		return username.hashCode();
+	}
 }

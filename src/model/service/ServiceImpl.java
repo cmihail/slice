@@ -47,4 +47,9 @@ public class ServiceImpl implements Service {
 		Service service = (Service) o;
 		return name.equals(service.getName());
 	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
 }

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -319,7 +318,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 	protected void updateServicesTable()
 	{
-		
+
 		int i=0;
 		for (Service s : mainUser.getServices()) {
 			servicesTable.getModel().setValueAt(s.getName(),i, 0);
@@ -332,7 +331,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 					servicesTable.getModel().setValueAt("No Offer",i,2);
 					servicesTable.getModel().setValueAt("",i,3);
 					}
-				else 
+				else
 				{
 					servicesTable.getModel().setValueAt("Offer Made",i,2);
 					servicesTable.getModel().setValueAt(curentOfferState,i,3);
@@ -385,9 +384,11 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 	@Override
 	public void activateBuyerForService(Buyer buyer, Service service) {
-			userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.OFFER_REQUESTED);
-			userServicesInfo.getServiceInfo(service).setServiceState(ServiceState.ACTIVE);
-			updateServicesTable();
+		if (userServicesInfo.getServiceInfo(service) == null)
+			System.out.println("ERR");
+		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.OFFER_REQUESTED);
+		userServicesInfo.getServiceInfo(service).setServiceState(ServiceState.ACTIVE);
+		updateServicesTable();
 	}
 
 	@Override
@@ -428,7 +429,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 		return aux;
 	}
-	
+
 	protected User getSelectedOfferUser(Service service)
 	{
 		int index = offersTable.getSelectedRow();
