@@ -99,7 +99,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 				// TODO delete (only for testing)
 				if ("user2".equals(u.getUsername()) &&
-						"service1".equals(s.getName())) {
+						"service2".equals(s.getName())) {
 					toUser = u;
 					sentService = s;
 				}

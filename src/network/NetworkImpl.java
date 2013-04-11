@@ -184,8 +184,13 @@ public class NetworkImpl implements Network {
 		}
 
 		// Send the file itself.
-		Thread thread = new Thread(new SendFileThread(mainUser, toUser, service));
-		thread.run();
+		try {
+			Thread thread = new Thread(new SendFileThread(mainUser, toUser, service));
+			thread.run();
+		} catch (Exception e) {
+			logger.warn(e.getMessage());
+		}
+
 	}
 
 	@Override
@@ -230,7 +235,10 @@ public class NetworkImpl implements Network {
 		private final int totalSize;
 		private int currentSentSize = 0;
 
-		public SendFileThread(User sender, User receiver, Service service) {
+		public SendFileThread(User sender, User receiver, Service service)
+				throws Exception {
+			if (!(sender instanceof Buyer))
+				throw new Exception("Invalid user for sending");
 			this.sender = sender;
 			this.receiver = receiver;
 			this.service = service;
@@ -240,11 +248,13 @@ public class NetworkImpl implements Network {
 		@Override
 		public void run() {
 			// TODO stop file sending if canceled by user
-			logger.info("Sending service < " + service.getName() + " > from < " +
-					sender.getUsername() + " > to < " + receiver.getUsername());
 			Random generator = new Random();
 
 			while (totalSize > currentSentSize) {
+				logger.info("Sending service segment (" + (currentSentSize) +
+						") for < " + service.getName() + " > to < " +
+						receiver.getUsername());
+
 				// Generate random bytes.
 				int sendingSize = Math.min(totalSize - currentSentSize,
 						Constants.SERVICE_NETWORK_SEGMENT_SIZE);
@@ -256,7 +266,7 @@ public class NetworkImpl implements Network {
 				// Send segment.
 				TransferService transferService =
 						new TransferService(sender, receiver, service,
-								currentSentSize, totalSize, byteBuffer);
+								currentSentSize, totalSize, bytes);
 				synchronized (socketChannel) {
 					Communication.send(socketChannel, transferService);
 				}

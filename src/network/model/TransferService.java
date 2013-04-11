@@ -4,7 +4,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 import mediator.MediatorNetwork;
 import model.service.Service;
@@ -25,18 +24,18 @@ public class TransferService implements NetworkObject {
 	private final String fileName;
 	private final int currentSentSize;
 	private final int totalSize;
-	private final ByteBuffer byteBuffer;
+	private final byte[] bytes;
 
 	public TransferService(User sender, User receiver, Service service,
-			int currentSentSize, int totalSize, ByteBuffer byteBuffer) {
+			int currentSentSize, int totalSize, byte[] bytes) {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.service = service;
 		this.fileName = Constants.SERVICE_FOLDER + receiver.getUsername() + "_" +
-				sender.getUsername() + "_" + service.getName();
+				service.getName() + "_" + sender.getUsername();
 		this.currentSentSize = currentSentSize;
 		this.totalSize = totalSize;
-		this.byteBuffer = byteBuffer;
+		this.bytes = bytes;
 	}
 
 	@Override
@@ -46,7 +45,8 @@ public class TransferService implements NetworkObject {
 
 	@Override
 	public void handler(MediatorNetwork mediator) {
-		logger.info("Receive segment file for < " + fileName + " >");
+		logger.info("Receive segment (" + (currentSentSize) + ") for < " +
+				service.getName() + " > from < " + sender.getUsername());
 
 		// Write data to file.
 		DataOutputStream out = null;
@@ -59,7 +59,7 @@ public class TransferService implements NetworkObject {
 
 			// Append content to file.
 			out = new DataOutputStream(new FileOutputStream(file, true));
-			out.write(byteBuffer.array());
+			out.write(bytes);
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
 		} finally {
