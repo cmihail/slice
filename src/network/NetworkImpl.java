@@ -2,10 +2,12 @@ package network;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import mediator.MediatorNetwork;
@@ -15,19 +17,20 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 import network.common.Communication;
-import network.model.AcceptServiceOffer;
-import network.model.AnnounceUserOfServiceOffer;
-import network.model.CancelTransfer;
-import network.model.DropServiceOfferRequest;
-import network.model.DropUserAuction;
-import network.model.LaunchServiceOfferRequest;
-import network.model.MakeServiceOffer;
 import network.model.NetworkObject;
 import network.model.NetworkUser;
-import network.model.RefuseServiceOffer;
-import network.model.RegisterUserForService;
-import network.model.StartTransfer;
-import network.model.UnregisterUserForService;
+import network.model.TransferService;
+import network.model.command.AcceptServiceOffer;
+import network.model.command.AnnounceUserOfServiceOffer;
+import network.model.command.CancelTransfer;
+import network.model.command.DropServiceOfferRequest;
+import network.model.command.DropUserAuction;
+import network.model.command.LaunchServiceOfferRequest;
+import network.model.command.MakeServiceOffer;
+import network.model.command.RefuseServiceOffer;
+import network.model.command.RegisterUserForService;
+import network.model.command.StartTransfer;
+import network.model.command.UnregisterUserForService;
 
 import org.apache.log4j.Logger;
 
@@ -175,18 +178,23 @@ public class NetworkImpl implements Network {
 	public void startTransfer(User mainUser, User toUser, Service service) {
 		logger.info("Transfer service (" + service.getName() + ") to user (" +
 				toUser.getUsername() + ")");
-		// TODO send the file itself
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
 					new StartTransfer(mainUser, toUser, service));
 		}
+
+		// Send the file itself.
+		Thread thread = new Thread(new SendFileThread(mainUser, toUser, service));
+		thread.run();
 	}
 
 	@Override
 	public void cancelTransfer(User mainUser, User toUser, Service service) {
 		logger.info("Cancel transfer service (" + service.getName() + ") to user (" +
 				toUser.getUsername() + ")");
-		// TODO stop file sending
+		// TODO stop file sending (stop correspondent thread)
+		// TODO think about this function -> might be ok just to stop connection with server
+		// and do everything in server
 		synchronized (socketChannel) {
 			Communication.send(socketChannel,
 					new CancelTransfer(mainUser, toUser, service));
@@ -210,11 +218,59 @@ public class NetworkImpl implements Network {
 	}
 
 	/**
+	 * Sends a file in a different thread.
+	 *
+	 * @author cmihail, radu-tutueanu
+	 */
+	private class SendFileThread implements Runnable {
+
+		private final User sender;
+		private final User receiver;
+		private final Service service;
+		private final int totalSize;
+		private int currentSentSize = 0;
+
+		public SendFileThread(User sender, User receiver, Service service) {
+			this.sender = sender;
+			this.receiver = receiver;
+			this.service = service;
+			this.totalSize = service.getPriceLimit().toInt() * Constants.SERVICE_BLOCK_SIZE;
+		}
+
+		@Override
+		public void run() {
+			// TODO stop file sending if canceled by user
+			logger.info("Sending service < " + service.getName() + " > from < " +
+					sender.getUsername() + " > to < " + receiver.getUsername());
+			Random generator = new Random();
+
+			while (totalSize > currentSentSize) {
+				// Generate random bytes.
+				int sendingSize = Math.min(totalSize - currentSentSize,
+						Constants.SERVICE_NETWORK_SEGMENT_SIZE);
+				currentSentSize += sendingSize;
+				byte[] bytes = new byte[sendingSize];
+				generator.nextBytes(bytes);
+				ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
+
+				// Send segment.
+				TransferService transferService =
+						new TransferService(sender, receiver, service,
+								currentSentSize, totalSize, byteBuffer);
+				synchronized (socketChannel) {
+					Communication.send(socketChannel, transferService);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Receives incoming messages in a different thread.
 	 *
 	 * @author cmihail, radu-tutueanu
 	 */
 	private class ReceiveIncomingMessagesThread implements Runnable {
+
 		private void read(SelectionKey key) {
 			synchronized (socketChannel) {
 				SocketChannel socketChannel = (SocketChannel) key.channel();

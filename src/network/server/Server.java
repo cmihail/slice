@@ -64,6 +64,7 @@ public class Server {
 			while (it.hasNext()) {
 				Entry<User, SocketChannel> entry = it.next();
 				if (entry.getValue().equals(socketChannel)) {
+					// TODO annonuce users of user disconnect and update TransferState to canceled
 					logger.info("Connection ended for: " + entry.getKey().getUsername());
 					it.remove();
 					break;

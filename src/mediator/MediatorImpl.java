@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -86,6 +87,27 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			logError("Couln't append logger file");
 			logger.error(e.toString());
 		}
+
+		// TODO delete (ony for testing)
+		User toUser = null;
+		Service sentService = null;
+		Set<Service> services = userServicesInfo.getServices();
+		for (Service s : services) {
+			Iterator<User> usersIt = userServicesInfo.getServiceInfo(s).getUsers().iterator();
+			while (usersIt.hasNext()) {
+				User u = usersIt.next();
+
+				// TODO delete (only for testing)
+				if ("user2".equals(u.getUsername()) &&
+						"service1".equals(s.getName())) {
+					toUser = u;
+					sentService = s;
+				}
+			}
+		}
+
+		if ("user1".equals(mainUser.getUsername()))
+			transfer(sentService, toUser);
 	}
 
 	@Override
@@ -291,16 +313,15 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		if (mapServiceUsers == null) {
 			gui.drawErrorPage("Error at login credentials (see config file).");
 			return false;
-		} else {
-				login.setVisible(false);
-				if(mainUser.getType()== User.Type.BUYER)
-					gui = new MainFrameBuyer(this);
-				else
-					gui = new MainFrameManufacturer(this);
-				gui.drawMainPage(mainUser, mapServiceUsers);
-
-				return true;
 		}
+
+		login.setVisible(false);
+		if(mainUser.getType()== User.Type.BUYER)
+			gui = new MainFrameBuyer(this);
+		else
+			gui = new MainFrameManufacturer(this);
+		gui.drawMainPage(mainUser, mapServiceUsers);
+		return true;
 	}
 
 	private void readConfigFileAndLogin(String configFile, String username, String password) {
@@ -335,7 +356,6 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 				}
 			}
 		}
-
 	}
 
 	private void logError(String errorMessage) {

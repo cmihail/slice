@@ -47,33 +47,31 @@ public class GUIImpl implements GUI {
 		mediator.setUserServicesInfo(userServicesInfo);
 
 		// Print user.
-		logger.info("User:");
-		logger.info("\tUsername: " + mainUser.getUsername());
-		logger.info("\tType: " + mainUser.getType());
+		String info = "User:";
+		info += "\tUsername: " + mainUser.getUsername();
+		info += "\tType: " + mainUser.getType();
 
-		logger.info("\tServices: ");
+		info += "\tServices: ";
 		for (Service s : mainUser.getServices())
 			logger.info(s.getName() + ", ");
-		logger.info("\n");
+		info += "\n";
 
 		// Print map service users.
-		logger.info("Services users:");
+		info += "Services users:";
 		Set<Service> services = mapServiceUsers.keySet();
 		for (Service s : services) {
-			logger.info("\tService: " + s.getName());
+			info += "\tService: " + s.getName();
 
 			Iterator<User> usersIt = mapServiceUsers.get(s).iterator();
 			if (usersIt.hasNext())
-				logger.info("\t\tUsers: ");
+				info += "\t\tUsers: ";
 			else
-				logger.info("\t\tNo users");
+				info += "\t\tNo users";
 			while (usersIt.hasNext()) {
 				User u = usersIt.next();
-				logger.info(u.getUsername() + ", ");
+				info += u.getUsername() + ", ";
 			}
-			logger.info("\n");
 		}
-		logger.info("\n");
 	}
 
 	@Override

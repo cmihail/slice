@@ -16,6 +16,10 @@ public class Price implements Comparable<Price>, Serializable {
 		this.value = value;
 	}
 
+	public int toInt() {
+		return value;
+	}
+
 	@Override
 	public String toString() {
 		return value + "";
