@@ -62,7 +62,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		login.setVisible(true);
 	}
 
-	// TODO delete (ony for testing)
+	// TODO delete (only for testing)
 	private void testTransfer() {
 		User toUser = null;
 		Service sentService = null;
@@ -72,7 +72,6 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			while (usersIt.hasNext()) {
 				User u = usersIt.next();
 
-				// TODO delete (only for testing)
 				if ("user2".equals(u.getUsername()) &&
 						"service2".equals(s.getName())) {
 					toUser = u;
@@ -83,6 +82,11 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 		if ("user1".equals(mainUser.getUsername()))
 			transfer(sentService, toUser);
+	}
+
+	@Override
+	public void networkError(String errorMessage) {
+		logError(errorMessage);
 	}
 
 	@Override
@@ -117,7 +121,6 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 	@Override
 	public void disconnectedUserFromServer(User disconnectedUser) {
-		// TODO test this part
 		for (Service service : disconnectedUser.getServices()) {
 			ServiceInfo si = userServicesInfo.getServiceInfo(service);
 			// Ignore services which disconnected user doesn't own.
@@ -239,6 +242,8 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 					userServicesInfo.getServiceInfo(service).getUsers());
 		else
 			logError("Invalid user type at launchOfferRequest.");
+
+
 		testTransfer(); // TODO delete (only for testing)
 	}
 
@@ -296,15 +301,20 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 	private List<Service> readServices(BufferedReader in, User.Type userType)
 			throws IOException {
-		String serviceName;
+		String line;
 		List<Service> userServices = new ArrayList<Service>();
-		while ((serviceName = in.readLine()) != null) {
+		while ((line = in.readLine()) != null) {
 			if (userType == Type.BUYER) {
-				// TODO maybe get price and timer from config file
-				userServices.add(new ServiceImpl(serviceName, new Price(200),
-						new Timer(5)));
+				String[] tokens = line.split(" ");
+				if (tokens.length != 3) {
+					login.drawErrorPage("Invalid service line");
+					return null;
+				}
+				userServices.add(new ServiceImpl(tokens[0],
+						new Price(Integer.parseInt(tokens[1])),
+						new Timer(Integer.parseInt(tokens[2]))));
 			} else {
-				userServices.add(new ServiceImpl(serviceName));
+				userServices.add(new ServiceImpl(line));
 			}
 		}
 

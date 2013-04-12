@@ -51,8 +51,12 @@ public class NetworkImpl implements Network {
 		this.mediator = mediator;
 
 		socketChannel = connectToServer();
-		Thread thread = new Thread(new ReceiveIncomingMessagesThread());
-		thread.start();
+		try {
+			ReceiveIncomingMessagesThread worker = new ReceiveIncomingMessagesThread();
+			worker.execute();
+		} catch (Exception e) {
+			logger.warn(e.getMessage());
+		}
 		Communication.send(socketChannel, new NetworkUser(mainUser));
 	}
 
@@ -196,9 +200,8 @@ public class NetworkImpl implements Network {
 		}
 
 		// Send the file itself.
-		SendFileWorker worker;
 		try {
-			worker = new SendFileWorker(mainUser, toUser, service);
+			SendFileWorker worker = new SendFileWorker(mainUser, toUser, service);
 			worker.execute();
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
@@ -222,7 +225,7 @@ public class NetworkImpl implements Network {
 	}
 
 	/**
-	 * Sends a file in a different thread.
+	 * Sends a file using a {@link SwingWorker}.
 	 *
 	 * @author cmihail, radu-tutueanu
 	 */
@@ -250,10 +253,8 @@ public class NetworkImpl implements Network {
 			Random generator = new Random();
 
 			while (totalSize > currentSentSize) {
-				int percentage = Math.round((float)currentSentSize / totalSize * 100);
 				logger.info("Sending service segment (" + currentSentSize + ") for < " +
-						service.getName() + " > to < " + receiver.getUsername() +
-						" > (percentage: " + percentage + "%)");
+						service.getName() + " > to < " + receiver.getUsername() + " >");
 
 				// Generate random bytes.
 				int sendingSize = Math.min(totalSize - currentSentSize,
@@ -284,14 +285,17 @@ public class NetworkImpl implements Network {
 	}
 
 	/**
-	 * TODO maybe as swing worker
-	 * Receives incoming messages in a different thread.
+	 * Receives incoming messages using a {@link SwingWorker}.
 	 *
 	 * @author cmihail, radu-tutueanu
 	 */
-	private class ReceiveIncomingMessagesThread implements Runnable {
+	private class ReceiveIncomingMessagesThread extends SwingWorker<Integer, Integer> {
 
-		private void read(SelectionKey key) {
+		/**
+		 * @param key the selection key
+		 * @return returns -1 if connection with server was lost
+		 */
+		private int read(SelectionKey key) {
 			synchronized (socketChannel) {
 				SocketChannel socketChannel = (SocketChannel) key.channel();
 
@@ -300,15 +304,17 @@ public class NetworkImpl implements Network {
 					networkObj.handler(mediator);
 				} catch (Communication.EndConnectionException e) {
 					logger.error("Connection with server lost");
-					System.exit(1); // TODO maybe another action
+					mediator.networkError("Connection with server lost");
+					return -1;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+			return 0;
 		}
 
 		@Override
-		public void run() {
+		protected Integer doInBackground() throws Exception {
 			Selector selector = null;
 			try {
 				selector = Selector.open();
@@ -324,13 +330,16 @@ public class NetworkImpl implements Network {
 						SelectionKey key = it.next();
 						it.remove();
 
-						if (key.isReadable())
-							read(key);
+						if (key.isReadable()) {
+							if (read(key) == -1)
+								break;
+						}
 					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return 0;
 		}
 	}
 }

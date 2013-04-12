@@ -143,15 +143,20 @@ public class WebServiceClientImpl implements WebServiceClient {
 
 	private List<Service> readServices(BufferedReader in, User.Type userType)
 			throws IOException {
-		String serviceName;
+		String line;
 		List<Service> userServices = new ArrayList<Service>();
-		while ((serviceName = in.readLine()) != null) {
+		while ((line = in.readLine()) != null) {
 			if (userType == Type.BUYER) {
-				// TODO maybe get price and timer from config file
-				userServices.add(new ServiceImpl(serviceName, new Price(200),
-						new Timer(5)));
+				String[] tokens = line.split(" ");
+				if (tokens.length != 3) {
+					logger.error("Invalid service line");
+					System.exit(1);
+				}
+				userServices.add(new ServiceImpl(tokens[0],
+						new Price(Integer.parseInt(tokens[1])),
+						new Timer(Integer.parseInt(tokens[2]))));
 			} else {
-				userServices.add(new ServiceImpl(serviceName));
+				userServices.add(new ServiceImpl(line));
 			}
 		}
 
@@ -159,67 +164,4 @@ public class WebServiceClientImpl implements WebServiceClient {
 			return null;
 		return userServices;
 	}
-
-//	private Map<Service, Set<User>> randomGenerate(User user, String password) {
-//		try {
-//			Thread.sleep(500); // TODO delete (only for testing)
-//		} catch (InterruptedException e) {
-//			logger.error(e.getMessage());
-//			System.exit(1);
-//		}
-//
-//		// Create mockup data.
-//		Map<Service, Set<User>> mapServiceUsers = new HashMap<Service, Set<User>>();
-//		Random random = new Random();
-//
-//		// Randomize users.
-//		Set<User> users = new HashSet<User>();
-//		int numOfUsers = random.nextInt(user.getServices().size()) + 2; // minimum 2 users
-//		for (int i = 0; i < numOfUsers; i++) {
-//			int numOfServices = random.nextInt(user.getServices().size() - 1);
-//			numOfServices++; // minimum 1 service
-//			int order = random.nextInt(2), limit = 0;
-//			if (order == 0)
-//				limit = user.getServices().size() - 1;
-//
-//			List<Service> services = new ArrayList<Service>();
-//			for (int j = 0; j < numOfServices; j++) {
-//				int index = Math.abs(j - limit);
-//				services.add(new ServiceImpl(user.getServices().get(index).getName()));
-//			}
-//
-//			switch (user.getType()) {
-//			case BUYER:
-//				users.add(new Manufacturer("Username " + i, services));
-//				break;
-//			case MANUFACTURER:
-//				users.add(new Buyer("Username " + i, services));
-//				break;
-//			}
-//		}
-//
-//		Iterator<Service> it = user.getServices().iterator();
-//		while (it.hasNext()) {
-//			Service service = it.next();
-//			Set<User> serviceUsers = new HashSet<User>();
-//
-//			Iterator<User> usersIt = users.iterator();
-//			while (usersIt.hasNext()) {
-//				User u = usersIt.next();
-//
-//				Iterator<Service> serviceIt = u.getServices().iterator();
-//				while (serviceIt.hasNext()) {
-//					Service s = serviceIt.next();
-//
-//					if (service.getName().equals(s.getName())) {
-//						serviceUsers.add(u);
-//					}
-//				}
-//			}
-//
-//			mapServiceUsers.put(service, serviceUsers);
-//		}
-//
-//		return mapServiceUsers;
-//	}
 }

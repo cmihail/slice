@@ -16,6 +16,12 @@ import network.Network;
 public interface MediatorNetwork {
 
 	/**
+	 * Sends a network error message to the mediator.
+	 * @param errorMessage the error
+	 */
+	void networkError(String errorMessage);
+
+	/**
 	 * Announces the disconnection of a user.
 	 * @param disconnectedUser the user that was disconnected
 	 */
@@ -29,8 +35,6 @@ public interface MediatorNetwork {
 	void registerUserForService(User userToRegister, Service service);
 
 	/**
-	 * TODO maybe remove
-	 *
 	 * Unregisters a user for a given service. Used when userToUnregister logouts.
 	 * @param userToUnregisterthe user to be unregistered
 	 * @param service the service where the action occurs

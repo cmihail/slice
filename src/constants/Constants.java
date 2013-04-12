@@ -1,5 +1,10 @@
 package constants;
 
+/**
+ * Defines global constants.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class Constants {
 
 	public static final String SERVER_IP = "127.0.0.1";
@@ -18,5 +23,5 @@ public class Constants {
 	public static final int SERVICE_BLOCK_SIZE = 1000;
 	public static final int SERVICE_MAXIMUM_SIZE = 1000 * SERVICE_BLOCK_SIZE;
 
-	public static boolean TEST_CANCEL = true; // TODO to delete
+	public static boolean TEST_CANCEL = false; // TODO to delete
 }

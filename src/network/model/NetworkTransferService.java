@@ -70,7 +70,8 @@ public class NetworkTransferService implements NetworkObject {
 		}
 
 		// Update transfer percentage
-		int percentage = Math.round((float)currentSentSize / totalSize * 100);
+		float totalSentSize = currentSentSize + bytes.length;
+		int percentage = Math.round(totalSentSize / totalSize * 100);
 		mediator.setServiceTransferPercentage(sender, service, percentage);
 
 		// End of transfer.
