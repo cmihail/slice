@@ -32,7 +32,7 @@ slice
   - User / Service objects are equal if they have same username / name
   - log files are in "log/" folder
   - transfer files are in "services/" and they are named like this:
-    <receiverUsername>_<serviceName>_<senderUsername>
+    receiverUsername_serviceName_senderUsername
 
 3. Testing:
   - different events (like making an offer, the user that makes the
