@@ -1,12 +1,17 @@
 slice
 =====
 
-// TODO update README for Tema2
+0. Run:
+  - ant run: starts server and 3 client instances
+  - login using user1 (Buyer), user2 (Manufacturer) and user3 (Manufacturer);
+    password is not important, but the username must be one of those 3 (they correspond to config files user1.cfg, user2.cfg, user3.cfg)
 
 1. Structure:
-  - gui folder: contains interfaces/classes related to GUI
-  - mediator folder: contains interfaces/calsses related to Mediator
-  - model: contains interfaces / classes shared between all entities
+  - constants: contains global constants
+  - gui: contains interfaces/classes related to GUI
+  - images: contains images for GUI
+  - mediator: contains interfaces/calsses related to Mediator
+  - model folder: contains interfaces / classes shared between all entities
   (for example: when a transfer occurs, Service should be sent from GUI
   to Mediator and then to Network); all classes that are here don't
   contain logic, but only information
@@ -15,12 +20,19 @@ slice
     service / offer / transfer states etc
   - model.state: Service / Offer / Transfer states
   - model.user: User interfaces / classes
-  - network folder: contains interfaces/calsses related to Network
-  - webserviceclient folder: contains interfaces/calsses related to Web
+  - network: contains interfaces/calsses related to Network
+  - network.common: contains common code for Server / Client
+  - network.model: contains classes shared between Server / Client
+  - network.model.command: contains classes that respect Command Pattern
+  - network.server: contains server classes
+  - webserviceclient: contains interfaces/calsses related to Web
     Service Client
 
 2. Observations:
   - User / Service objects are equal if they have same username / name
+  - log files are in "log/" folder
+  - transfer files are in "services/" and they are named like this:
+    <receiverUsername>_<serviceName>_<senderUsername>
 
 3. Testing:
   - different events (like making an offer, the user that makes the
@@ -36,7 +48,8 @@ slice
 
 5. GUI
   - Has a Login frame
-  - Uses two tables, one for services, one for Buyers/ Manufacturers.
+  - Uses two tables, one for services, one for Buyers/ Manufacturers
     When a service is selected, the Buyers/Manufacturers belonging to that service.
   - Most of the funtionalities in MainFrame.java, extended by two classes for Buyer
-    and Manufacturer, implementing the parts that are different.
+    and Manufacturer, implementing the parts that are different
+
