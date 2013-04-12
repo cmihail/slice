@@ -1,10 +1,10 @@
 package network.model.command;
 
-import network.model.NetworkObject;
 import mediator.MediatorNetwork;
 import model.service.Service;
 import model.state.TransferState;
 import model.user.User;
+import network.model.NetworkObject;
 
 public class StartTransfer implements NetworkObject {
 
@@ -26,7 +26,6 @@ public class StartTransfer implements NetworkObject {
 
 	@Override
 	public void handler(MediatorNetwork mediator) {
-		// TODO start receiving file
 		mediator.setServiceTransferState(sender, service, TransferState.TRANSFER_STARTED);
 	}
 }
