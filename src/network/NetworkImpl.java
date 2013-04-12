@@ -269,11 +269,11 @@ public class NetworkImpl implements Network {
 				}
 
 				// TODO delete (only for testing cancel)
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
 			}
 
 			return 0;

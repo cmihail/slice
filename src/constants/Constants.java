@@ -15,5 +15,5 @@ public class Constants {
 
 	public static final String SERVICE_FOLDER = "services/";
 	public static final int SERVICE_NETWORK_SEGMENT_SIZE = 1024;
-	public static final int SERVICE_BLOCK_SIZE = 1000;
+	public static final int SERVICE_BLOCK_SIZE = 10000;
 }

@@ -52,22 +52,22 @@
 
     <!-- Start server and 3 clients -->
     <target name="server" depends="build">
-        <java classname="network.server.Server" fork="yes">
+        <java classname="network.server.Server" fork="yes" maxmemory="256M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
     <target name="client1" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
     <target name="client2" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
     <target name="client3" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
