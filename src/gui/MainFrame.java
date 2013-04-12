@@ -25,12 +25,15 @@ import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
 
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author cmihail, radu-tutueanu
  */
 public class MainFrame extends javax.swing.JFrame implements GUI , ActionListener{
 
+	private static final Logger logger = Logger.getLogger(MainFrame.class);
 	protected final MediatorGUI mediator;
 	protected UserServicesInfo userServicesInfo;
 	protected User mainUser;
@@ -303,11 +306,6 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	protected javax.swing.JLabel offersLabel;
 	private javax.swing.JLabel usernameLabel;
 	// End of variables declaration
-	@Override
-	public void generateEvents() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void drawErrorPage(String errorMessage) {
@@ -371,7 +369,12 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	public void setTransferState(User user, Service service,
 			TransferState transferState) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(user).setTransferState(transferState);
+	}
 
+	@Override
+	public void setTransferPercentage(User user, Service service, int percentage) {
+		// TODO update percentage
+		logger.info("Received percentage update: " + percentage + "%"); // TODO might del this
 	}
 
 	@Override

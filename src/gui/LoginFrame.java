@@ -103,7 +103,6 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	mediator.login(usernameTextField.getText(), myPasswordField.getPassword().toString());
-
     }
 
 	public void drawErrorPage(String errorMessage) {

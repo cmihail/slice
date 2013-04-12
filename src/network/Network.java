@@ -17,6 +17,14 @@ import model.user.User;
 public interface Network {
 
 	/**
+	 * TODO maybe without param and add mainUser as a param in constructor + a method to get it
+	 *
+	 * Called when a user logouts in order to notify other users.
+	 * @param userToLogout the user that logouts
+	 */
+	void userLogout(User userToLogout);
+
+	/**
 	 * Registers a user with a given service in all users clients that have
 	 * same service.
 	 * @param mainUser the user that must be registered
@@ -43,14 +51,6 @@ public interface Network {
 	 * @param service the service where the action occurs
 	 */
 	void startTransfer(User mainUser, User toUser, Service service);
-
-	/**
-	 * Cancels a transfer in progress.
-	 * @param mainUser the user that initiated the transfer
-	 * @param toUser the user that was receiving the service
-	 * @param service the service where the action occurs
-	 */
-	void cancelTransfer(User mainUser, User toUser, Service service);
 
 	/*
 	 * for mainUser as buyer only

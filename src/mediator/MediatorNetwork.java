@@ -16,6 +16,12 @@ import network.Network;
 public interface MediatorNetwork {
 
 	/**
+	 * Announces the disconnection of a user.
+	 * @param disconnectedUser the user that was disconnected
+	 */
+	void disconnectedUserFromServer(User disconnectedUser);
+
+	/**
 	 * Registers a new user for a given service. Used when userToRegister logins.
 	 * @param userToRegister the user to be registered
 	 * @param service the service where the action occurs
@@ -23,8 +29,10 @@ public interface MediatorNetwork {
 	void registerUserForService(User userToRegister, Service service);
 
 	/**
+	 * TODO maybe remove
+	 *
 	 * Unregisters a user for a given service. Used when userToUnregister logouts.
-	 * @param userToUnregister  the user to be unregistered
+	 * @param userToUnregisterthe user to be unregistered
 	 * @param service the service where the action occurs
 	 */
 	void unregisterUserForService(User userToUnregister, Service service);
@@ -37,6 +45,14 @@ public interface MediatorNetwork {
 	 */
 	void setServiceTransferState(User fromUser, Service service,
 			TransferState transferState);
+
+	/**
+	 * Sets the transfer percentage of a service received from a user.
+	 * @param fromUser the user from which the service is transfered
+	 * @param service the service where the action occurs
+	 * @param percentage the transfer percentage
+	 */
+	void setServiceTransferPercentage(User fromUser, Service service, int percentage);
 
 	/*
 	 * for mainUser as buyer only

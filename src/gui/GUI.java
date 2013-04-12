@@ -19,8 +19,6 @@ import model.user.User;
  */
 public interface GUI {
 
-	public void generateEvents();
-
 	/**
 	 * Draws a page with a error message.
 	 * @param errorMessage the error message
@@ -55,6 +53,14 @@ public interface GUI {
 	 * @param transferState the new state
 	 */
 	void setTransferState(User user, Service service, TransferState transferState);
+
+	/**
+	 * Sets the transfer percentage for a given user.
+	 * @param fromUser the user from which the service is transfered
+	 * @param service the service where the action occurs
+	 * @param percentage the transfer percentage
+	 */
+	void setTransferPercentage(User user, Service service, int percentage);
 
 	/*
 	 * for mainUser as buyer only

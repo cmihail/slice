@@ -15,6 +15,7 @@ import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
 import network.model.NetworkUser;
+import network.model.NetworkUserDisconnect;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
@@ -41,7 +42,6 @@ public class Server {
 	public static void read(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
 
-
 		try {
 			NetworkObject networkObj = Communication.recv(socketChannel);
 
@@ -60,18 +60,35 @@ public class Server {
 				Communication.send(userChannel, networkObj);
 			}
 		} catch (Communication.EndConnectionException e) {
-			Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
-			while (it.hasNext()) {
-				Entry<User, SocketChannel> entry = it.next();
-				if (entry.getValue().equals(socketChannel)) {
-					// TODO annonuce users of user disconnect and update TransferState to canceled
-					logger.info("Connection ended for: " + entry.getKey().getUsername());
-					it.remove();
-					break;
-				}
-			}
+			removeUser(socketChannel);
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
+		}
+	}
+
+	private static void removeUser(SocketChannel socketChannel) {
+		Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<User, SocketChannel> entry = it.next();
+			User userToRemove = entry.getKey();
+			if (entry.getValue().equals(socketChannel)) {
+				logger.info("Connection ended for: " + userToRemove.getUsername());
+
+				// Announce users with same service of user disconnect.
+				Iterator<Entry<User, SocketChannel>> itAux =
+						userSocketsMap.entrySet().iterator();
+				while (itAux.hasNext()) {
+					Entry<User, SocketChannel> entryAux = itAux.next();
+					User user = entryAux.getKey();
+					if (!userToRemove.equals(user) && user.getType() != userToRemove.getType())
+						Communication.send(entryAux.getValue(),
+								new NetworkUserDisconnect(userToRemove, user));
+				}
+
+				// Remove user
+				it.remove();
+				break;
+			}
 		}
 	}
 

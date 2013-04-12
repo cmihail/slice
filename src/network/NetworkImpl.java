@@ -2,13 +2,14 @@ package network;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+
+import javax.swing.SwingWorker;
 
 import mediator.MediatorNetwork;
 import model.service.Offer;
@@ -18,11 +19,10 @@ import model.user.Manufacturer;
 import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
+import network.model.NetworkTransferService;
 import network.model.NetworkUser;
-import network.model.TransferService;
 import network.model.command.AcceptServiceOffer;
 import network.model.command.AnnounceUserOfServiceOffer;
-import network.model.command.CancelTransfer;
 import network.model.command.DropServiceOfferRequest;
 import network.model.command.DropUserAuction;
 import network.model.command.LaunchServiceOfferRequest;
@@ -54,6 +54,17 @@ public class NetworkImpl implements Network {
 		Thread thread = new Thread(new ReceiveIncomingMessagesThread());
 		thread.start();
 		Communication.send(socketChannel, new NetworkUser(mainUser));
+	}
+
+	@Override
+	public void userLogout(User userToLogout) {
+		synchronized (socketChannel) {
+			try {
+				socketChannel.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage());
+			}
+		}
 	}
 
 	@Override
@@ -175,7 +186,8 @@ public class NetworkImpl implements Network {
 	}
 
 	@Override
-	public void startTransfer(User mainUser, User toUser, Service service) {
+	public void startTransfer(final User mainUser, final User toUser,
+			final Service service) {
 		logger.info("Transfer service (" + service.getName() + ") to user (" +
 				toUser.getUsername() + ")");
 		synchronized (socketChannel) {
@@ -184,25 +196,12 @@ public class NetworkImpl implements Network {
 		}
 
 		// Send the file itself.
+		SendFileWorker worker;
 		try {
-			Thread thread = new Thread(new SendFileThread(mainUser, toUser, service));
-			thread.run();
+			worker = new SendFileWorker(mainUser, toUser, service);
+			worker.execute();
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
-		}
-
-	}
-
-	@Override
-	public void cancelTransfer(User mainUser, User toUser, Service service) {
-		logger.info("Cancel transfer service (" + service.getName() + ") to user (" +
-				toUser.getUsername() + ")");
-		// TODO stop file sending (stop correspondent thread)
-		// TODO think about this function -> might be ok just to stop connection with server
-		// and do everything in server
-		synchronized (socketChannel) {
-			Communication.send(socketChannel,
-					new CancelTransfer(mainUser, toUser, service));
 		}
 	}
 
@@ -227,7 +226,7 @@ public class NetworkImpl implements Network {
 	 *
 	 * @author cmihail, radu-tutueanu
 	 */
-	private class SendFileThread implements Runnable {
+	private class SendFileWorker extends SwingWorker<Integer, Integer> {
 
 		private final User sender;
 		private final User receiver;
@@ -235,7 +234,7 @@ public class NetworkImpl implements Network {
 		private final int totalSize;
 		private int currentSentSize = 0;
 
-		public SendFileThread(User sender, User receiver, Service service)
+		public SendFileWorker(User sender, User receiver, Service service)
 				throws Exception {
 			if (!(sender instanceof Buyer))
 				throw new Exception("Invalid user for sending");
@@ -246,35 +245,43 @@ public class NetworkImpl implements Network {
 		}
 
 		@Override
-		public void run() {
-			// TODO stop file sending if canceled by user
+		protected Integer doInBackground() throws Exception {
 			Random generator = new Random();
 
 			while (totalSize > currentSentSize) {
-				logger.info("Sending service segment (" + (currentSentSize) +
-						") for < " + service.getName() + " > to < " +
-						receiver.getUsername());
+				int percentage = Math.round((float)currentSentSize / totalSize * 100);
+				logger.info("Sending service segment (" + currentSentSize + ") for < " +
+						service.getName() + " > to < " + receiver.getUsername() +
+						" > (percentage: " + percentage + "%)");
 
 				// Generate random bytes.
 				int sendingSize = Math.min(totalSize - currentSentSize,
 						Constants.SERVICE_NETWORK_SEGMENT_SIZE);
-				currentSentSize += sendingSize;
 				byte[] bytes = new byte[sendingSize];
 				generator.nextBytes(bytes);
-				ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 
 				// Send segment.
-				TransferService transferService =
-						new TransferService(sender, receiver, service,
+				NetworkTransferService transferService =
+						new NetworkTransferService(sender, receiver, service,
 								currentSentSize, totalSize, bytes);
 				synchronized (socketChannel) {
-					Communication.send(socketChannel, transferService);
+					currentSentSize += Communication.send(socketChannel, transferService);
+				}
+
+				// TODO delete (only for testing cancel)
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
+
+			return 0;
 		}
 	}
 
 	/**
+	 * TODO maybe as swing worker
 	 * Receives incoming messages in a different thread.
 	 *
 	 * @author cmihail, radu-tutueanu
@@ -323,82 +330,4 @@ public class NetworkImpl implements Network {
 			}
 		}
 	}
-
-	// TODO delete (only for testing)
-//	private class ReceiveIncomingMessagesThread implements Runnable {
-//
-//		private final MediatorNetwork mediator;
-//		private final User mainUser;
-//		private final UserServicesInfo userServicesInfo;
-//
-//		public ReceiveIncomingMessagesThread(MediatorNetwork mediator,
-//				User mainUser, UserServicesInfo userServicesInfo) {
-//			this.mediator = mediator;
-//			this.mainUser = mainUser;
-//			this.userServicesInfo = userServicesInfo;
-//		}
-//
-//		@Override
-//		public void run() {
-//			// TODO receive incoming message from other clients
-//
-//			// for testing only: we assume we received offers
-//			Random random = new Random();
-//
-//			if (userServicesInfo.getServices().isEmpty())
-//				return;
-//
-//			while (true) {
-//				int seconds = random.nextInt(2) + 1;
-//				try {
-//					Thread.sleep(seconds * 1000);
-//
-//					// generate random service
-//					Set<Service> usi = userServicesInfo.getServices();
-//					int index = random.nextInt(usi.size()), i;
-//					ServiceInfo si = null;
-//					Iterator<Service> it = usi.iterator();
-//					i = 0;
-//					while (it.hasNext()) {
-//						si = userServicesInfo.getServiceInfo(it.next());
-//						if (i == index)
-//							break;
-//						i++;
-//					}
-//
-//					// generate random user
-//					Set<User> users = si.getUsers();
-//					if (users.isEmpty())
-//						continue;
-//
-//					index = random.nextInt(users.size());
-//					User user = null;
-//					Iterator<User> itUsers = users.iterator();
-//					i = 0;
-//					while (itUsers.hasNext()) {
-//						user = itUsers.next();
-//						if (i == index)
-//							break;
-//						i++;
-//					}
-//
-//					if (mainUser instanceof Buyer) {
-//						if (user != null && user instanceof Manufacturer) {
-//							int price = random.nextInt(10000) + 1;
-//							mediator.receiveServiceOffer((Manufacturer) user,
-//									si.getService(), new OfferImpl(new Price(price)));
-//						}
-//					}
-//					if (mainUser instanceof Manufacturer) {
-//						if (user != null && user instanceof Buyer) {
-//							mediator.receiveLaunchedServiceOfferRequest((Buyer) user, si.getService());
-//
-//						}
-//					}
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//	}
 }

@@ -20,7 +20,8 @@ public class Communication {
 		private static final long serialVersionUID = 3407535627371086058L;
 	}
 
-	public static void send(SocketChannel socketChannel, NetworkObject obj) {
+	// TODO might return number of written chars
+	public static int send(SocketChannel socketChannel, NetworkObject obj) {
 		ObjectOutputStream oos = null;
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -34,9 +35,13 @@ public class Communication {
 			byteBuffer.put(baos.toByteArray());
 			byteBuffer.flip();
 
+			int sentSize = 0;
 			while (byteBuffer.hasRemaining()) {
-				socketChannel.write(byteBuffer);
+				sentSize += socketChannel.write(byteBuffer);
+				if (sentSize <= 0)
+					break;
 			}
+			return sentSize;
 		} catch (IOException e) {
 			logger.warn(e.getMessage());
 		} finally {
@@ -48,6 +53,7 @@ public class Communication {
 				}
 			}
 		}
+		return 0;
 	}
 
 	public static NetworkObject recv(SocketChannel socketChannel) throws Exception {

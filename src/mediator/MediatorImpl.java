@@ -60,9 +60,29 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		login = new LoginFrame(this);
 		webServiceClient = new WebServiceClientImpl(this);
 		login.setVisible(true);
-		//gui.generateEvents(); // TODO delete (only for testing)
+	}
 
-		// TODO synchronize in GUI
+	// TODO delete (ony for testing)
+	private void testTransfer() {
+		User toUser = null;
+		Service sentService = null;
+		Set<Service> services = userServicesInfo.getServices();
+		for (Service s : services) {
+			Iterator<User> usersIt = userServicesInfo.getServiceInfo(s).getUsers().iterator();
+			while (usersIt.hasNext()) {
+				User u = usersIt.next();
+
+				// TODO delete (only for testing)
+				if ("user2".equals(u.getUsername()) &&
+						"service2".equals(s.getName())) {
+					toUser = u;
+					sentService = s;
+				}
+			}
+		}
+
+		if ("user1".equals(mainUser.getUsername()))
+			transfer(sentService, toUser);
 	}
 
 	@Override
@@ -87,50 +107,48 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 			logError("Couln't append logger file");
 			logger.error(e.toString());
 		}
-
-		// TODO delete (ony for testing)
-		User toUser = null;
-		Service sentService = null;
-		Set<Service> services = userServicesInfo.getServices();
-		for (Service s : services) {
-			Iterator<User> usersIt = userServicesInfo.getServiceInfo(s).getUsers().iterator();
-			while (usersIt.hasNext()) {
-				User u = usersIt.next();
-
-				// TODO delete (only for testing)
-				if ("user2".equals(u.getUsername()) &&
-						"service2".equals(s.getName())) {
-					toUser = u;
-					sentService = s;
-				}
-			}
-		}
-
-		if ("user1".equals(mainUser.getUsername()))
-			transfer(sentService, toUser);
 	}
 
 	@Override
 	public void logout() {
-		for (Service service : userServicesInfo.getServices()) {
+		webServiceClient.logout(mainUser);
+		network.userLogout(mainUser);
+	}
+
+	@Override
+	public void disconnectedUserFromServer(User disconnectedUser) {
+		// TODO test this part
+		for (Service service : disconnectedUser.getServices()) {
 			ServiceInfo si = userServicesInfo.getServiceInfo(service);
+			// Ignore services which disconnected user doesn't own.
+			if (si == null)
+				continue;
 
 			for (User user : si.getUsers()) {
+				// Ignore user if not the same.
+				if (!user.equals(disconnectedUser))
+					continue;
+
 				UserInfo ui = si.getUserInfo(user);
 
-				// Refuse offer.
-				if (mainUser instanceof Buyer && user instanceof Manufacturer &&
+				// Refuse offers in progress.
+				if (mainUser instanceof Manufacturer && user instanceof Buyer &&
 						ui.getOfferState() == OfferState.OFFER_MADE)
-					network.refuseServiceOffer((Buyer) mainUser, (Manufacturer) user,
-							service);
+					receiveRefusedServiceOffer((Buyer) user, service);
 
-				// Cancel transfer.
-				if (ui.getTransferState() != TransferState.TRANSFER_COMPLETED)
-					network.cancelTransfer(mainUser, user, service);
+				// Cancel transfers in progress.
+				if (ui.getTransferState() == TransferState.TRANSFER_STARTED ||
+						ui.getTransferState() == TransferState.TRANSFER_IN_PROGRESS) {
+					setServiceTransferState(user, service, TransferState.TRANSFER_FAILED);
+					logger.warn("Transfer canceled for < " + service.getName() +
+							" > from < " + user.getUsername() + " >");
+					System.out.println("Transfer canceled");
+				}
+
+				// Unregister disconnected user. // TODO see if needed
+//				unregisterUserForService(disconnectedUser, service);
 			}
 		}
-
-		webServiceClient.logout(mainUser);
 	}
 
 	@Override
@@ -193,6 +211,12 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	}
 
 	@Override
+	public void setServiceTransferPercentage(User fromUser, Service service,
+			int percentage) {
+		gui.setTransferPercentage(fromUser, service, percentage);
+	}
+
+	@Override
 	public void makeOffer(Service service, Buyer buyer, Offer offer) {
 		if (mainUser instanceof Manufacturer)
 			network.makeServiceOffer((Manufacturer) mainUser, buyer, service, offer);
@@ -215,6 +239,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 					userServicesInfo.getServiceInfo(service).getUsers());
 		else
 			logError("Invalid user type at launchOfferRequest.");
+		testTransfer(); // TODO delete (only for testing)
 	}
 
 	@Override
