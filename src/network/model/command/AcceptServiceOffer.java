@@ -1,11 +1,11 @@
 package network.model.command;
 
-import network.model.NetworkObject;
 import mediator.MediatorNetwork;
 import model.service.Service;
 import model.user.Buyer;
 import model.user.Manufacturer;
 import model.user.User;
+import network.model.NetworkObject;
 
 public class AcceptServiceOffer implements NetworkObject {
 

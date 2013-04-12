@@ -24,12 +24,22 @@ import org.apache.log4j.PropertyConfigurator;
 
 import constants.Constants;
 
+/**
+ * Defines the server used to mediate the communication between clients.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class Server {
 
 	private static final Logger logger = Logger.getLogger(Server.class);
 	private static final Map<User, SocketChannel> userSocketsMap =
 			new HashMap<User, SocketChannel>();
 
+	/**
+	 * Accepts a new connection.
+	 * @param key the selection key
+	 * @throws IOException
+	 */
 	public static void accept(SelectionKey key) throws IOException {
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
 		SocketChannel socketChannel = serverSocketChannel.accept();
@@ -39,6 +49,10 @@ public class Server {
 		logger.info("Connection from: " + socketChannel.socket().getRemoteSocketAddress());
 	}
 
+	/**
+	 * Reads data from a client.
+	 * @param key the selection key
+	 */
 	public static void read(SelectionKey key) {
 		SocketChannel socketChannel = (SocketChannel) key.channel();
 
@@ -66,6 +80,10 @@ public class Server {
 		}
 	}
 
+	/**
+	 * Removes a user from server.
+	 * @param socketChannel the user socket channel
+	 */
 	private static void removeUser(SocketChannel socketChannel) {
 		Iterator<Entry<User, SocketChannel>> it = userSocketsMap.entrySet().iterator();
 		while (it.hasNext()) {

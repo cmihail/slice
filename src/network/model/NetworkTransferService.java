@@ -14,6 +14,11 @@ import org.apache.log4j.Logger;
 
 import constants.Constants;
 
+/**
+ * Defines a segment from a transfer service.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class NetworkTransferService implements NetworkObject {
 
 	private static final Logger logger = Logger.getLogger(NetworkTransferService.class);
@@ -24,10 +29,10 @@ public class NetworkTransferService implements NetworkObject {
 	private final String fileName;
 	private final int currentSentSize;
 	private final int totalSize;
-	private final byte[] bytes;
+	private final byte[] data_segment;
 
 	public NetworkTransferService(User sender, User receiver, Service service,
-			int currentSentSize, int totalSize, byte[] bytes) {
+			int currentSentSize, int totalSize, byte[] data_segment) {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.service = service;
@@ -35,7 +40,7 @@ public class NetworkTransferService implements NetworkObject {
 				service.getName() + "_" + sender.getUsername();
 		this.currentSentSize = currentSentSize;
 		this.totalSize = totalSize;
-		this.bytes = bytes;
+		this.data_segment = data_segment;
 	}
 
 	@Override
@@ -56,7 +61,7 @@ public class NetworkTransferService implements NetworkObject {
 
 			// Append content to file.
 			out = new DataOutputStream(new FileOutputStream(file, true));
-			out.write(bytes);
+			out.write(data_segment);
 		} catch (Exception e) {
 			logger.warn(e.getMessage());
 		} finally {
@@ -70,7 +75,7 @@ public class NetworkTransferService implements NetworkObject {
 		}
 
 		// Update transfer percentage
-		float totalSentSize = currentSentSize + bytes.length;
+		float totalSentSize = currentSentSize + data_segment.length;
 		int percentage = Math.round(totalSentSize / totalSize * 100);
 		mediator.setServiceTransferPercentage(sender, service, percentage);
 
