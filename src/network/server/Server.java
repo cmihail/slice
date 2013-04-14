@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
+import network.model.NetworkTransferService;
 import network.model.NetworkUser;
 import network.model.NetworkUserDisconnect;
 
@@ -69,9 +70,10 @@ public class Server {
 						userSocketsMap.get(networkObj.getDestinationUser());
 				if (userChannel == null)
 					throw new Exception("Invalid receiver");
-
-				logger.info("Packet for: " + networkObj.getDestinationUser().getUsername());
 				Communication.send(userChannel, networkObj);
+
+				if (!(networkObj instanceof NetworkTransferService))
+					logger.info("Packet for: " + networkObj.getDestinationUser().getUsername());
 			}
 		} catch (Communication.EndConnectionException e) {
 			removeUser(socketChannel);
