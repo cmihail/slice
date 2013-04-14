@@ -153,7 +153,7 @@ public class NetworkImpl implements Network {
 
 		// Refuse offer for all other manufacturers.
 		for (User user : usersWithService) {
-			if (!user.equals(mainUser) && user instanceof Manufacturer) {
+			if (!user.equals(manufacturer) && user instanceof Manufacturer) {
 				synchronized (socketChannel) {
 					Communication.send(socketChannel,
 							new RefuseServiceOffer(mainUser, (Manufacturer) user, service));
