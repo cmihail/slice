@@ -53,3 +53,4 @@ slice
   - Most of the funtionalities in MainFrame.java, extended by two classes for Buyer
     and Manufacturer, implementing the parts that are different
 
+6. TODO -> explain web service config

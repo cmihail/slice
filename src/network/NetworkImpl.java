@@ -332,7 +332,7 @@ public class NetworkImpl implements Network {
 
 						if (key.isReadable()) {
 							if (read(key) == -1)
-								break;
+								return 0;
 						}
 					}
 				}

@@ -85,6 +85,11 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	}
 
 	@Override
+	public void webServiceError(String errorMessage) {
+		login.drawErrorPage(errorMessage);
+	}
+
+	@Override
 	public void networkError(String errorMessage) {
 		logError(errorMessage);
 	}
@@ -346,7 +351,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 
 		// Draw corresponded page in GUI.
 		if (mapServiceUsers == null) {
-			gui.drawErrorPage("Error at login credentials (see config file).");
+			logError("Error at login credentials (see config file).");
 			return false;
 		}
 

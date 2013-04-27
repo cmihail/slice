@@ -13,6 +13,14 @@
     <path id="slice.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/log4j-1.2.17.jar"/>
+        <pathelement location="lib/gson-2.2.3.jar"/>
+        <pathelement location="lib/axis.jar"/>
+        <pathelement location="lib/axis-ant.jar"/>
+        <pathelement location="lib/commons-discovery-0.2.jar"/>
+        <pathelement location="lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="lib/jaxrpc.jar"/>
+        <pathelement location="lib/saaj.jar"/>
+        <pathelement location="lib/wsdl4j-1.5.1.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -57,17 +65,17 @@
         </java>
     </target>
     <target name="client1" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="32M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
     <target name="client2" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="32M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>
     <target name="client3" depends="build">
-        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="128M">
+        <java classname="mediator.Main" fork="yes" spawn="yes" maxmemory="32M">
             <classpath refid="slice.classpath"/>
         </java>
     </target>

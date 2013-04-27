@@ -7,6 +7,8 @@ package constants;
  */
 public class Constants {
 
+	public static final String WEBSERVICE_ADDRESS =
+			"http://localhost:8080/axis/services/WebService";
 	public static final String SERVER_IP = "127.0.0.1";
 	public static final int SERVER_PORT = 30000;
 

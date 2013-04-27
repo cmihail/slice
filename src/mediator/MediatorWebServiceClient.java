@@ -9,4 +9,9 @@ import webserviceclient.WebServiceClient;
  */
 public interface MediatorWebServiceClient {
 
+	/**
+	 * Sends a web service error message to the mediator.
+	 * @param errorMessage the error
+	 */
+	void webServiceError(String errorMessage);
 }
