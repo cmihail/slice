@@ -2,6 +2,7 @@ slice
 =====
 
 0. Run:
+  - configure WebApp with TOMCAT and AXIS (see 6.)
   - ant run: starts server and 3 client instances
   - login using user1 (Buyer), user2 (Manufacturer) and user3 (Manufacturer);
     password is not important, but the username must be one of those 3 (they correspond to config files user1.cfg, user2.cfg, user3.cfg)
@@ -46,11 +47,28 @@ slice
   - git
   - https://github.com/cmihail/slice
 
-5. GUI
+5. GUI:
   - Has a Login frame
   - Uses two tables, one for services, one for Buyers/ Manufacturers
     When a service is selected, the Buyers/Manufacturers belonging to that service.
   - Most of the funtionalities in MainFrame.java, extended by two classes for Buyer
     and Manufacturer, implementing the parts that are different
 
-6. TODO -> explain web service config
+6. Configure WebApp:
+  - for installing tomcat7, axis, etc, see http://elf.cs.pub.ro/idp/laboratoare/lab-web
+  - install tomcat7 (latest version)
+  - install axis
+  - configure exports (service classes must be registered)
+  - edit AXIS_CLASSES_PATH (see deployWebService.sh) to point to WEB-INF/classes folder
+  - start tomcat
+  - start clients
+  - communication protocol is implemented using GSON
+    (https://sites.google.com/site/gson/Home)
+
+7. Observations: // TODO delete this -> for testing only
+  - move all user config files (userX.cfg) to WEB-INF/classes in AXIS webapp folder
+    (the folder inside TOMCAT)
+  - if any modifications are done to WebService classes, the service must be undeployed
+    (undeployWebService.sh), tomcat must be restared, and the serivce must be deployed
+    again(deployWebService.sh)
+

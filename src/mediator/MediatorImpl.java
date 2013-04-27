@@ -247,9 +247,6 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 					userServicesInfo.getServiceInfo(service).getUsers());
 		else
 			logError("Invalid user type at launchOfferRequest.");
-
-
-		testTransfer(); // TODO delete (only for testing)
 	}
 
 	@Override

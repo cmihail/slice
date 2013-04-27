@@ -23,11 +23,11 @@ import model.webservice.WebServiceJson;
 import model.webservice.WebServiceJsonImpl;
 import constants.Constants;
 
-// TODO explain how to generate service -> copy model.service / model.user / etc
-// needed packages for compilation
-// TODO mention the addition of GSON jar to tomcat->axis->web-info lib folder
-// TODO user*.cfg should be in WEB-INFO/classes
-
+/**
+ * Defines the web service.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class WebService {
 
 	private final WebServiceJson json = new WebServiceJsonImpl();

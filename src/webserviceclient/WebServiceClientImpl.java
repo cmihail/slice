@@ -19,8 +19,6 @@ import org.apache.log4j.Logger;
 
 import constants.Constants;
 
-// TODO build.xml seems to work... maybe because of $AXISCLASSPATH (mention this in README)
-
 /**
  * Implements {@link WebServiceClient}.
  *

@@ -26,7 +26,6 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 	
 	public MainFrameManufacturer(MediatorGUI med) {
 		super(med);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("unchecked")

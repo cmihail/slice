@@ -27,7 +27,6 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 	JMenuItem launch, drop, accept, refuse;
 	public MainFrameBuyer(MediatorGUI med) {
 		super(med);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -114,20 +113,20 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		{
 			/*find the selected service*/
 
-			
+
 				mediator.launchOfferRequest(selectedService);
 				userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.ACTIVE);
-			
-			
+
+
 		}
 		if(e.getActionCommand().equals(drop.getText()))
 		{
 			mediator.launchOfferRequest(selectedService);
 			userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.INACTIVE);
-			
+
 		}
-	
-		
+
+
 		if(e.getActionCommand().equals(accept.getText()))
 		{
 			User aUser = getSelectedOfferUser(selectedService);
@@ -160,7 +159,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		if(SwingUtilities.isLeftMouseButton(e) && e.getSource() == servicesTable)
 		{
 			int index = servicesTable.getSelectedRow();
-			if(index == -1 ) 
+			if(index == -1 )
 				{
 				drawErrorPage("No Service selected");
 				return;
@@ -170,7 +169,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
 			if (aux ==null)
 			{
-				
+
 				return;
 			}
 			offersTableInit();
@@ -199,8 +198,8 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 					}
 				}
 			}
-			
-			
+
+
 		}
 
 	}

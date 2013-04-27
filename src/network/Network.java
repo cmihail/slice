@@ -17,8 +17,6 @@ import model.user.User;
 public interface Network {
 
 	/**
-	 * TODO maybe without param and add mainUser as a param in constructor + a method to get it
-	 *
 	 * Called when a user logouts in order to notify other users.
 	 * @param userToLogout the user that logouts
 	 */

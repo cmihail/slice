@@ -20,8 +20,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-// TODO add gson lib to build.xml
-
+/**
+ * Implements {@link WebServiceJson}.
+ *
+ * @author cmihail, radu-tutueanu
+ */
 public class WebServiceJsonImpl implements WebServiceJson {
 
 	private final Gson gson = new Gson();
