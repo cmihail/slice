@@ -1,0 +1,942 @@
+31916 101  [AWT-EventQueue-0] INFO  network.NetworkImpl  - Service (service1) offer for buyer < user1 >:200
+68689 2351 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Enter: Call::invoke(ns, meth, args)
+68690 2043 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - operation=null
+68690 2405 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Enter: Call::invoke(RPCElement)
+68690 182  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart ctor(FORM_SOAPENVELOPE)
+68690 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+68691 374  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Setting current message form to: FORM_SOAPENVELOPE (currentMessage is now org.apache.axis.message.SOAPEnvelope)
+68691 188  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Exit: SOAPPart ctor()
+68691 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(addBody00)
+68691 168  [AWT-EventQueue-0] DEBUG org.apache.axis.message.SOAPBody  - Adding body element to message...
+68691 2638 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Enter: Call::invoke()
+68691 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+68692 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+68692 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_SOAPENVELOPE
+68692 749  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - MessageContext: setTargetService()
+68692 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(noService10)
+68693 110  [AWT-EventQueue-0] DEBUG org.apache.axis.ConfigurationException  - Exception: 
+org.apache.axis.ConfigurationException: No service named  is available
+org.apache.axis.ConfigurationException: No service named  is available
+	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
+	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
+	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
+	at org.apache.axis.client.Call.invoke(Call.java:2708)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at webserviceclient.WebServiceClientImpl.invoke(WebServiceClientImpl.java:93)
+	at webserviceclient.WebServiceClientImpl.logout(WebServiceClientImpl.java:71)
+	at mediator.MediatorImpl.logout(MediatorImpl.java:123)
+	at gui.MainFrame.logoutButtonActionPerformed(MainFrame.java:288)
+	at gui.MainFrame.access$0(MainFrame.java:286)
+	at gui.MainFrame$7.actionPerformed(MainFrame.java:219)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2018)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2341)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6505)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3312)
+	at java.awt.Component.processEvent(Component.java:6270)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4832)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4492)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4422)
+	at java.awt.Container.dispatchEventImpl(Container.java:2273)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:729)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:688)
+	at java.awt.EventQueue$3.run(EventQueue.java:686)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:702)
+	at java.awt.EventQueue$4.run(EventQueue.java:700)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:699)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+
+	at org.apache.axis.configuration.FileProvider.getService(FileProvider.java:233)
+	at org.apache.axis.AxisEngine.getService(AxisEngine.java:311)
+	at org.apache.axis.MessageContext.setTargetService(MessageContext.java:756)
+	at org.apache.axis.client.Call.invoke(Call.java:2708)
+	at org.apache.axis.client.Call.invoke(Call.java:2443)
+	at org.apache.axis.client.Call.invoke(Call.java:2366)
+	at org.apache.axis.client.Call.invoke(Call.java:1812)
+	at webserviceclient.WebServiceClientImpl.invoke(WebServiceClientImpl.java:93)
+	at webserviceclient.WebServiceClientImpl.logout(WebServiceClientImpl.java:71)
+	at mediator.MediatorImpl.logout(MediatorImpl.java:123)
+	at gui.MainFrame.logoutButtonActionPerformed(MainFrame.java:288)
+	at gui.MainFrame.access$0(MainFrame.java:286)
+	at gui.MainFrame$7.actionPerformed(MainFrame.java:219)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2018)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2341)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.Component.processMouseEvent(Component.java:6505)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3312)
+	at java.awt.Component.processEvent(Component.java:6270)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4832)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4492)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4422)
+	at java.awt.Container.dispatchEventImpl(Container.java:2273)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:729)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:688)
+	at java.awt.EventQueue$3.run(EventQueue.java:686)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:702)
+	at java.awt.EventQueue$4.run(EventQueue.java:700)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:699)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+68722 793  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - MessageContext: setServiceHandler(null)
+68732 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(targetService)
+68732 2715 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Target service:  
+68732 749  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - MessageContext: setTargetService(null)
+68733 793  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - MessageContext: setServiceHandler(null)
+68733 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+68733 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+68733 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_SOAPENVELOPE
+68733 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68733 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+68734 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68734 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68734 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68734 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+68734 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68735 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
+68735 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68735 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68735 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
+68735 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68735 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68736 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
+68742 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68742 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
+68743 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68743 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68743 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:loginUser
+68743 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68752 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68752 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:arg0
+68752 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68752 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenc' - 'http://schemas.xmlsoap.org/soap/encoding/'
+68753 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68753 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68753 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68753 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element arg0
+68753 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68754 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68754 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element loginUser
+68754 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68754 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68754 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Body
+68754 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68755 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68755 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Envelope
+68755 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(empty00)
+68755 113  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (empty)
+68755 2762 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><loginUser soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><arg0 xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{&quot;username&quot;:&quot;user3&quot;,&quot;type&quot;:&quot;MANUFACTURER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;},{&quot;name&quot;:&quot;service2&quot;},{&quot;name&quot;:&quot;service4&quot;}]}</arg0></loginUser></soapenv:Body></soapenv:Envelope>
+68757 77   [AWT-EventQueue-0] DEBUG org.apache.axis.client.AxisClient  - Enter: AxisClient::invoke
+68757 90   [AWT-EventQueue-0] DEBUG org.apache.axis.client.AxisClient  - EngineHandler: null
+68757 79   [AWT-EventQueue-0] DEBUG org.apache.axis.SimpleChain  - Enter: SimpleChain::invoke
+68757 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(enter00)
+68758 125  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Enter:  HTTPSender::invoke
+68758 524  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::saveChanges
+68759 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68759 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+68759 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68759 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68760 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68762 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+68765 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68765 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
+68765 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68766 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68766 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
+68766 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68766 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68766 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
+68770 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68770 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
+68770 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68771 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68771 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:loginUser
+68771 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68772 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68772 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:arg0
+68772 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68772 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenc' - 'http://schemas.xmlsoap.org/soap/encoding/'
+68772 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68773 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68773 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68773 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element arg0
+68773 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68774 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68774 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element loginUser
+68774 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68774 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68774 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Body
+68775 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68775 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+68775 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Envelope
+68775 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(empty00)
+68775 113  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (empty)
+68776 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+68776 374  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Setting current message form to: FORM_OPTIMIZED (currentMessage is now org.apache.axis.utils.ByteArray)
+68777 537  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Exit: SOAPPart::saveChanges(): org.apache.axis.utils.ByteArray@aad9e9d
+68778 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(createdHTTP00)
+68778 122  [AWT-EventQueue-0] DEBUG org.apache.axis.components.net.DefaultSocketFactory  - Created an insecure HTTP connection
+68779 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(xmlSent00)
+68779 484  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - XML sent:
+68779 485  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - ---------------------------------------------------
+68790 519  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - POST /axis/services/WebService HTTP/1.0
+Content-Type: text/xml; charset=utf-8
+Accept: application/soap+xml, application/dime, multipart/related, text/*
+User-Agent: Axis/1.4
+Host: localhost:8080
+Cache-Control: no-cache
+Pragma: no-cache
+SOAPAction: ""
+Content-Length: 672
+
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><loginUser soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><arg0 xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">{&quot;username&quot;:&quot;user3&quot;,&quot;type&quot;:&quot;MANUFACTURER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;},{&quot;name&quot;:&quot;service2&quot;},{&quot;name&quot;:&quot;service4&quot;}]}</arg0></loginUser></soapenv:Body></soapenv:Envelope>
+68824 627  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - HTTP/1.1 200 OK
+68825 627  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Server Apache-Coyote/1.1
+68825 627  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Content-Type text/xml;charset=utf-8
+68825 627  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Date Sun, 28 Apr 2013 04:55:30 GMT
+68825 627  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Connection close
+68826 182  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart ctor(FORM_INPUTSTREAM)
+68826 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+68826 374  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Setting current message form to: FORM_INPUTSTREAM (currentMessage is now org.apache.axis.transport.http.SocketInputStream)
+68826 188  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Exit: SOAPPart ctor()
+68827 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(no00)
+68827 791  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - 
+no Content-Length
+68827 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(xmlRecd00)
+68828 794  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - 
+XML received:
+68828 795  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - -----------------------------------------------
+68828 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+68828 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+68828 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_INPUTSTREAM
+68828 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+68829 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.EnvelopeHandler@4c0776d0
+68829 886  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startPrefixMapping(soapenv, http://schemas.xmlsoap.org/soap/envelope/)
+68830 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68830 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68830 925  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startPrefixMapping()
+68831 886  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startPrefixMapping(xsd, http://www.w3.org/2001/XMLSchema)
+68831 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68831 925  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startPrefixMapping()
+68831 886  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startPrefixMapping(xsi, http://www.w3.org/2001/XMLSchema-instance)
+68831 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68832 925  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startPrefixMapping()
+68832 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(http://schemas.xmlsoap.org/soap/envelope/, Envelope)
+68832 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+68832 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.EnvelopeBuilder@1fd22827
+68832 765  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing element Envelope
+68833 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+68833 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(http://schemas.xmlsoap.org/soap/envelope/, Body)
+68833 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+68834 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.BodyBuilder@1e4a28c3
+68834 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(newElem00)
+68834 239  [AWT-EventQueue-0] DEBUG org.apache.axis.message.MessageElement  - New MessageElement (org.apache.axis.message.SOAPBody@180a849a) named {soapenv}Body
+68839 765  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing element Body
+68839 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68840 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+68840 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(, loginUserResponse)
+68840 109  [AWT-EventQueue-0] DEBUG org.apache.axis.message.BodyBuilder  - Enter: BodyBuilder::onStartChild()
+68840 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(dispatching00)
+68841 225  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - Dispatching to a body namespace ''
+68841 793  [AWT-EventQueue-0] DEBUG org.apache.axis.MessageContext  - MessageContext: setServiceHandler(null)
+68841 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(newElem00)
+68841 239  [AWT-EventQueue-0] DEBUG org.apache.axis.message.MessageElement  - New MessageElement (org.apache.axis.message.RPCElement@5a87a6ca) named {}loginUserResponse
+68841 242  [AWT-EventQueue-0] DEBUG org.apache.axis.message.MessageElement  -   soapenv:encodingStyle = 'http://schemas.xmlsoap.org/soap/encoding/'
+68842 222  [AWT-EventQueue-0] DEBUG org.apache.axis.message.BodyBuilder  - Exit: BodyBuilder::onStartChild()
+68842 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+68842 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.SOAPHandler@7fd74634
+68842 765  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing element loginUserResponse
+68842 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68843 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+68843 886  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startPrefixMapping(soapenc, http://schemas.xmlsoap.org/soap/encoding/)
+68843 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68843 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68843 925  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startPrefixMapping()
+68844 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(, loginUserReturn)
+68844 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+68844 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.SOAPHandler@e42417e
+68844 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(newElem00)
+68845 239  [AWT-EventQueue-0] DEBUG org.apache.axis.message.MessageElement  - New MessageElement (org.apache.axis.message.MessageElement@1fd9be82) named {}loginUserReturn
+68845 242  [AWT-EventQueue-0] DEBUG org.apache.axis.message.MessageElement  -   xsi:type = 'soapenc:string'
+68845 765  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing element loginUserReturn
+68845 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+68850 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(, loginUserReturn)
+68850 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+68850 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.message.SOAPHandler@e42417e
+68851 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68851 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to org.apache.axis.message.RPCElement:loginUserResponse
+68851 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+68851 933  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endPrefixMapping(soapenc)
+68851 945  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endPrefixMapping()
+68852 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(, loginUserResponse)
+68852 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+68856 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.message.SOAPHandler@7fd74634
+68856 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68856 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to org.apache.axis.message.SOAPBody:Body
+68857 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+68857 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(http://schemas.xmlsoap.org/soap/envelope/, Body)
+68857 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+68857 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.message.BodyBuilder@1e4a28c3
+68857 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+68858 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to org.apache.axis.message.SOAPEnvelope:Envelope
+68858 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+68858 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(http://schemas.xmlsoap.org/soap/envelope/, Envelope)
+68858 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+68858 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.message.EnvelopeBuilder@1fd22827
+68859 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(empty00)
+68859 113  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (empty)
+68859 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to null
+68859 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+68859 933  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endPrefixMapping(soapenv)
+68859 945  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endPrefixMapping()
+68860 933  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endPrefixMapping(xsd)
+68860 945  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endPrefixMapping()
+68860 933  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endPrefixMapping(xsi)
+68860 945  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endPrefixMapping()
+68861 858  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endDocument()
+68861 866  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endDocument()
+68861 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setMsgForm)
+68861 374  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Setting current message form to: FORM_SOAPENVELOPE (currentMessage is now org.apache.axis.message.SOAPEnvelope)
+68861 724  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Exit: SOAPPart::getAsSOAPEnvelope
+68862 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68862 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenv' - 'http://schemas.xmlsoap.org/soap/envelope/'
+68862 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68862 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68862 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68863 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsd' - 'http://www.w3.org/2001/XMLSchema'
+68863 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68863 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68863 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'xsi' - 'http://www.w3.org/2001/XMLSchema-instance'
+68863 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68879 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68879 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Envelope
+68879 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68880 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element [http://schemas.xmlsoap.org/soap/envelope/]:Body
+68880 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68880 94   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.startElement ['' loginUserResponse]
+68880 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68880 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:loginUserResponse
+68881 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68881 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(register00)
+68881 472  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - register 'soapenc' - 'http://schemas.xmlsoap.org/soap/encoding/'
+68881 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68881 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+68882 94   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.startElement ['' loginUserReturn]
+68882 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(startElem00)
+68882 1098 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - Start element []:loginUserReturn
+68882 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['[{']
+68882 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68883 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service']
+68883 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68883 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68883 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68883 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68884 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},']
+68885 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68885 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['users']
+68885 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68885 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68885 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['username']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['user2']
+68886 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68887 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68887 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68887 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['type']
+68887 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68892 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68892 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['MANUFACTURER']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['services']
+68893 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68894 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68895 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+68895 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68895 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68895 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+68897 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68898 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68898 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68898 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68898 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68898 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service3']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68899 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service5']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['}]},{']
+68900 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['username']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['user1']
+68901 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['type']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68902 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68903 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['BUYER']
+68903 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68903 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68903 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68904 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['services']
+68904 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68904 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68904 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68904 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68910 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68910 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68911 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68912 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+68917 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68917 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68917 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68917 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68918 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68918 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68925 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68925 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':600}},{']
+68925 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68925 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68927 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68927 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68927 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68927 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+68927 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68932 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68932 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68933 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68933 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68933 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68933 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68933 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68934 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68934 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':150},']
+68934 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68934 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68934 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}},{']
+68935 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service3']
+68936 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68941 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68941 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68941 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68941 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':250},']
+68942 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68943 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':1200}},{']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68944 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68945 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service4']
+68945 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68948 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68948 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68948 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68949 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+68950 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68950 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68950 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68950 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68950 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}}]}]']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68951 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68952 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68953 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['users']
+68954 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68954 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68954 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68954 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['username']
+68954 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68955 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68955 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68955 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['user2']
+68955 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68955 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['type']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68956 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['MANUFACTURER']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['services']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68957 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68958 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+68959 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68959 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68959 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68959 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68960 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68960 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68960 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68960 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+68961 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68961 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68961 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68961 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68961 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68962 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68962 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68962 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service3']
+68962 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68962 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68963 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68963 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68963 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68963 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68963 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68964 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service5']
+68964 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68964 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['}]},{']
+68964 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['username']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['user1']
+68965 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['type']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68966 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['BUYER']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['services']
+68967 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68968 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68969 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68970 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68970 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68970 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68970 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68970 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68971 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':600}},{']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68972 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68973 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68974 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':150},']
+68985 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68986 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68986 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68986 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68989 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}},{']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68990 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68991 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68991 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68991 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service3']
+68991 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68991 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68992 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':250},']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68993 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':1200}},{']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68994 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service4']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+68995 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68996 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+68996 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68996 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68996 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68997 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68997 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68997 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68998 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+68999 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68999 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}}]}]']
+68999 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},{']
+68999 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+68999 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69000 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69001 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69001 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service4']
+69001 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69001 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['},']
+69001 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['users']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['username']
+69002 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['user1']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69003 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['type']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['BUYER']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69004 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69005 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69005 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['services']
+69005 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69005 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':[{']
+69005 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service1']
+69006 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69017 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69017 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69017 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+69017 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69017 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69018 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69021 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69022 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69022 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+69022 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69023 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+69023 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69023 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69023 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':600}},{']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+69028 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69029 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69030 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69030 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service2']
+69030 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69030 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69031 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69031 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+69031 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69033 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69033 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69034 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69034 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69036 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':150},']
+69036 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69037 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}},{']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69038 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service3']
+69039 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69039 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69041 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69041 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+69041 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69042 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69042 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69042 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69042 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69042 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':250},']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69043 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':1200}},{']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['name']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69044 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['service4']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [',']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69045 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['priceLimit']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69046 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':200},']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['timer']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':{']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69047 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['value']
+69048 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['"']
+69048 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters [':900}}]}]']
+69048 63   [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.characters ['}]']
+69048 109  [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.endElement ['' loginUserReturn]
+69049 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+69049 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element loginUserReturn
+69049 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+69050 109  [AWT-EventQueue-0] DEBUG org.apache.axis.message.SAXOutputter  - SAXOutputter.endElement ['' loginUserResponse]
+69050 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+69050 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element loginUserResponse
+69050 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+69050 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+69050 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Body
+69051 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+69051 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(endElem00)
+69051 1208 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.SerializationContext  - End element soapenv:Envelope
+69051 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(empty00)
+69051 113  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (empty)
+69051 796  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><loginUserResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><loginUserReturn xsi:type="soapenc:string" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">[{&quot;service&quot;:{&quot;name&quot;:&quot;service1&quot;},&quot;users&quot;:[{&quot;username&quot;:&quot;user2&quot;,&quot;type&quot;:&quot;MANUFACTURER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;},{&quot;name&quot;:&quot;service2&quot;},{&quot;name&quot;:&quot;service3&quot;},{&quot;name&quot;:&quot;service5&quot;}]},{&quot;username&quot;:&quot;user1&quot;,&quot;type&quot;:&quot;BUYER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:600}},{&quot;name&quot;:&quot;service2&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:150},&quot;timer&quot;:{&quot;value&quot;:900}},{&quot;name&quot;:&quot;service3&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:250},&quot;timer&quot;:{&quot;value&quot;:1200}},{&quot;name&quot;:&quot;service4&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:900}}]}]},{&quot;service&quot;:{&quot;name&quot;:&quot;service2&quot;},&quot;users&quot;:[{&quot;username&quot;:&quot;user2&quot;,&quot;type&quot;:&quot;MANUFACTURER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;},{&quot;name&quot;:&quot;service2&quot;},{&quot;name&quot;:&quot;service3&quot;},{&quot;name&quot;:&quot;service5&quot;}]},{&quot;username&quot;:&quot;user1&quot;,&quot;type&quot;:&quot;BUYER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:600}},{&quot;name&quot;:&quot;service2&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:150},&quot;timer&quot;:{&quot;value&quot;:900}},{&quot;name&quot;:&quot;service3&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:250},&quot;timer&quot;:{&quot;value&quot;:1200}},{&quot;name&quot;:&quot;service4&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:900}}]}]},{&quot;service&quot;:{&quot;name&quot;:&quot;service4&quot;},&quot;users&quot;:[{&quot;username&quot;:&quot;user1&quot;,&quot;type&quot;:&quot;BUYER&quot;,&quot;services&quot;:[{&quot;name&quot;:&quot;service1&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:600}},{&quot;name&quot;:&quot;service2&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:150},&quot;timer&quot;:{&quot;value&quot;:900}},{&quot;name&quot;:&quot;service3&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:250},&quot;timer&quot;:{&quot;value&quot;:1200}},{&quot;name&quot;:&quot;service4&quot;,&quot;priceLimit&quot;:{&quot;value&quot;:200},&quot;timer&quot;:{&quot;value&quot;:900}}]}]}]</loginUserReturn></loginUserResponse></soapenv:Body></soapenv:Envelope>
+69052 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(exit00)
+69052 157  [AWT-EventQueue-0] DEBUG org.apache.axis.transport.http.HTTPSender  - Exit:  HTTPDispatchHandler::invoke
+69052 86   [AWT-EventQueue-0] DEBUG org.apache.axis.SimpleChain  - Exit: SimpleChain::invoke
+69052 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(semanticCheck00)
+69052 55   [AWT-EventQueue-0] DEBUG org.apache.axis.handlers.soap.MustUnderstandChecker  - Doing SOAP semantic checks...
+69052 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+69053 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+69053 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_SOAPENVELOPE
+69053 226  [AWT-EventQueue-0] DEBUG org.apache.axis.client.AxisClient  - Exit: AxisClient::invoke
+69053 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+69054 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+69054 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_SOAPENVELOPE
+69055 2773 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Exit: Call::invoke()
+69055 661  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - Enter: SOAPPart::getAsSOAPEnvelope()
+69055 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(currForm)
+69055 662  [AWT-EventQueue-0] DEBUG org.apache.axis.SOAPPart  - current form is FORM_SOAPENVELOPE
+69055 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+69056 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.EnvelopeHandler@5290d764
+69056 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(, loginUserResponse)
+69056 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+69056 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.message.RPCHandler@232d1095
+69056 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+69056 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+69056 886  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startPrefixMapping(soapenc, http://schemas.xmlsoap.org/soap/encoding/)
+69057 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+69057 85   [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPush (32)
+69057 925  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startPrefixMapping()
+69057 1003 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::startElement(, loginUserReturn)
+69057 125  [AWT-EventQueue-0] DEBUG org.apache.axis.message.RPCHandler  - Enter: RPCHandler.onStartChild()
+69057 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(typeFromAttr00)
+69057 169  [AWT-EventQueue-0] DEBUG org.apache.axis.message.RPCHandler  - Type from attributes is:  {http://schemas.xmlsoap.org/soap/encoding/}string
+69058 303  [AWT-EventQueue-0] DEBUG org.apache.axis.message.RPCHandler  - Exit: RPCHandler.onStartChild()
+69058 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(pushHandler00)
+69058 796  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Pushing handler org.apache.axis.encoding.ser.SimpleDeserializer@639bb83d
+69058 1067 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::startElement()
+69060 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(, loginUserReturn)
+69060 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+69065 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.encoding.ser.SimpleDeserializer@639bb83d
+69066 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setValueInTarget00)
+69066 251  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializerImpl  - Set value [{"service":{"name":"service1"},"users":[{"username":"user2","type":"MANUFACTURER","services":[{"name":"service1"},{"name":"service2"},{"name":"service3"},{"name":"service5"}]},{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]},{"service":{"name":"service2"},"users":[{"username":"user2","type":"MANUFACTURER","services":[{"name":"service1"},{"name":"service2"},{"name":"service3"},{"name":"service5"}]},{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]},{"service":{"name":"service4"},"users":[{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]}] in target org.apache.axis.message.RPCParamTarget@45cdfe2
+69066 119  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (32)
+69066 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to org.apache.axis.message.RPCElement:loginUserResponse
+69066 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+69067 933  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endPrefixMapping(soapenc)
+69067 945  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endPrefixMapping()
+69067 1078 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Enter: DeserializationContext::endElement(, loginUserResponse)
+69068 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(popHandler00)
+69068 829  [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popping handler org.apache.axis.message.RPCHandler@232d1095
+69068 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(setProp00)
+69068 317  [AWT-EventQueue-0] DEBUG org.apache.axis.message.RPCHandler  - Setting MessageContext property in RPCHandler.endElement().
+69068 72   [AWT-EventQueue-0] DEBUG org.apache.axis.i18n.ProjectResourceBundle  - org.apache.axis.i18n.resource::handleGetObject(empty00)
+69068 113  [AWT-EventQueue-0] DEBUG org.apache.axis.utils.NSStack  - NSPop (empty)
+69068 1106 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Popped element stack to org.apache.axis.message.SOAPBody:Body
+69069 1107 [AWT-EventQueue-0] DEBUG org.apache.axis.encoding.DeserializationContext  - Exit: DeserializationContext::endElement()
+69069 2594 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Exit: Call::invoke(RPCElement)
+69069 2369 [AWT-EventQueue-0] DEBUG org.apache.axis.client.Call  - Exit: Call::invoke(ns, meth, args)
+69069 1816 [AWT-EventQueue-0] DEBUG org.apache.axis.TIME  - axis.Call.invoke: 380 loginUser
+69069 72   [AWT-EventQueue-0] INFO  webserviceclient.WebServiceClientImpl  - [{"service":{"name":"service1"},"users":[{"username":"user2","type":"MANUFACTURER","services":[{"name":"service1"},{"name":"service2"},{"name":"service3"},{"name":"service5"}]},{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]},{"service":{"name":"service2"},"users":[{"username":"user2","type":"MANUFACTURER","services":[{"name":"service1"},{"name":"service2"},{"name":"service3"},{"name":"service5"}]},{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]},{"service":{"name":"service4"},"users":[{"username":"user1","type":"BUYER","services":[{"name":"service1","priceLimit":{"value":200},"timer":{"value":600}},{"name":"service2","priceLimit":{"value":150},"timer":{"value":900}},{"name":"service3","priceLimit":{"value":250},"timer":{"value":1200}},{"name":"service4","priceLimit":{"value":200},"timer":{"value":900}}]}]}]

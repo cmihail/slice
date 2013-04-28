@@ -12,6 +12,14 @@ public class Constants {
 	public static final String SERVER_IP = "127.0.0.1";
 	public static final int SERVER_PORT = 30000;
 
+	public static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
+	public static final String DATABASE_IP = "localhost"; // TODO 127.0.0.1
+	public static final String DATABASE_DB = "test";
+	public static final String DATABASE_USER = "pw";
+	public static final String DATABASE_PASS = "pw";
+	public static final String DATABASE_URL =
+			"jdbc:mysql://"+ DATABASE_IP + ":3306/" + DATABASE_DB;
+
 	public static final String CONFIG_FILE_EXTENSION = ".cfg";
 
 	public static final String LOGGER_FILE_EXTENSION = ".log";

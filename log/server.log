@@ -1,0 +1,20 @@
+0    50   [main] INFO  network.server.Server  - Connection from: /127.0.0.1:56355
+183  66   [main] INFO  network.server.Server  - Added connection from: user1
+6491 50   [main] INFO  network.server.Server  - Connection from: /127.0.0.1:56360
+6527 66   [main] INFO  network.server.Server  - Added connection from: user2
+14329 50   [main] INFO  network.server.Server  - Connection from: /127.0.0.1:56363
+14418 66   [main] INFO  network.server.Server  - Added connection from: user3
+17193 76   [main] INFO  network.server.Server  - Packet for: user2
+17196 76   [main] INFO  network.server.Server  - Packet for: user3
+23667 76   [main] INFO  network.server.Server  - Packet for: user1
+23718 76   [main] INFO  network.server.Server  - Packet for: user2
+23728 76   [main] INFO  network.server.Server  - Packet for: user3
+35281 76   [main] INFO  network.server.Server  - Packet for: user1
+35294 76   [main] INFO  network.server.Server  - Packet for: user2
+35309 76   [main] INFO  network.server.Server  - Packet for: user3
+46789 76   [main] INFO  network.server.Server  - Packet for: user3
+49148 76   [main] INFO  network.server.Server  - Packet for: user2
+49154 76   [main] INFO  network.server.Server  - Packet for: user3
+54460 95   [main] INFO  network.server.Server  - Connection ended for: user2
+57461 95   [main] INFO  network.server.Server  - Connection ended for: user1
+60780 95   [main] INFO  network.server.Server  - Connection ended for: user3

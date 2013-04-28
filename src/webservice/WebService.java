@@ -21,6 +21,7 @@ import model.user.User;
 import model.user.User.Type;
 import model.webservice.WebServiceJson;
 import model.webservice.WebServiceJsonImpl;
+import webservice.database.Database;
 import constants.Constants;
 
 /**
@@ -31,6 +32,26 @@ import constants.Constants;
 public class WebService {
 
 	private final WebServiceJson json = new WebServiceJsonImpl();
+
+	public Database db;
+
+	public WebService() throws Exception {
+		Class.forName(Constants.DATABASE_DRIVER).newInstance();
+		db = new Database(Constants.DATABASE_URL, Constants.DATABASE_USER,
+				Constants.DATABASE_PASS);
+	}
+
+	// TODO delete (only for testing)
+	public String updateDB(String param) throws Exception {
+		String query = "UPDATE test SET text = '" + param + "'";
+		try {
+			db.setCommand(query);
+			db.execute();
+		} finally {
+			db.close();
+		}
+		return query;
+	}
 
 	public String loginUser(String userJson, String password) throws Exception {
 		// TODO correct action
