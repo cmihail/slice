@@ -60,6 +60,7 @@ slice
   - install axis
   - configure exports (service classes must be registered)
   - edit AXIS_CLASSES_PATH (see deployWebService.sh) to point to WEB-INF/classes folder
+  - copy gson library (gson-2.2.3.jar) to WEB-INF/lib
   - start tomcat
   - start clients
   - communication protocol is implemented using GSON
