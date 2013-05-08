@@ -62,7 +62,6 @@ slice
   - edit AXIS_CLASSES_PATH (see deployWebService.sh) to point to WEB-INF/classes folder
   - copy gson library (gson-2.2.3.jar) to WEB-INF/lib
   - copy mysql connector library (mysql-connector-java-5.1.24-bin.jar) to WEB-INF/lib
-  - TODO mention database config
   - start tomcat
   - run deployWebService.sh
   - start clients
