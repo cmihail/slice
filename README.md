@@ -63,6 +63,7 @@ slice
   - copy gson library (gson-2.2.3.jar) to WEB-INF/lib
   - copy mysql connector library (mysql-connector-java-5.1.24-bin.jar) to WEB-INF/lib
   - start tomcat
+  - run deployWebService.sh
   - start clients
   - communication protocol is implemented using GSON (https://sites.google.com/site/gson/Home)
 
