@@ -35,6 +35,11 @@ public interface MediatorNetwork {
 	void registerUserForService(User userToRegister, Service service);
 
 	/**
+	 * @param userToRegister the user to be registered
+	 */
+	void registerUserForAllServices(User userToRegister);
+
+	/**
 	 * Unregisters a user for a given service. Used when userToUnregister logouts.
 	 * @param userToUnregisterthe user to be unregistered
 	 * @param service the service where the action occurs
