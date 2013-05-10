@@ -68,10 +68,9 @@ Otherwise, use 6. to configure the Webapp and DB.
   - copy gson library (gson-2.2.3.jar) to WEB-INF/lib
   - copy mysql connector library (mysql-connector-java-5.1.24-bin.jar) to WEB-INF/lib
   - create a mysql user with all rights with username 'student' and password 'student'
-  - import database
+  - import database (run deploy_db.sql to create the DB).
   - start tomcat
   - run deployWebService.sh
-  - run deploy_db.sql to create the DB. It has to be named idp.
   - start clients
   - communication protocol is implemented using GSON (https://sites.google.com/site/gson/Home)
 
