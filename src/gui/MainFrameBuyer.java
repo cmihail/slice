@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import mediator.MediatorGUI;
@@ -155,7 +156,7 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		/*if mouse is clicked on a service, shor the offer table*/
+		/*if mouse is clicked on a service, show the offer table*/
 		if(SwingUtilities.isLeftMouseButton(e) && e.getSource() == servicesTable)
 		{
 			int index = servicesTable.getSelectedRow();
@@ -177,13 +178,14 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			{
 				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
 				int i =0;
-				TableModel model = offersTable.getModel();
+				DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
 				while (usersIt.hasNext()){
 					User user = usersIt.next();
 
 					if(user.getType().equals(User.Type.MANUFACTURER)){
-
-
+						/*add rows if needed*/
+						if(i>=model.getRowCount()) model.setRowCount(i+1);
+						
 						Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
 						if(o!=null)
 						{

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.table.DefaultTableModel;
 
 import mediator.MediatorGUI;
 import model.service.Offer;
@@ -37,6 +38,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	protected final MediatorGUI mediator;
 	protected UserServicesInfo userServicesInfo;
 	protected User mainUser;
+	int progress =0;
 	/**
 	 * Creates new form Main
 	 */
@@ -298,7 +300,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JButton logoutButton;
-	private javax.swing.JProgressBar myProgressBar;
+	protected javax.swing.JProgressBar myProgressBar;
 	private javax.swing.JLabel progressLabel;
 	private javax.swing.JLabel servicesLabel;
 	protected javax.swing.JTable servicesTable;
@@ -319,17 +321,22 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 		int i=0;
 		for (Service s : mainUser.getServices()) {
+			if(servicesTable.getModel().getRowCount()<=i) ((DefaultTableModel)servicesTable.getModel()).setRowCount(i+1);
 			servicesTable.getModel().setValueAt(s.getName(),i, 0);
 			ServiceState currentServState = userServicesInfo.getServiceInfo(s).getServiceState();
 			servicesTable.getModel().setValueAt(currentServState,i,1);
 			if(currentServState.equals(ServiceState.ACTIVE)){
 				OfferState curentOfferState=userServicesInfo.getServiceInfo(s).getOfferState();
+
+
+
+
 				if(curentOfferState.equals(OfferState.NONE))
-					{
+				{
 					servicesTable.getModel().setValueAt("No Offer",i,2);
 					servicesTable.getModel().setValueAt("",i,3);
-					}
-				else
+				}
+				else 
 				{
 					servicesTable.getModel().setValueAt("Offer Made",i,2);
 					servicesTable.getModel().setValueAt(curentOfferState,i,3);
@@ -374,6 +381,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	@Override
 	public void setTransferPercentage(User user, Service service, int percentage) {
 		// TODO update percentage
+		myProgressBar.setValue(percentage);
 		logger.info("Received percentage update: " + percentage + "%"); // TODO might del this
 	}
 
@@ -405,16 +413,22 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 			OfferState offerState) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(offerState);
 		userServicesInfo.getServiceInfo(service).setOfferState(offerState);
+		if(offerState.equals(OfferState.OFFER_ACCEPTED)) mediator.transfer(service, buyer);
 		updateServicesTable();
 	}
 
 	@Override
 	public void compareServiceOffer(Buyer buyer, Service service, Offer offer) {
 		UserInfo userInfo = userServicesInfo.getServiceInfo(service).getUserInfo(buyer);
-		if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) >= 0) {
-			userInfo.setOfferState(OfferState.OFFER_EXCEEDED);
-			updateServicesTable();
+		if(userInfo.getOffer()!=null && userInfo.getOffer().getPrice()!=null){
+			System.out.println("comparing offers mine "+ userInfo.getOffer().getPrice() +" theirs"+offer.getPrice());
+			if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) >= 0) {
+				userInfo.setOfferState(OfferState.OFFER_EXCEEDED);
+				System.out.println("offer exceeded");
+				updateServicesTable();
+			}
 		}
+
 	}
 
 	@Override

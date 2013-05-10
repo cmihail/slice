@@ -8,6 +8,7 @@ import java.util.Iterator;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import mediator.MediatorGUI;
@@ -67,12 +68,14 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 			{
 				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
 				int i =0;
-				TableModel model = offersTable.getModel();
+				DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
 				while (usersIt.hasNext()){
 					User user = usersIt.next();
 
 					if(user.getType().equals(User.Type.BUYER)){
-
+						/*add rows if needed*/
+						if(i>=model.getRowCount()) model.setRowCount(i+1);
+						
 						if(userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOfferState().equals(OfferState.NONE)) 
 							continue;
 						Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
