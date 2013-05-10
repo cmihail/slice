@@ -239,7 +239,7 @@ public class NetworkImpl implements Network {
 
 		public SendFileWorker(User sender, User receiver, Service service)
 				throws Exception {
-			if (!(sender instanceof Buyer))
+			if (!(sender instanceof Manufacturer))
 				throw new Exception("Invalid user for sending");
 			this.sender = sender;
 			this.receiver = receiver;

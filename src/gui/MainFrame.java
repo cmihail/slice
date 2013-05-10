@@ -424,6 +424,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 			System.out.println("comparing offers mine "+ userInfo.getOffer().getPrice() +" theirs"+offer.getPrice());
 			if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) >= 0) {
 				userInfo.setOfferState(OfferState.OFFER_EXCEEDED);
+				userServicesInfo.getServiceInfo(service).setOfferState(OfferState.OFFER_EXCEEDED);
 				System.out.println("offer exceeded");
 				updateServicesTable();
 			}
