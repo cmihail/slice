@@ -68,7 +68,7 @@ public class WebServiceClientImpl implements WebServiceClient {
 	public void logout(User user) {
 		try {
 			Object[] params = new Object[] { json.userAsJson(user) };
-			Object obj = invoke("loginUser", params);
+			Object obj = invoke("logout", params);
 			logger.info(obj);
 		} catch (Exception e) {
 			e.printStackTrace();
