@@ -65,17 +65,6 @@ public class WebService {
 				}
 	}
 
-	// TODO delete (only for testing)
-	public String updateDB(String param) throws Exception {
-		String query = "UPDATE test SET text = '" + param + "'";
-		try {
-			db.setCommand(query);
-			db.execute();
-		} finally {
-			//db.close();
-		}
-		return query;
-	}
 	
 	public String loginUser(String userJson, String password)  {
 
@@ -111,6 +100,21 @@ public class WebService {
 				}
 				
 
+			}
+		}
+		else{
+			String query = "UPDATE User SET Status=1 WHERE Name= \""+user.getUsername()+"\";";
+			try {
+			db.setCommand(query);
+			db.execute();
+			int typeID = getTypeIDByName(user.getType().toString());
+			query = "UPDATE User SET Type= "+typeID+" WHERE Name= \""+user.getUsername()+"\";";
+			db.setCommand(query);
+			db.execute();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				logger.error("WebService->loginUser: "+e.getMessage()+" for userID "+ userID);
+				System.err.println("WebService->loginUser: "+e.getMessage()+" for userID "+ userID);
 			}
 		}
 
@@ -257,7 +261,7 @@ public class WebService {
 		Set<User> users = new HashSet<User>();
 		HashMap<Integer, String> usernames_ID = new HashMap<Integer, String>();
 		int serviceID=0;
-		//TODO Finish implementation
+		
 		String query = "SELECT * FROM User";
 		try {
 			db.setCommand(query);
@@ -268,7 +272,10 @@ public class WebService {
 				logger.info("WebService->getMapServiceUsers: for user "+ user.getUsername()+" adding users to list "+(i++));
 				String auxUname = resUsers.getString(2);
 				if(auxUname.equals(user.getUsername())) continue;
-				//if(resUsers.getInt(4)==0) continue;
+				/*if(resUsers.getInt(4)==0){
+					logger.info("WebService->getMapServiceUsers: for user "+ user.getUsername()+" "+auxUname+" offline");
+					continue;
+				} this makes comm fail*/
 				int auxUserID = resUsers.getInt(1);
 				usernames_ID.put(auxUserID, auxUname);
 			}
