@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+
 import model.service.Price;
 import model.service.Service;
 import model.service.ServiceImpl;
@@ -34,13 +38,31 @@ import constants.Constants;
 public class WebService {
 
 	private final WebServiceJson json = new WebServiceJsonImpl();
-
+	
+	//TODO delete logger
+	private final static Logger logger = Logger.getLogger(WebService.class);
 	public Database db;
+	//public Database db_getMap;
+	//public Database db_getService;
 
-	public WebService() throws Exception {
+	private void initializeDB() throws Exception{
 		Class.forName(Constants.DATABASE_DRIVER).newInstance();
 		db = new Database(Constants.DATABASE_URL, Constants.DATABASE_USER,
 				Constants.DATABASE_PASS);
+	}
+	public WebService() throws Exception {
+		initializeDB();
+		
+				try {
+					PatternLayout layout = new PatternLayout(Constants.LOGGER_PATTERN);
+					String file =  "webservice" +
+							Constants.LOGGER_FILE_EXTENSION;
+					FileAppender appender = new FileAppender(layout, file, true);
+					Logger.getRootLogger().addAppender(appender);
+				} catch (IOException e) {
+					e.printStackTrace();
+					logger.error(e.toString());
+				}
 	}
 
 	// TODO delete (only for testing)
@@ -50,14 +72,16 @@ public class WebService {
 			db.setCommand(query);
 			db.execute();
 		} finally {
-			db.close();
+			//db.close();
 		}
 		return query;
 	}
+	
+	public String loginUser(String userJson, String password)  {
 
-	public String loginUser(String userJson, String password) throws Exception {
 		
 		User user = json.jsonAsUser(userJson);
+		logger.info("LOGIN user " +user.getUsername());
 		int userID = getUserIDByName(user.getUsername());
 		if(userID==-1){
 			/*user not in DB, add him*/
@@ -76,26 +100,37 @@ public class WebService {
 					serviceID = getServiceByName(temp.getName());
 				}
 				String query ="INSERT INTO UserToService (UserID, ServiceID) VALUES ( "+userID+" , "+serviceID+") ;";
-				
+
+				try {
 					db.setCommand(query);
 					db.execute();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					logger.error("WebService->loginUser: "+e.getMessage()+" for userID "+ userID);
+					System.err.println("WebService->loginUser: "+e.getMessage()+" for userID "+ userID);
+				}
 				
+
 			}
 		}
-		
-		Map<Service, Set<User>> mapServiceUsers = getMapServiceUsers(user.getUsername(),userID);
+
+		Map<Service, Set<User>> mapServiceUsers = getMapServiceUsers(user,userID);
 		return json.mapServiceUsersAsJson(mapServiceUsers);
 	}
-	
-	
-	
+
+
+
 	public void logout(String userJson, String password) throws SQLException {
 		User user = json.jsonAsUser(userJson);
+		logger.info("LOGOUT user " +user.getUsername());
 		String query = "UPDATE User SET Status=0 WHERE Name= \""+user.getUsername()+"\";";
-			db.setCommand(query);
-			db.execute();
-		
+		db.setCommand(query);
+		db.execute();
+
 	}
+
+
+	
 
 	/**
 	 * Selects one value of the field field_to_select from tablename where the field "field" has the value "value"
@@ -112,20 +147,23 @@ public class WebService {
 		try {
 			db.setCommand(query);
 			ResultSet rs =db.executeSelect();
-			
+
 			rs.next();
 			ret = rs.getString(1);
 			System.out.println(ret);
 		} catch (SQLException e) {
 			if(!e.getMessage().equals("Illegal operation on empty result set."))
-				e.printStackTrace();
+				{
+				logger.error("WebService->selectOne: "+e.getMessage()+" for table "+ tablename +"field_to_select " +field_to_select);
+				System.err.println("WebService->selectOne: "+e.getMessage()+" for table "+ tablename +"field_to_select " +field_to_select) ;
+				}
 			else return null;
 		}
-		
+
 		return ret;
-		
+
 	}
-	
+
 	private String selectOneTwoConditions(String tablename,String field_to_select, String field1, String value1,String field2, String value2)
 	{
 		String ret = null;
@@ -133,99 +171,155 @@ public class WebService {
 		try {
 			db.setCommand(query);
 			ResultSet rs =db.executeSelect();
-			
+
 			rs.next();
 			ret = rs.getString(1);
 			System.out.println(ret);
 		} catch (SQLException e) {
 			if(!e.getMessage().equals("Illegal operation on empty result set."))
+				{
+				logger.error(e.getLocalizedMessage());
 				e.printStackTrace();
+				}
 			else return null;
 		}
-		
+
 		return ret;
-		
+
 	}
-	
+
 	private int getServiceByName(String name){
 		int result =-1;
 		String res = selectOne("Service", "ID", "ServiceName", name);
 		if (res!=null) result = Integer.parseInt(res);
 		return result;
 	}
-	
+
 	private String getServiceName(int ID){
-		
+
 		return selectOne("Service", "ServiceName", "ID", ID+"");
-		
+
 	}
 	private String getUserName(int ID){
-		
+
 		return selectOne("User", "Name", "ID", ID+"");
-		
+
 	}
-	
+
 	private int getUserIDByName(String name){
 		int result =-1;
 		String res = selectOne("User", "ID", "Name", name);
 		if (res!=null) result = Integer.parseInt(res);
 		return result;
 	}
-	
+
 	private int getTypeIDByName(String name){
 		int result =-1;
 		String res = selectOne("UserType", "ID", "TypeName", name);
 		if (res!=null) result = Integer.parseInt(res);
 		return result;
 	}
-	
+
 	private void addUser(String name, int type, String password){
 		String query = "INSERT INTO User (Name, Type, Status, Password) VALUES ('"+name+"','"+type+"',1,'"+password+"');";
 		try {
 			db.setCommand(query);
 			db.execute();
 		} catch (SQLException e) {
+			logger.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	private User.Type getUserType(int ID){
 		User.Type result = Type.BUYER;
 		String res = selectOne("UserType","TypeName","ID",selectOne("User", "Type", "ID", ID+""));
 		if (res!=null &&res.equals(Type.MANUFACTURER.toString()))
 			result = Type.MANUFACTURER;
-			
+
 		return result;
 	}
-	
+
 	private void addService(String name){
 		String query = "INSERT INTO Service ( ServiceName) VALUES (\""+name+"\");";
 		try {
 			db.setCommand(query);
 			db.execute();
 		} catch (SQLException e) {
+			logger.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
-	
-	
-	private Map<Service, Set<User>> getMapServiceUsers(String userName, int userID) throws Exception  {
+
+
+	private Map<Service, Set<User>> getMapServiceUsers(User user, int userID)   {
 		Map<Service, Set<User>> mapServiceUsers = new HashMap<Service, Set<User>>();
 		Set<User> users = new HashSet<User>();
+		HashMap<Integer, String> usernames_ID = new HashMap<Integer, String>();
 		int serviceID=0;
 		//TODO Finish implementation
 		String query = "SELECT * FROM User";
-		db.setCommand(query);
-		ResultSet resUsers = db.executeSelect();
-		while(resUsers.next())
-		{
-			if(resUsers.getString(2).equals(userName)) continue;
-			if(resUsers.getInt(4)==0) continue;
-			int auxUserID = resUsers.getInt(1);
-			User.Type type = getUserType(auxUserID);
-			List<Service> userServices = readServices(auxUserID, type);
+		try {
+			db.setCommand(query);
+			int i=0;
+			ResultSet resUsers = db.executeSelect();
+			while(resUsers.next())
+			{
+				logger.info("WebService->getMapServiceUsers: for user "+ user.getUsername()+" adding users to list "+(i++));
+				String auxUname = resUsers.getString(2);
+				if(auxUname.equals(user.getUsername())) continue;
+				//if(resUsers.getInt(4)==0) continue;
+				int auxUserID = resUsers.getInt(1);
+				usernames_ID.put(auxUserID, auxUname);
+			}
+			Iterator<Integer> it = usernames_ID.keySet().iterator();
+			while (it.hasNext())
+			{
+				int auxUserID = it.next();
+				String auxUname = usernames_ID.get(auxUserID);
+				User.Type type = getUserType(auxUserID);
+				List<Service> userServices = readServices(auxUserID, type);
+				if (userServices == null)
+					throw new Exception("Invalid services.");
+
+				switch (type) {
+				case BUYER:
+					users.add(new Buyer(auxUname, userServices));
+					break;
+				case MANUFACTURER:
+					users.add(new Manufacturer(auxUname, userServices));
+					break;
+				}
+				logger.info("WebService->getMapServiceUsers: for user "+ user.getUsername()+" adding "+auxUname+" type "+type.toString());
+			}
+		} catch (Exception e) {
+			logger.error("WebService->getMapServiceUsers: "+e.getLocalizedMessage()+" for userID "+ userID);
+			System.err.println("WebService->getMapServiceUsers: "+e.getMessage()+" for userID "+ userID);
 		}
-		
+
+
+		Iterator<Service> it = user.getServices().iterator();
+		while (it.hasNext()) {
+			Service service = it.next();
+			Set<User> serviceUsers = new HashSet<User>();
+
+			Iterator<User> usersIt = users.iterator();
+			while (usersIt.hasNext()) {
+				User u = usersIt.next();
+
+				Iterator<Service> serviceIt = u.getServices().iterator();
+				while (serviceIt.hasNext()) {
+					Service s = serviceIt.next();
+
+					if (service.getName().equals(s.getName())) {
+						serviceUsers.add(u);
+					}
+				}
+			}
+
+			mapServiceUsers.put(service, serviceUsers);
+		}
+
 		/*String query = "SELECT DISTINCT ServiceID FROM UserToService WHERE UserID="+userID+" ;";
 		db.setCommand(query);
 		ResultSet resServices = db.executeSelect();
@@ -243,23 +337,57 @@ public class WebService {
 				User.Type type = getUserType(auxUserID);
 			}
 		}*/
-		
-		
-		
+
+
+
 		return mapServiceUsers;
 	}
-	
-	private List<Service> readServices(int UserID, User.Type userType){
+
+	private List<Service> readServices(int userID, User.Type userType) {
+
 		List<Service> userServices = new ArrayList<Service>();
-		//TODO finish implementation. All services?
-		return userServices;
+		String query = "SELECT DISTINCT ServiceID FROM UserToService WHERE UserID="+userID+" ;";
+		ArrayList<Integer> serviceIDs = new ArrayList<Integer>();
+		try {
+			db.setCommand(query);
+			int i=0;
+			ResultSet resServices = db.executeSelect();
+			
+			while(resServices.next())
+			{
+				logger.info("WebService->readServices: user "+userID+" adding service "+ (i++));
+				int serviceID = resServices.getInt(1);
+				serviceIDs.add(serviceID);
+			}
+			Iterator<Integer> it =serviceIDs.iterator();
+			while (it.hasNext()){
+				String sname = getServiceName(it.next());
+				if (userType == Type.BUYER) {
+					/*price and timer are not used here*/
+					userServices.add(new ServiceImpl(sname, new Price(0), new Timer(0)));
+				}
+				else {
+					userServices.add(new ServiceImpl(sname));
+				}
+				logger.info("WebService->readServices: user "+userID+" adding service "+ sname);
+			}
+		} catch (SQLException e) {
+			logger.error("WebService->readServices: "+e.getLocalizedMessage()+" for userID "+ userID);
+			System.err.println("WebService->readServices: "+e.getMessage()+" for userID "+ userID);
+		}
 		
+		
+		if (userServices.isEmpty())
+			return null;
+
+		return userServices;
+
 	}
 	/*
 	 * TODO delete (only for testing from here)
 	 */
-	
-	
+
+
 	private Map<Service, Set<User>> readConfigFiles(User user, String password)
 			throws Exception {
 		Map<Service, Set<User>> mapServiceUsers = new HashMap<Service, Set<User>>();
@@ -336,7 +464,7 @@ public class WebService {
 		return userType;
 	}
 
-	
+
 	private List<Service> readServices(BufferedReader in, User.Type userType)
 			throws IOException {
 		String line;
@@ -349,7 +477,7 @@ public class WebService {
 				}
 				userServices.add(new ServiceImpl(tokens[0], new Price(Integer
 						.parseInt(tokens[1])), new Timer(Integer
-						.parseInt(tokens[2]))));
+								.parseInt(tokens[2]))));
 			} else {
 				userServices.add(new ServiceImpl(line));
 			}
