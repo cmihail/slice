@@ -270,7 +270,6 @@ public class NetworkImpl implements Network {
 					currentSentSize += Communication.send(socketChannel, transferService);
 				}
 
-				// TODO delete (only for testing cancel)
 				if (Constants.TEST_CANCEL) {
 					try {
 						Thread.sleep(1000);

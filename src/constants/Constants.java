@@ -33,5 +33,5 @@ public class Constants {
 	public static final int SERVICE_BLOCK_SIZE = 1000;
 	public static final int SERVICE_MAXIMUM_SIZE = 1000 * SERVICE_BLOCK_SIZE;
 
-	public static boolean TEST_CANCEL = false; // TODO to delete
+	public static boolean TEST_CANCEL = false;
 }

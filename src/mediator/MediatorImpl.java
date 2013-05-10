@@ -62,7 +62,7 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 		login.setVisible(true);
 	}
 
-	// TODO delete (only for testing)
+	// TODO only for testing
 	private void testTransfer() {
 		User toUser = null;
 		Service sentService = null;
@@ -153,8 +153,8 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 					System.out.println("Transfer canceled");
 				}
 
-				// Unregister disconnected user. // TODO see if needed
-//				unregisterUserForService(disconnectedUser, service);
+				// Unregister disconnected user.
+///				unregisterUserForService(disconnectedUser, service);
 			}
 		}
 	}
@@ -162,6 +162,22 @@ public class MediatorImpl implements MediatorGUI, MediatorNetwork,
 	@Override
 	public void registerUserForService(User userToRegister, Service service) {
 		gui.addUserForService(userToRegister, service);
+	}
+
+	@Override
+	public void registerUserForAllServices(User userToRegister) {
+		if (mainUser.getType() == userToRegister.getType()) {
+			logger.warn("Invalid user to register for all services < " +
+					userToRegister.getUsername() + ">");
+			return;
+		}
+
+		List<Service> userServices = mainUser.getServices();
+		for (Service service : userToRegister.getServices()) {
+			if (userServices.contains(service)) {
+				registerUserForService(userToRegister, service);
+			}
+		}
 	}
 
 	@Override

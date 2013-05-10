@@ -8,9 +8,11 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import model.service.Service;
 import model.user.User;
 import network.common.Communication;
 import network.model.NetworkObject;
@@ -62,9 +64,26 @@ public class Server {
 
 			if (networkObj instanceof NetworkUser) { // New user.
 				NetworkUser networkUser = (NetworkUser) networkObj;
-				userSocketsMap.put(networkUser.getDestinationUser(), socketChannel);
+				User user = networkUser.getDestinationUser();
+				userSocketsMap.put(user, socketChannel);
 				logger.info("Added connection from: " +
 						networkUser.getDestinationUser().getUsername());
+
+				List<Service> userServices = user.getServices();
+				for (Entry<User, SocketChannel> entry : userSocketsMap.entrySet()) {
+					User u = entry.getKey();
+					if (user.getType() == u.getType())
+						continue;
+
+					List<Service> uServices = u.getServices();
+					for (int i = 0, limit = uServices.size(); i < limit; i++) {
+						if (userServices.contains(uServices.get(i))) {
+							Communication.send(entry.getValue(), networkObj);
+							logger.info("Added user <" + user.getUsername() +
+									"> to user <" + u.getUsername() + ">");
+						}
+					}
+				}
 			} else { // Packet that needs to be redirect.
 				SocketChannel userChannel =
 						userSocketsMap.get(networkObj.getDestinationUser());

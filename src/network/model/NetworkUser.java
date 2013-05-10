@@ -25,6 +25,6 @@ public class NetworkUser implements NetworkObject {
 
 	@Override
 	public void handler(MediatorNetwork mediator) {
-		// Nothing to do.
+		mediator.registerUserForAllServices(user);
 	}
 }
