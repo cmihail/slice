@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import mediator.MediatorGUI;
@@ -160,6 +161,8 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		usernameLabel = new javax.swing.JLabel();
 		logoutButton = new javax.swing.JButton();
 		jScrollPane1 = new javax.swing.JScrollPane();
+		this.addWindowListener(new WindowEventHandler());
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		servicesTable = new javax.swing.JTable() {
 
 			/**
@@ -286,8 +289,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	}// </editor-fold>
 
 	private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		JOptionPane.showMessageDialog(this, "Logging out and exiting");
-		mediator.logout();
+		
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 
@@ -422,7 +424,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		UserInfo userInfo = userServicesInfo.getServiceInfo(service).getUserInfo(buyer);
 		if(userInfo.getOffer()!=null && userInfo.getOffer().getPrice()!=null){
 			System.out.println("comparing offers mine "+ userInfo.getOffer().getPrice() +" theirs"+offer.getPrice());
-			if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) >= 0) {
+			if (offer.getPrice().compareTo(userInfo.getOffer().getPrice()) < 0) {
 				userInfo.setOfferState(OfferState.OFFER_EXCEEDED);
 				userServicesInfo.getServiceInfo(service).setOfferState(OfferState.OFFER_EXCEEDED);
 				System.out.println("offer exceeded");
@@ -458,5 +460,12 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		String uname = (String)offersTable.getModel().getValueAt(index, 0);
 		User aux = userServicesInfo.getServiceInfo(service).getUserByName(uname);
 		return aux;
+	}
+
+
+	public void logout() {
+		//JOptionPane.showMessageDialog(this, "Logging out and exiting");
+		mediator.logout();
+
 	}
 }
