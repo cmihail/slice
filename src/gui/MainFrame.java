@@ -39,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 	protected final MediatorGUI mediator;
 	protected UserServicesInfo userServicesInfo;
 	protected User mainUser;
+	protected Service lastSelectedService ;
 	int progress =0;
 	/**
 	 * Creates new form Main
@@ -317,7 +318,9 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 	}
 
-
+	protected void updateOffersTable(Service aux){
+		
+	}
 	protected void updateServicesTable()
 	{
 
@@ -393,6 +396,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		userServicesInfo.getServiceInfo(service).getUserInfo(manufacturer).setOffer(offer);
 		userServicesInfo.getServiceInfo(service).setOfferState(OfferState.OFFER_MADE);
 		updateServicesTable();
+		updateOffersTable(lastSelectedService);
 	}
 
 	@Override
@@ -402,12 +406,14 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.OFFER_REQUESTED);
 		userServicesInfo.getServiceInfo(service).setServiceState(ServiceState.ACTIVE);
 		updateServicesTable();
+		updateOffersTable(lastSelectedService);
 	}
 
 	@Override
 	public void deactivateBuyerForService(Buyer buyer, Service service) {
 		userServicesInfo.getServiceInfo(service).getUserInfo(buyer).setOfferState(OfferState.NONE);
 		updateServicesTable();
+		updateOffersTable(lastSelectedService);
 	}
 
 	@Override
@@ -417,6 +423,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 		userServicesInfo.getServiceInfo(service).setOfferState(offerState);
 		if(offerState.equals(OfferState.OFFER_ACCEPTED)) mediator.transfer(service, buyer);
 		updateServicesTable();
+		updateOffersTable(lastSelectedService);
 	}
 
 	@Override
@@ -464,7 +471,7 @@ public class MainFrame extends javax.swing.JFrame implements GUI , ActionListene
 
 
 	public void logout() {
-		//JOptionPane.showMessageDialog(this, "Logging out and exiting");
+		
 		mediator.logout();
 
 	}

@@ -60,40 +60,11 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 
 			if (aux ==null)
 			{
-				
 				return;
 			}
-			offersTableInit();
-			if(userServicesInfo.getServiceInfo(aux).getServiceState().equals(ServiceState.ACTIVE))
-			{
-				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
-				int i =0;
-				DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
-				while (usersIt.hasNext()){
-					User user = usersIt.next();
-
-					if(user.getType().equals(User.Type.BUYER)){
-						/*add rows if needed*/
-						if(i>=model.getRowCount()) model.setRowCount(i+1);
-						
-						if(userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOfferState().equals(OfferState.NONE)) 
-							continue;
-						Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
-						model.setValueAt(user.getUsername(), i, 0);
-						if(o!=null)
-						{
-							Price p =o.getPrice();
-							
-							if(p!=null) {
-								model.setValueAt(p, i, 1);
-								
-							}
-
-						}
-						i++;
-					}
-				}
-			}
+			lastSelectedService = aux;
+			updateOffersTable(aux);
+			
 		}
 			
 	}
@@ -103,13 +74,19 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 		Service selectedService = getSelectedService();
 		if (selectedService == null)
 			{
-			drawErrorPage("Internal Error. Can't find requested Service");
-			return;
+			if(lastSelectedService == null)
+				{
+				drawErrorPage("Please select Service first");
+				return;
+				}
+			selectedService=lastSelectedService;
 			}
+		
+		lastSelectedService =selectedService;
 		User aUser = getSelectedOfferUser(selectedService);
 		if(aUser == null)
 		{
-			drawErrorPage("Internal Error. Can't find requested user");
+			drawErrorPage("Please select user");
 			return;
 			}
 		if(e.getActionCommand().equals(makeOffer.getText()))
@@ -128,6 +105,7 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 				mediator.makeOffer(selectedService, (Buyer) aUser,o );
 				userServicesInfo.getServiceInfo(selectedService).getUserInfo(aUser).setOffer(o);
 				userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_MADE);
+				updateOffersTable(lastSelectedService);
 			}
 			catch (NumberFormatException ex)
 			{
@@ -144,6 +122,42 @@ public class MainFrameManufacturer extends MainFrame  implements MouseListener{
 		}
 		updateServicesTable();
 
+	}
+	
+	@Override
+	protected void updateOffersTable(Service aux){
+		if(aux == null)	return;
+		offersTableInit();
+		if(userServicesInfo.getServiceInfo(aux).getServiceState().equals(ServiceState.ACTIVE))
+		{
+			Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
+			int i =0;
+			DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
+			while (usersIt.hasNext()){
+				User user = usersIt.next();
+
+				if(user.getType().equals(User.Type.BUYER)){
+					/*add rows if needed*/
+					if(i>=model.getRowCount()) model.setRowCount(i+1);
+					
+					if(userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOfferState().equals(OfferState.NONE)) 
+						continue;
+					Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
+					model.setValueAt(user.getUsername(), i, 0);
+					if(o!=null)
+					{
+						Price p =o.getPrice();
+						
+						if(p!=null) {
+							model.setValueAt(p, i, 1);
+							
+						}
+
+					}
+					i++;
+				}
+			}
+		}
 	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {

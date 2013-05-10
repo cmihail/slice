@@ -106,17 +106,24 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 	public void actionPerformed(ActionEvent e) {
 		Service selectedService = getSelectedService();
 		if (selectedService == null)
+		{
+		if(lastSelectedService == null)
 			{
-			drawErrorPage("Internal Error. Can't find requested Service");
+			drawErrorPage("Please select Service first");
 			return;
 			}
+		selectedService=lastSelectedService;
+		}
+	
+		lastSelectedService =selectedService;
+		
 		if(e.getActionCommand().equals(launch.getText()))
 		{
 			/*find the selected service*/
 
 
-				mediator.launchOfferRequest(selectedService);
-				userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.ACTIVE);
+			mediator.launchOfferRequest(selectedService);
+			userServicesInfo.getServiceInfo(selectedService).setServiceState(ServiceState.ACTIVE);
 
 
 		}
@@ -133,9 +140,9 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			User aUser = getSelectedOfferUser(selectedService);
 			if(aUser == null)
 			{
-				drawErrorPage("Internal Error. Can't find requested user");
+				drawErrorPage("Please select user first");
 				return;
-				}
+			}
 			mediator.acceptOffer(selectedService, (Manufacturer) aUser);
 			userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_ACCEPTED);
 		}
@@ -144,9 +151,9 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 			User aUser = getSelectedOfferUser(selectedService);
 			if(aUser == null)
 			{
-				drawErrorPage("Internal Error. Can't find requested user");
+				drawErrorPage("Please select user first");
 				return;
-				}
+			}
 			mediator.refuseOffer(selectedService, (Manufacturer) aUser);
 			userServicesInfo.getServiceInfo(selectedService).setOfferState(OfferState.OFFER_REFUSED);
 		}
@@ -161,10 +168,10 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 		{
 			int index = servicesTable.getSelectedRow();
 			if(index == -1 )
-				{
+			{
 				drawErrorPage("No Service selected");
 				return;
-				}
+			}
 			String sname = (String)servicesTable.getModel().getValueAt(index, 0);
 			Service aux = userServicesInfo.getServiceByName(sname);
 
@@ -173,39 +180,45 @@ public class MainFrameBuyer extends MainFrame implements MouseListener  {
 
 				return;
 			}
-			offersTableInit();
-			if(userServicesInfo.getServiceInfo(aux).getServiceState().equals(ServiceState.ACTIVE))
-			{
-				Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
-				int i =0;
-				DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
-				while (usersIt.hasNext()){
-					User user = usersIt.next();
-
-					if(user.getType().equals(User.Type.MANUFACTURER)){
-						/*add rows if needed*/
-						if(i>=model.getRowCount()) model.setRowCount(i+1);
-						
-						Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
-						if(o!=null)
-						{
-							Price p =o.getPrice();
-							if(p!=null) {
-								model.setValueAt(p, i, 1);
-								model.setValueAt(user.getUsername(), i, 0);
-							}
-
-						}
-						i++;
-					}
-				}
-			}
+			lastSelectedService = aux;
+			updateOffersTable(aux);
 
 
 		}
 
 	}
 
+	@Override
+	protected void updateOffersTable(Service aux){
+		if(aux == null)	return;
+		offersTableInit();
+		if(userServicesInfo.getServiceInfo(aux).getServiceState().equals(ServiceState.ACTIVE))
+		{
+			Iterator<User> usersIt = userServicesInfo.getServiceInfo(aux).getUsers().iterator();
+			int i =0;
+			DefaultTableModel model = (DefaultTableModel) offersTable.getModel();
+			while (usersIt.hasNext()){
+				User user = usersIt.next();
+
+				if(user.getType().equals(User.Type.MANUFACTURER)){
+					/*add rows if needed*/
+					if(i>=model.getRowCount()) model.setRowCount(i+1);
+
+					Offer o = userServicesInfo.getServiceInfo(aux).getUserInfo(user).getOffer();
+					if(o!=null)
+					{
+						Price p =o.getPrice();
+						if(p!=null) {
+							model.setValueAt(p, i, 1);
+							model.setValueAt(user.getUsername(), i, 0);
+						}
+
+					}
+					i++;
+				}
+			}
+		}
+	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub

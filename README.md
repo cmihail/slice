@@ -1,11 +1,16 @@
 slice
 =====
 
+For full functionality, we will upload a virtual machine. The link where you can download
+the virtual machine will be on https://github.com/cmihail/slice/blob/master/README.md .
+Otherwise, use 6. to configure the Webapp and DB.
+
 0. Run:
   - configure WebApp with TOMCAT and AXIS (see 6.)
   - ant run: starts server and 3 client instances
   - login using user1 (Buyer), user2 (Manufacturer) and user3 (Manufacturer);
     password is not important, but the username must be one of those 3 (they correspond to config files user1.cfg, user2.cfg, user3.cfg)
+  - feel free to add other config files.
 
 1. Structure:
   - constants: contains global constants
@@ -66,13 +71,8 @@ slice
   - import database
   - start tomcat
   - run deployWebService.sh
+  - run deploy_db.sql to create the DB. It has to be named idp.
   - start clients
   - communication protocol is implemented using GSON (https://sites.google.com/site/gson/Home)
 
-7. Observations: // TODO delete this -> for testing only
-  - move all user config files (userX.cfg) to WEB-INF/classes in AXIS webapp folder
-    (the folder inside TOMCAT)
-  - if any modifications are done to WebService classes, the service must be undeployed
-    (undeployWebService.sh), tomcat must be restared, and the serivce must be deployed
-    again(deployWebService.sh)
 
