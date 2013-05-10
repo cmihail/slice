@@ -127,9 +127,9 @@ public class WebService {
 	public void logout(String userJson, String password) throws SQLException {
 		User user = json.jsonAsUser(userJson);
 		logger.info("LOGOUT user " +user.getUsername());
-		String query = "UPDATE User SET Status=0 WHERE Name= \""+user.getUsername()+"\";";
-		db.setCommand(query);
-		db.execute();
+		int userID = getUserIDByName(user.getUsername());
+		deleteUserService(userID);
+		deleteUser(userID);
 
 	}
 
@@ -254,7 +254,26 @@ public class WebService {
 			e.printStackTrace();
 		}
 	}
-
+	private void deleteUserService(int userID){
+		String query = "DELETE FROM UserToService WHERE UserID = "+userID+" ;";
+		try {
+			db.setCommand(query);
+			db.execute();
+		} catch (SQLException e) {
+			logger.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
+	private void deleteUser(int userID){
+		String query = "DELETE FROM User WHERE ID = "+userID+" ;";
+		try {
+			db.setCommand(query);
+			db.execute();
+		} catch (SQLException e) {
+			logger.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
 
 	private Map<Service, Set<User>> getMapServiceUsers(User user, int userID)   {
 		Map<Service, Set<User>> mapServiceUsers = new HashMap<Service, Set<User>>();
