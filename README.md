@@ -1,6 +1,10 @@
 slice
 =====
 
+L.E.: Links for virtual machine (if any problem at downloading, send message):
+https://docs.google.com/file/d/0B0HdlgjtUYVyWDl0SFpDY3pKMDA/edit?usp=sharing
+https://docs.google.com/file/d/0B0HdlgjtUYVyM2ZNNjZpUVF1YUE/edit?usp=sharing
+
 For full functionality, we will upload a virtual machine. The link where you can download
 the virtual machine will be on https://github.com/cmihail/slice/blob/master/README.md .
 Otherwise, use 6. to configure the Webapp and DB.
